@@ -5,7 +5,7 @@ import { Button } from '@/components/ui/button';
 import { toast } from '@/components/ui/use-toast';
 import DecodedText from '@/components/ui/decode-text';
 
-const FORMSPREE_ENDPOINT = 'https://formspree.io/f/mbdlpabw';
+const FORMSPREE_ENDPOINT = 'https://formspree.io/f/mdawpzqp';
 
 const Contact = () => {
   const [formData, setFormData] = useState({
