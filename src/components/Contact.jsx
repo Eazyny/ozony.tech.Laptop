@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { Mail, MapPin, Send, Github, Linkedin, Twitter, CheckCircle2 } from 'lucide-react';
+import { Mail, Phone, MapPin, Send, Github, Linkedin, Twitter, CheckCircle2 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { toast } from '@/components/ui/use-toast';
 import DecodedText from '@/components/ui/decode-text';
@@ -95,6 +95,12 @@ const Contact = () => {
       href: 'mailto:contact@ozony.tech',
     },
     {
+      icon: Phone,
+      label: 'Phone',
+      value: '(347) 653-7655',
+      href: 'tel:+13476537655',
+    },
+    {
       icon: MapPin,
       label: 'Service Area',
       value: 'New York, NY',
@@ -127,14 +133,14 @@ const Contact = () => {
           </p>
         </motion.div>
 
-        <div className="grid lg:grid-cols-2 gap-12">
+        <div className="grid lg:grid-cols-2 gap-12 items-stretch">
           {/* Contact Information */}
           <motion.div
             initial={{ opacity: 0, x: -30 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5 }}
-            className="space-y-8"
+            className="flex h-full flex-col gap-8"
           >
             <div className="bg-gradient-to-br from-slate-900/80 to-slate-800/80 backdrop-blur-sm rounded-xl p-8 border border-slate-700/50">
               <h3 className="text-2xl font-bold text-white mb-6">Business Contact</h3>
@@ -187,11 +193,11 @@ const Contact = () => {
               </div>
             </div>
 
-            <div className="relative h-64 rounded-xl overflow-hidden">
+            <div className="relative flex-1 min-h-[22rem] lg:min-h-0 rounded-xl overflow-hidden bg-slate-900/60 border border-slate-700/50 p-2">
               <img
                 src="/ozony-elsevif-1-t.webp"
-                alt="Ozony Tech"
-                className="w-full h-full object-cover object-[center_20%]"
+                alt="Ozony Tech network setup"
+                className="w-full h-full object-cover object-center"
                 decoding="async"
                 fetchpriority="high"
                 loading="eager"
@@ -205,12 +211,13 @@ const Contact = () => {
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5 }}
+            className="h-full"
           >
             <form
               onSubmit={handleSubmit}
-              className="bg-gradient-to-br from-slate-900/80 to-slate-800/80 backdrop-blur-sm rounded-xl p-8 border border-slate-700/50"
+              className="h-full bg-gradient-to-br from-slate-900/80 to-slate-800/80 backdrop-blur-sm rounded-xl p-8 border border-slate-700/50 flex flex-col"
             >
-              <div className="space-y-6">
+              <div className="space-y-6 flex-1">
                 <div>
                   <label htmlFor="name" className="block text-white font-medium mb-2">
                     Name *
@@ -288,20 +295,20 @@ const Contact = () => {
                     placeholder="Tell me about your setup, the issue you’re having, or the kind of help you need."
                   />
                 </div>
-
-                <Button
-                  type="submit"
-                  disabled={isSubmitting}
-                  className="w-full bg-blue-600 hover:bg-blue-700 text-white py-6 text-base font-semibold disabled:opacity-60 disabled:cursor-not-allowed"
-                >
-                  <Send className="w-5 h-5 mr-2" />
-                  {isSubmitting ? (
-                    'Sending...'
-                  ) : (
-                    <DecodedText speed={12}>Send Inquiry</DecodedText>
-                  )}
-                </Button>
               </div>
+
+              <Button
+                type="submit"
+                disabled={isSubmitting}
+                className="w-full mt-6 bg-blue-600 hover:bg-blue-700 text-white py-6 text-base font-semibold disabled:opacity-60 disabled:cursor-not-allowed"
+              >
+                <Send className="w-5 h-5 mr-2" />
+                {isSubmitting ? (
+                  'Sending...'
+                ) : (
+                  <DecodedText speed={12}>Send Inquiry</DecodedText>
+                )}
+              </Button>
             </form>
           </motion.div>
         </div>
