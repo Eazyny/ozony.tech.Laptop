@@ -91,8 +91,8 @@ const Contact = () => {
     {
       icon: Mail,
       label: 'Email',
-      value: 'ozony@ozony.tech',
-      href: 'mailto:ozony@ozony.tech',
+      value: 'contact@ozony.tech',
+      href: 'mailto:contact@ozony.tech',
     },
     {
       icon: MapPin,
