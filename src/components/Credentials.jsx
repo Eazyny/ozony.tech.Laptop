@@ -3,15 +3,15 @@ import { motion } from 'framer-motion';
 import { Award, CheckCircle, FileText, Download } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 
-const Certifications = () => {
-  const certifications = [
+const Credentials = () => {
+  const credentials = [
     {
       title: 'Technical Support Fundamentals',
       issuer: 'Google',
       date: 'November 2025',
       credentialId: 'GOOG-IT-001',
       description:
-        'Mastered the fundamentals of IT support, including troubleshooting, customer service, networking, operating systems, and security protocols.',
+        'Foundational training in IT support, troubleshooting, customer service, networking, operating systems, and security best practices.',
       pdfName: 'TechnicalSupportFundamentalCert.pdf',
       verificationUrl: 'https://www.coursera.org/verify/EYCM6K2LYK10',
     },
@@ -21,7 +21,7 @@ const Certifications = () => {
       date: 'December 2025',
       credentialId: 'GOOG-IT-003',
       description:
-        'Deep dive into computer networking, including TCP/IP protocols, DNS, DHCP, and troubleshooting network connectivity issues.',
+        'Training in networking concepts including TCP/IP, DNS, DHCP, and practical troubleshooting of connectivity issues.',
       pdfName: 'TheBitsandBytesCert.pdf',
       verificationUrl: 'https://www.coursera.org/verify/GXACQZY45CW7',
     },
@@ -31,7 +31,7 @@ const Certifications = () => {
       date: 'January 2026',
       credentialId: 'GOOG-IT-002',
       description:
-        'Gained advanced knowledge of Windows and Linux operating systems, covering user management, software configuration, and file systems.',
+        'Coursework covering Windows and Linux operating systems, software configuration, file systems, and user administration.',
       pdfName: 'OperatingSystemsandYou.pdf',
       verificationUrl: 'https://www.coursera.org/verify/9QNIGDEBM1MT',
     },
@@ -41,38 +41,34 @@ const Certifications = () => {
       date: 'January 2026',
       credentialId: 'GOOG-IT-004',
       description:
-        'Learned core system administration tasks, infrastructure services, and best practices for managing users, services, and enterprise environments.',
+        'Training focused on system administration tasks, infrastructure services, user management, and operational best practices.',
       pdfName: 'SystemAdministrator.pdf',
       verificationUrl: 'https://www.coursera.org/verify/IBZO8E1TFB3U',
     },
-
-    // ✅ NEW: Course 5 (Security)
     {
       title: 'IT Security: Defense against the Digital Dark Arts',
       issuer: 'Google',
-      date: 'January 2026', // <-- change if needed
+      date: 'January 2026',
       credentialId: 'GOOG-IT-005',
       description:
-        'Covered core security concepts including CIA triad, encryption basics, network security, authentication, and incident response fundamentals.',
-      pdfName: 'ITSecurity.pdf', // <-- make sure this matches the PDF in /public
-      verificationUrl: 'https://coursera.org/verify/YS67E8K4K2V4', // <-- replace
+        'Security training covering authentication, encryption basics, network security, phishing awareness, and incident response fundamentals.',
+      pdfName: 'ITSecurity.pdf',
+      verificationUrl: 'https://coursera.org/verify/YS67E8K4K2V4',
     },
-
-    // ✅ NEW: Full Professional Certificate (Specialization completion)
     {
       title: 'Google IT Support Professional Certificate',
       issuer: 'Google',
-      date: 'January 2026', // <-- change if needed
+      date: 'January 2026',
       credentialId: 'GOOG-IT-PRO',
       description:
-        'Completed the full Google IT Support Professional Specialization, demonstrating job-ready skills across troubleshooting, networking, operating systems, system administration, and security.',
-      pdfName: 'GoogleITSupportProfessionalCert.pdf', // <-- make sure this matches the PDF in /public
-      verificationUrl: 'https://coursera.org/verify/professional-cert/2FLTPOHX1URJ', // <-- replace
+        'Completion of the full Google IT Support Professional Certificate, covering troubleshooting, networking, operating systems, system administration, and security.',
+      pdfName: 'GoogleITSupportProfessionalCert.pdf',
+      verificationUrl: 'https://coursera.org/verify/professional-cert/2FLTPOHX1URJ',
     },
   ];
 
   return (
-    <section id="certifications" className="py-20 px-4">
+    <section id="credentials" className="py-20 px-4">
       <div className="container mx-auto max-w-7xl">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -82,16 +78,16 @@ const Certifications = () => {
           className="text-center mb-16"
         >
           <h2 className="text-4xl md:text-5xl font-bold text-white mb-4">
-            Professional Certificates
+            Credentials
           </h2>
-          <p className="text-gray-400 text-lg max-w-2xl mx-auto">
-            Google IT Support Professional Specialization
+          <p className="text-gray-400 text-lg max-w-3xl mx-auto">
+            Verified technical training and coursework that support the practical IT and
+            network services offered by Ozony Tech.
           </p>
         </motion.div>
 
-        {/* ✅ 2 columns on md+ keeps 6 items clean (3 rows of 2) */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          {certifications.map((cert, index) => (
+          {credentials.map((cert, index) => (
             <motion.div
               key={cert.credentialId}
               initial={{ opacity: 0, y: 30 }}
@@ -155,4 +151,4 @@ const Certifications = () => {
   );
 };
 
-export default Certifications;
+export default Credentials;

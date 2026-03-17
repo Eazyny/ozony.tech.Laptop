@@ -16,10 +16,10 @@ const Header = () => {
   }, []);
 
   const navItems = [
-    { label: 'Skills', href: '#skills' },
-    { label: 'HomeLabs', href: '#homelabs' },
-    { label: 'Certifications', href: '#certifications' },
-    { label: 'Experience', href: '#experience' },
+    { label: 'Services', href: '#services' },
+    { label: 'Solutions', href: '#solutions' },
+    { label: 'Credentials', href: '#credentials' },
+    { label: 'About', href: '#about' },
     { label: 'Contact', href: '#contact' },
   ];
 
@@ -61,20 +61,20 @@ const Header = () => {
       />
 
       <nav className="container mx-auto px-4 py-4">
-        <div className="flex items-center justify-between">
+        <div className="flex items-center justify-between gap-4">
           {/* Brand */}
           <motion.button
             type="button"
             onClick={scrollToTop}
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            className="flex items-center gap-3 text-xl font-bold text-white"
+            className="flex items-center gap-3 text-xl font-bold text-white shrink-0"
             aria-label="Go to top"
           >
             <span className="oz-logo-wrap" aria-hidden="true">
               <span className="oz-logo" />
             </span>
-            <span>Ozony Elsevif</span>
+            <span>Ozony Tech</span>
           </motion.button>
 
           {/* Desktop Navigation */}
@@ -84,13 +84,23 @@ const Header = () => {
                 key={item.label}
                 initial={{ opacity: 0, y: -20 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: index * 0.1 }}
+                transition={{ delay: index * 0.08 }}
                 onClick={() => scrollToSection(item.href)}
                 className="text-gray-300 hover:text-white transition-colors duration-200 font-medium"
               >
                 <DecodedText speed={12}>{item.label}</DecodedText>
               </motion.button>
             ))}
+
+            <motion.button
+              initial={{ opacity: 0, y: -20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.45 }}
+              onClick={() => scrollToSection('#contact')}
+              className="inline-flex items-center rounded-full border border-blue-400/30 bg-blue-500/10 px-5 py-2.5 text-sm font-semibold text-white transition-all duration-200 hover:bg-blue-500/20 hover:border-blue-300/50 hover:shadow-lg hover:shadow-blue-500/20"
+            >
+              Request a Quote
+            </motion.button>
           </div>
 
           {/* Mobile Menu Button */}
@@ -112,17 +122,26 @@ const Header = () => {
           <motion.div
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: 'auto' }}
-            className="lg:hidden mt-4 pb-4 bg-slate-900/60 backdrop-blur-md rounded-xl border border-white/10"
+            className="lg:hidden mt-4 p-3 bg-slate-900/60 backdrop-blur-md rounded-xl border border-white/10"
           >
-            {navItems.map((item) => (
+            <div className="flex flex-col gap-1">
+              {navItems.map((item) => (
+                <button
+                  key={item.label}
+                  onClick={() => scrollToSection(item.href)}
+                  className="block w-full text-left py-3 px-4 text-gray-300 hover:text-white hover:bg-white/10 rounded-lg transition-colors duration-200"
+                >
+                  <DecodedText speed={12}>{item.label}</DecodedText>
+                </button>
+              ))}
+
               <button
-                key={item.label}
-                onClick={() => scrollToSection(item.href)}
-                className="block w-full text-left py-3 px-4 text-gray-300 hover:text-white hover:bg-white/10 rounded-lg transition-colors duration-200"
+                onClick={() => scrollToSection('#contact')}
+                className="mt-2 w-full rounded-lg border border-blue-400/30 bg-blue-500/10 px-4 py-3 text-sm font-semibold text-white transition-all duration-200 hover:bg-blue-500/20"
               >
-                <DecodedText speed={12}>{item.label}</DecodedText>
+                Request a Quote
               </button>
-            ))}
+            </div>
           </motion.div>
         )}
       </nav>

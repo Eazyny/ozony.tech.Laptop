@@ -1,52 +1,79 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Monitor, Network, Wrench, Shield, Terminal, Headphones } from 'lucide-react';
+import { Monitor, Network, Wrench, Shield, Cloud, Headphones } from 'lucide-react';
 
-const Skills = () => {
-  const skillCategories = [
-    {
-      icon: Monitor,
-      title: 'Desktop Support',
-      skills: ['Windows 10/11', 'Hardware Troubleshooting', 'Software Installs', 'Printer Support', 'Basic macOS'],
-    },
+const Services = () => {
+  const serviceCategories = [
     {
       icon: Network,
-      title: 'Networking Fundamentals',
-      skills: ['TCP/IP', 'DNS', 'DHCP', 'Subnets (Basics)', 'Wi-Fi Troubleshooting'],
+      title: 'Business Networking',
+      skills: [
+        'Router & Switch Setup',
+        'Wired Network Deployment',
+        'Guest / Staff Segmentation',
+        'Small Office Network Design',
+        'Basic VLAN Planning',
+      ],
     },
     {
-      icon: Terminal,
-      title: 'Tools I Use',
+      icon: Monitor,
+      title: 'Workstation & Device Setup',
       skills: [
-        'Microsoft 365 (Outlook/Teams)',
-        'Google Workspace',
-        'Remote Desktop',
-        'Command Line',
-        'PowerShell',
-        'Ticketing Systems',
-        'VS Code',
-        'VPN Basics',
+        'PC Setup & Configuration',
+        'Printer & Peripheral Setup',
+        'Office Device Installs',
+        'Shared Workspace Setup',
+        'Basic macOS & Windows Support',
+      ],
+    },
+    {
+      icon: Cloud,
+      title: 'Productivity & Cloud Tools',
+      skills: [
+        'Microsoft 365 Setup',
+        'Google Workspace Support',
+        'User Account Setup',
+        'Remote Desktop Access',
+        'Email & Collaboration Tools',
       ],
     },
     {
       icon: Shield,
-      title: 'Security Basics',
-      skills: ['MFA', 'Password Hygiene', 'Phishing Awareness', 'Device Updates', 'Least Privilege (Basics)'],
+      title: 'Security & Protection',
+      skills: [
+        'Firewall Setup',
+        'MFA & Account Security',
+        'Password Best Practices',
+        'Secure Guest Wi-Fi',
+        'Device Update Hygiene',
+      ],
     },
     {
       icon: Wrench,
-      title: 'Troubleshooting Workflow',
-      skills: ['Issue Triage', 'Root Cause Thinking', 'Reproduce & Isolate', 'Escalation', 'Post-fix Verification'],
+      title: 'Troubleshooting & Repairs',
+      skills: [
+        'Connectivity Issues',
+        'Wi-Fi Troubleshooting',
+        'Device Performance Issues',
+        'Printer Troubleshooting',
+        'Root Cause Investigation',
+      ],
     },
     {
       icon: Headphones,
-      title: 'Customer Support',
-      skills: ['Clear Communication', 'Empathy Under Pressure', 'User Training', 'Status Updates', 'Follow-ups'],
+      title: 'Remote & On-Site Support',
+      skills: [
+        'Remote Assistance',
+        'Issue Triage',
+        'User Support',
+        'Follow-Ups & Updates',
+        'Practical Ongoing IT Help',
+      ],
     },
   ];
 
   return (
-    <section id="skills" className="py-20 px-4 bg-slate-800/30">
+    <section id="services" className="py-20 px-4 bg-slate-800/30">
       <div className="container mx-auto max-w-7xl">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -56,15 +83,16 @@ const Skills = () => {
           className="text-center mb-16"
         >
           <h2 className="text-4xl md:text-5xl font-bold text-white mb-4">
-            Technical Skills
+            Services
           </h2>
           <p className="text-gray-400 text-lg max-w-2xl mx-auto">
-            Practical IT support skills focused on troubleshooting, networking fundamentals, and customer service
+            Practical IT and network services designed to help small businesses stay connected,
+            secure, and running smoothly.
           </p>
         </motion.div>
 
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {skillCategories.map((category, index) => {
+          {serviceCategories.map((category, index) => {
             const Icon = category.icon;
             return (
               <motion.div
@@ -101,4 +129,4 @@ const Skills = () => {
   );
 };
 
-export default Skills;
+export default Services;

@@ -3,12 +3,13 @@ import { Helmet } from 'react-helmet';
 import { Toaster } from '@/components/ui/toaster';
 import Header from '@/components/Header';
 import Hero from '@/components/Hero';
-import Skills from '@/components/Skills';
-import Certifications from '@/components/Certifications';
-import Experience from '@/components/Experience';
+import Services from '@/components/Services';
+import Solutions from '@/components/Solutions';
+import Credentials from '@/components/Credentials';
+import About from '@/components/About';
 import Contact from '@/components/Contact';
 import Footer from '@/components/Footer';
-import Homelabs from '@/components/Homelabs';
+import CallToAction from '@/components/CallToAction';
 
 function App() {
   useEffect(() => {
@@ -33,22 +34,26 @@ function App() {
   return (
     <>
       <Helmet>
-        <title>Ozony Elsevif - IT Professional | IT Support</title>
+        <title>Ozony Tech | IT &amp; Network Solutions for Small Businesses</title>
         <meta
           name="description"
-          content="Professional IT resume showcasing skills in software development, cloud computing, and system architecture. View my certifications, experience, and get in touch."
+          content="Ozony Tech provides practical IT and network solutions for small businesses, including Wi-Fi setup, networking, device support, troubleshooting, and business IT services."
         />
       </Helmet>
+
       <div className="min-h-screen app-bg">
         <Header />
+
         <main>
           <Hero />
-          <Skills />
-          <Homelabs />
-          <Certifications />
-          <Experience />
+          <Services />
+          <Solutions />
+          <Credentials />
+          <About />
           <Contact />
+          <CallToAction />
         </main>
+
         <Footer />
         <Toaster />
       </div>

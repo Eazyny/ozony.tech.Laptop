@@ -1,20 +1,19 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { Mail, Phone, MapPin, Send, Github, Linkedin, Twitter } from 'lucide-react';
+import { Mail, MapPin, Send, Github, Linkedin, Twitter, CheckCircle2 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { toast } from '@/components/ui/use-toast';
 import DecodedText from '@/components/ui/decode-text';
-import { CheckCircle2 } from 'lucide-react';
-
 
 const FORMSPREE_ENDPOINT = 'https://formspree.io/f/mbdlpabw';
 
 const Contact = () => {
   const [formData, setFormData] = useState({
     name: '',
+    businessName: '',
     email: '',
-    subject: '',
-    message: ''
+    service: '',
+    message: '',
   });
 
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -22,11 +21,10 @@ const Contact = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // Validate
     if (!formData.name || !formData.email || !formData.message) {
       toast({
         title: 'Please fill in all required fields',
-        variant: 'destructive'
+        variant: 'destructive',
       });
       return;
     }
@@ -37,15 +35,16 @@ const Contact = () => {
       const res = await fetch(FORMSPREE_ENDPOINT, {
         method: 'POST',
         headers: {
-          'Accept': 'application/json',
-          'Content-Type': 'application/json'
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
         },
         body: JSON.stringify({
           name: formData.name,
+          businessName: formData.businessName,
           email: formData.email,
-          subject: formData.subject,
-          message: formData.message
-        })
+          service: formData.service,
+          message: formData.message,
+        }),
       });
 
       const data = await res.json().catch(() => ({}));
@@ -58,18 +57,23 @@ const Contact = () => {
       }
 
       toast({
-          title: 'Message sent successfully!',
-          description: "Thank you for reaching out. I'll get back to you soon.",
-          icon: <CheckCircle2 className="h-4 w-4 text-emerald-300" />
-    });
+        title: 'Inquiry sent successfully!',
+        description: "Thanks for reaching out to Ozony Tech. I'll get back to you soon.",
+        icon: <CheckCircle2 className="h-4 w-4 text-emerald-300" />,
+      });
 
-
-      setFormData({ name: '', email: '', subject: '', message: '' });
+      setFormData({
+        name: '',
+        businessName: '',
+        email: '',
+        service: '',
+        message: '',
+      });
     } catch (err) {
       toast({
         title: 'Message failed to send',
         description: err?.message || 'Please try again in a moment.',
-        variant: 'destructive'
+        variant: 'destructive',
       });
     } finally {
       setIsSubmitting(false);
@@ -79,21 +83,29 @@ const Contact = () => {
   const handleChange = (e) => {
     setFormData((prev) => ({
       ...prev,
-      [e.target.name]: e.target.value
+      [e.target.name]: e.target.value,
     }));
   };
 
-  // Update these to your real info
   const contactInfo = [
-    { icon: Mail, label: 'Email', value: 'ozony@ozony.tech', href: 'mailto:ozony@ozony.tech' },
-    // { icon: Phone, label: 'Phone', value: '+1 (555) 123-4567', href: 'tel:+15551234567' },
-    { icon: MapPin, label: 'Location', value: 'New York, NY', href: null }
+    {
+      icon: Mail,
+      label: 'Email',
+      value: 'ozony@ozony.tech',
+      href: 'mailto:ozony@ozony.tech',
+    },
+    {
+      icon: MapPin,
+      label: 'Service Area',
+      value: 'New York, NY',
+      href: null,
+    },
   ];
 
   const socialLinks = [
     { icon: Github, label: 'GitHub', href: 'https://github.com/Eazyny' },
     { icon: Linkedin, label: 'LinkedIn', href: 'https://www.linkedin.com/in/ozony-elsevif/' },
-    { icon: Twitter, label: 'Twitter', href: 'https://x.com/BlockchainEazy' }
+    { icon: Twitter, label: 'Twitter', href: 'https://x.com/BlockchainEazy' },
   ];
 
   return (
@@ -107,10 +119,11 @@ const Contact = () => {
           className="text-center mb-16"
         >
           <h2 className="text-4xl md:text-5xl font-bold text-white mb-4">
-            Get In Touch
+            Contact Ozony Tech
           </h2>
-          <p className="text-gray-400 text-lg max-w-2xl mx-auto">
-            Have a project in mind or want to discuss opportunities? Let&apos;s connect!
+          <p className="text-gray-400 text-lg max-w-3xl mx-auto">
+            Need help with Wi-Fi, networking, device setup, troubleshooting, or general IT support?
+            Send over a few details and let’s talk through your business needs.
           </p>
         </motion.div>
 
@@ -124,7 +137,7 @@ const Contact = () => {
             className="space-y-8"
           >
             <div className="bg-gradient-to-br from-slate-900/80 to-slate-800/80 backdrop-blur-sm rounded-xl p-8 border border-slate-700/50">
-              <h3 className="text-2xl font-bold text-white mb-6">Contact Information</h3>
+              <h3 className="text-2xl font-bold text-white mb-6">Business Contact</h3>
 
               <div className="space-y-6">
                 {contactInfo.map((item) => {
@@ -153,7 +166,7 @@ const Contact = () => {
               </div>
 
               <div className="mt-8 pt-8 border-t border-slate-700/50">
-                <p className="text-gray-400 text-sm mb-4">Follow me on social media</p>
+                <p className="text-gray-400 text-sm mb-4">Connect online</p>
                 <div className="flex gap-4">
                   {socialLinks.map((social) => {
                     const Icon = social.icon;
@@ -177,7 +190,7 @@ const Contact = () => {
             <div className="relative h-64 rounded-xl overflow-hidden">
               <img
                 src="/ozony-elsevif-1-t.webp"
-                alt="Ozony Elsevif"
+                alt="Ozony Tech"
                 className="w-full h-full object-cover object-[center_20%]"
                 decoding="async"
                 fetchpriority="high"
@@ -215,6 +228,21 @@ const Contact = () => {
                 </div>
 
                 <div>
+                  <label htmlFor="businessName" className="block text-white font-medium mb-2">
+                    Business Name
+                  </label>
+                  <input
+                    type="text"
+                    id="businessName"
+                    name="businessName"
+                    value={formData.businessName}
+                    onChange={handleChange}
+                    className="w-full px-4 py-3 bg-slate-900/50 border border-slate-700 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
+                    placeholder="Your business or organization"
+                  />
+                </div>
+
+                <div>
                   <label htmlFor="email" className="block text-white font-medium mb-2">
                     Email *
                   </label>
@@ -231,23 +259,23 @@ const Contact = () => {
                 </div>
 
                 <div>
-                  <label htmlFor="subject" className="block text-white font-medium mb-2">
-                    Subject
+                  <label htmlFor="service" className="block text-white font-medium mb-2">
+                    Service Needed
                   </label>
                   <input
                     type="text"
-                    id="subject"
-                    name="subject"
-                    value={formData.subject}
+                    id="service"
+                    name="service"
+                    value={formData.service}
                     onChange={handleChange}
                     className="w-full px-4 py-3 bg-slate-900/50 border border-slate-700 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
-                    placeholder="What's this about?"
+                    placeholder="Wi-Fi, networking, setup, troubleshooting, etc."
                   />
                 </div>
 
                 <div>
                   <label htmlFor="message" className="block text-white font-medium mb-2">
-                    Message *
+                    Project Details *
                   </label>
                   <textarea
                     id="message"
@@ -257,7 +285,7 @@ const Contact = () => {
                     required
                     rows={6}
                     className="w-full px-4 py-3 bg-slate-900/50 border border-slate-700 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all resize-none"
-                    placeholder="Tell me about your project or inquiry..."
+                    placeholder="Tell me about your setup, the issue you’re having, or the kind of help you need."
                   />
                 </div>
 
@@ -270,7 +298,7 @@ const Contact = () => {
                   {isSubmitting ? (
                     'Sending...'
                   ) : (
-                    <DecodedText speed={12}>Send Message</DecodedText>
+                    <DecodedText speed={12}>Send Inquiry</DecodedText>
                   )}
                 </Button>
               </div>
