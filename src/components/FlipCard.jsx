@@ -28,7 +28,7 @@ const FlipCard = ({
     <motion.div
       whileHover={{ y: -6, scale: 1.015 }}
       transition={{ duration: 0.25, ease: 'easeOut' }}
-      className={`group relative h-[540px] w-full [perspective:1400px] ${className}`}
+      className={`group relative h-[580px] w-full [perspective:1400px] ${className}`}
     >
       <div
         role="button"
@@ -43,6 +43,7 @@ const FlipCard = ({
             isFlipped ? '[transform:rotateY(180deg)]' : ''
           }`}
         >
+          {/* Front */}
           <div className="absolute inset-0 overflow-hidden rounded-2xl border border-slate-700/60 bg-slate-900 shadow-lg shadow-blue-500/10 [backface-visibility:hidden]">
             <div className="absolute inset-0">
               <img
@@ -76,7 +77,7 @@ const FlipCard = ({
                   </p>
                 </div>
 
-                <div className="rounded-2xl border border-slate-700/60 bg-slate-950/55 p-4 backdrop-blur-sm">
+                <div className="rounded-2xl border border-slate-700/60 bg-slate-950/55 p-4 backdrop-blur-sm min-h-[110px]">
                   <p className="text-xs uppercase tracking-[0.18em] text-blue-400">Best for</p>
                   <p className="mt-2 text-sm leading-relaxed text-gray-300">{bestFor}</p>
                 </div>
@@ -84,9 +85,10 @@ const FlipCard = ({
             </div>
           </div>
 
+          {/* Back */}
           <div className="absolute inset-0 overflow-hidden rounded-2xl border border-slate-700/60 bg-gradient-to-br from-slate-900/95 to-slate-800/95 p-6 shadow-lg shadow-blue-500/10 [backface-visibility:hidden] [transform:rotateY(180deg)]">
             <div className="flex h-full flex-col">
-              <div className="flex items-start justify-between gap-4">
+              <div className="flex items-start justify-between gap-4 min-h-[72px]">
                 <div>
                   <p className="text-xs uppercase tracking-[0.18em] text-blue-400">
                     Package details
@@ -101,20 +103,20 @@ const FlipCard = ({
               </div>
 
               {stackName && (
-                <div className="mt-5 rounded-2xl border border-slate-700/60 bg-slate-950/50 p-4">
+                <div className="mt-4 rounded-2xl border border-slate-700/60 bg-slate-950/50 p-4 min-h-[108px]">
                   <p className="text-xs uppercase tracking-[0.18em] text-blue-400">
                     {stackLabel}
                   </p>
-                  <p className="mt-2 text-sm text-gray-300">{stackName}</p>
+                  <p className="mt-2 text-sm leading-relaxed text-gray-300">{stackName}</p>
                 </div>
               )}
 
-              <div className="mt-5 flex-1">
+              <div className="mt-4 flex-1 flex flex-col">
                 <p className="mb-4 text-xs uppercase tracking-[0.18em] text-blue-400">
                   What’s included
                 </p>
 
-                <div className="space-y-3">
+                <div className="space-y-3 flex-1">
                   {includes.map((item) => (
                     <div key={item} className="flex items-start gap-3">
                       <BadgeCheck className="mt-0.5 h-4 w-4 shrink-0 text-blue-400" />
@@ -124,7 +126,7 @@ const FlipCard = ({
                 </div>
               </div>
 
-              <div className="mt-6 rounded-2xl border border-slate-700/60 bg-blue-500/5 px-4 py-3">
+              <div className="mt-4 rounded-2xl border border-slate-700/60 bg-blue-500/5 px-4 py-3">
                 <p className="text-sm leading-relaxed text-gray-300">
                   Every package can be adjusted based on your layout, device count, and business needs.
                 </p>
