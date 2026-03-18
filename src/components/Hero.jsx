@@ -122,7 +122,7 @@ const Hero = () => {
 
               <div className="relative z-10 w-full h-full overflow-hidden rounded-2xl">
                 <img
-                  src="/ozony-elsevif-t.webp"
+                  src="/heroimage.webp"
                   alt="Ozony Tech"
                   className="w-full h-full object-cover object-[20%_20%] -scale-x-100"
                   decoding="async"

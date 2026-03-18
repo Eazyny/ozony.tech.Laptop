@@ -195,7 +195,7 @@ const Contact = () => {
 
             <div className="relative flex-1 min-h-[22rem] lg:min-h-0 rounded-xl overflow-hidden bg-slate-900/60 border border-slate-700/50 p-2">
               <img
-                src="/ozony-elsevif-1-t.webp"
+                src="/contactimage.webp"
                 alt="Ozony Tech network setup"
                 className="w-full h-full object-cover object-center"
                 decoding="async"
