@@ -31,7 +31,7 @@ const Hero = () => {
   };
 
   return (
-    <section className="relative min-h-screen overflow-hidden px-4 pt-24 pb-16 md:pt-28 md:pb-20">
+    <section className="relative overflow-hidden px-4 pt-24 pb-16 md:pt-28 md:pb-20 lg:min-h-[820px]">
       <StarfieldBackground />
 
       <div className="relative container mx-auto max-w-7xl">

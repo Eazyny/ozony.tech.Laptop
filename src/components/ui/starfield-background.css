@@ -39,7 +39,7 @@
   left: 0;
   top: 0;
   background: transparent;
-  animation: starfieldScroll 800s linear infinite;
+  animation: starfieldScroll 600s linear infinite;
   will-change: transform;
 }
 

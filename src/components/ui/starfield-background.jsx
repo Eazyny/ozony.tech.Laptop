@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import './starfield-background.css';
 
 const createSeededRandom = (seed = 1) => {
@@ -20,25 +20,49 @@ const buildBoxShadows = (count, maxX, maxY, seed, alpha = 0.9) => {
   }).join(', ');
 };
 
+const getBounds = () => {
+  if (typeof window === 'undefined') {
+    return { width: 2600, height: 2200 };
+  }
+
+  return {
+    width: Math.max(Math.ceil(window.innerWidth * 1.4), 2600),
+    height: 2200,
+  };
+};
+
 const StarfieldBackground = ({
-  smallCount = 320,
-  mediumCount = 120,
-  largeCount = 70,
+  smallCount = 420,
+  mediumCount = 150,
+  largeCount = 75,
   className = '',
 }) => {
+  const [bounds, setBounds] = useState(getBounds);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setBounds(getBounds());
+    };
+
+    handleResize();
+    window.addEventListener('resize', handleResize);
+
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
   const smallStars = useMemo(
-    () => buildBoxShadows(smallCount, 2200, 2200, 11, 0.85),
-    [smallCount]
+    () => buildBoxShadows(smallCount, bounds.width, bounds.height, 11, 0.85),
+    [smallCount, bounds.width, bounds.height]
   );
 
   const mediumStars = useMemo(
-    () => buildBoxShadows(mediumCount, 2200, 2200, 27, 0.75),
-    [mediumCount]
+    () => buildBoxShadows(mediumCount, bounds.width, bounds.height, 27, 0.75),
+    [mediumCount, bounds.width, bounds.height]
   );
 
   const largeStars = useMemo(
-    () => buildBoxShadows(largeCount, 2200, 2200, 49, 0.65),
-    [largeCount]
+    () => buildBoxShadows(largeCount, bounds.width, bounds.height, 49, 0.65),
+    [largeCount, bounds.width, bounds.height]
   );
 
   return (
