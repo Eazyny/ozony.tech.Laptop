@@ -13,9 +13,21 @@ import CallToAction from '@/components/CallToAction';
 
 function App() {
   useEffect(() => {
+    if ('scrollRestoration' in window.history) {
+      window.history.scrollRestoration = 'manual';
+    }
+
     const scrollToHash = () => {
       const hash = window.location.hash;
-      if (!hash) return;
+
+      if (!hash) {
+        window.scrollTo({
+          top: 0,
+          left: 0,
+          behavior: 'auto',
+        });
+        return;
+      }
 
       const el = document.querySelector(hash);
       if (!el) return;
@@ -29,6 +41,12 @@ function App() {
     };
 
     scrollToHash();
+
+    return () => {
+      if ('scrollRestoration' in window.history) {
+        window.history.scrollRestoration = 'auto';
+      }
+    };
   }, []);
 
   return (
