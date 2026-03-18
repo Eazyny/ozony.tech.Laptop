@@ -6,23 +6,19 @@ import {
   ArrowLeft,
   ArrowRight,
   ArrowUp,
-  BadgeCheck,
-  BriefcaseBusiness,
-  Building2,
   Network,
   ShieldCheck,
-  Store,
   Wifi,
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import DecodedText from '@/components/ui/decode-text';
 import StarfieldBackground from '@/components/ui/starfield-background';
+import FlipCard from '@/components/FlipCard';
 
 const packageTiers = [
   {
     name: 'Starter',
     badge: 'Best for small spaces',
-    icon: Store,
     image: '/images/packages/starter-stack.webp',
     stackLabel: 'Recommended stack',
     stackName: 'Omada / compact business setup',
@@ -40,7 +36,6 @@ const packageTiers = [
   {
     name: 'Growth',
     badge: 'Most flexible',
-    icon: BriefcaseBusiness,
     image: '/images/packages/growth-stack.webp',
     stackLabel: 'Recommended stack',
     stackName: 'UniFi / managed small business setup',
@@ -58,7 +53,6 @@ const packageTiers = [
   {
     name: 'Complete',
     badge: 'Best for long-term setup',
-    icon: Building2,
     image: '/images/packages/complete-stack.webp',
     stackLabel: 'Recommended stack',
     stackName: 'UniFi + OPNsense / advanced deployment',
@@ -275,65 +269,25 @@ const PackagesPage = () => {
           <section className="px-4 pb-20 pt-6">
             <div className="container mx-auto max-w-7xl">
               <div className="grid gap-6 lg:grid-cols-3">
-                {packageTiers.map((tier, index) => {
-                  const Icon = tier.icon;
-
-                  return (
-                    <motion.div
-                      key={tier.name}
-                      initial={{ opacity: 0, y: 24 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      transition={{ duration: 0.5, delay: index * 0.08 }}
-                      className="h-full rounded-2xl border border-slate-700/50 bg-gradient-to-br from-slate-900/85 to-slate-800/80 p-8 shadow-lg shadow-blue-500/10"
-                    >
-                      <div className="mb-6 flex items-start justify-between gap-4">
-                        <div className="rounded-xl bg-blue-500/10 p-3">
-                          <Icon className="h-7 w-7 text-blue-400" />
-                        </div>
-
-                        <span className="rounded-full border border-blue-400/20 bg-blue-400/10 px-3 py-1 text-xs font-medium text-blue-300">
-                          {tier.badge}
-                        </span>
-                      </div>
-
-                      <h2 className="text-2xl font-bold text-white">{tier.name}</h2>
-                      <p className="mt-3 leading-relaxed text-gray-400">{tier.description}</p>
-
-                      <div className="mt-6 overflow-hidden rounded-2xl border border-slate-700/50 bg-slate-950/50">
-                        <div className="relative h-44 w-full overflow-hidden">
-                          <div className="absolute inset-0 z-10 bg-gradient-to-br from-blue-500/10 via-transparent to-slate-900/40" />
-                          <img
-                            src={tier.image}
-                            alt={`${tier.name} package recommended stack`}
-                            className="h-full w-full object-contain p-4"
-                            loading="lazy"
-                          />
-                        </div>
-
-                        <div className="border-t border-slate-700/50 px-4 py-3">
-                          <p className="text-xs uppercase tracking-[0.18em] text-blue-400">
-                            {tier.stackLabel}
-                          </p>
-                          <p className="mt-1 text-sm text-gray-300">{tier.stackName}</p>
-                        </div>
-                      </div>
-
-                      <div className="mt-6 rounded-xl border border-slate-700/50 bg-slate-900/40 p-4">
-                        <p className="text-sm font-semibold text-gray-300">Best for</p>
-                        <p className="mt-2 text-sm text-gray-400">{tier.bestFor}</p>
-                      </div>
-
-                      <div className="mt-6 space-y-3">
-                        {tier.includes.map((item) => (
-                          <div key={item} className="flex items-start gap-3">
-                            <BadgeCheck className="mt-0.5 h-4 w-4 shrink-0 text-blue-400" />
-                            <p className="text-sm text-gray-300">{item}</p>
-                          </div>
-                        ))}
-                      </div>
-                    </motion.div>
-                  );
-                })}
+                {packageTiers.map((tier, index) => (
+                  <motion.div
+                    key={tier.name}
+                    initial={{ opacity: 0, y: 24 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.5, delay: index * 0.08 }}
+                  >
+                    <FlipCard
+                      name={tier.name}
+                      badge={tier.badge}
+                      image={tier.image}
+                      description={tier.description}
+                      bestFor={tier.bestFor}
+                      includes={tier.includes}
+                      stackLabel={tier.stackLabel}
+                      stackName={tier.stackName}
+                    />
+                  </motion.div>
+                ))}
               </div>
 
               <div className="mt-10 rounded-2xl border border-slate-700/50 bg-slate-900/50 px-6 py-5 text-center">
