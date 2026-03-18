@@ -1,0 +1,558 @@
+import React, { useEffect, useState } from 'react';
+import { Helmet } from 'react-helmet';
+import { AnimatePresence, motion } from 'framer-motion';
+import { Link } from 'react-router-dom';
+import {
+  ArrowLeft,
+  ArrowRight,
+  ArrowUp,
+  BadgeCheck,
+  BriefcaseBusiness,
+  Building2,
+  Network,
+  ShieldCheck,
+  Store,
+  Wifi,
+} from 'lucide-react';
+import { Button } from '@/components/ui/button';
+import DecodedText from '@/components/ui/decode-text';
+import StarfieldBackground from '@/components/ui/starfield-background';
+
+const packageTiers = [
+  {
+    name: 'Starter',
+    badge: 'Best for small spaces',
+    icon: Store,
+    image: '/images/packages/starter-stack.webp',
+    stackLabel: 'Recommended stack',
+    stackName: 'Omada / compact business setup',
+    description:
+      'A clean entry point for smaller businesses that need a more reliable setup without overcomplicating the environment.',
+    bestFor: 'Barbershops, small retail, home offices, simple office setups',
+    includes: [
+      'Router / firewall setup',
+      'Basic switch and device connectivity',
+      'Wi-Fi optimization and coverage tuning',
+      'Printer / workstation connectivity help',
+      'Basic security and account setup guidance',
+    ],
+  },
+  {
+    name: 'Growth',
+    badge: 'Most flexible',
+    icon: BriefcaseBusiness,
+    image: '/images/packages/growth-stack.webp',
+    stackLabel: 'Recommended stack',
+    stackName: 'UniFi / managed small business setup',
+    description:
+      'Built for growing businesses that need stronger Wi-Fi, better segmentation, and a more organized, scalable setup.',
+    bestFor: 'Busier offices, multi-room businesses, growing teams, guest Wi-Fi needs',
+    includes: [
+      'Managed networking upgrade path',
+      'Guest and staff network separation',
+      'Multiple device / workstation setup support',
+      'Improved wireless coverage planning',
+      'Cleaner organization and business-ready structure',
+    ],
+  },
+  {
+    name: 'Complete',
+    badge: 'Best for long-term setup',
+    icon: Building2,
+    image: '/images/packages/complete-stack.webp',
+    stackLabel: 'Recommended stack',
+    stackName: 'UniFi + OPNsense / advanced deployment',
+    description:
+      'A more complete small-business network package designed for reliability, cleaner deployment, and future growth.',
+    bestFor: 'Larger small businesses, higher device counts, polished long-term setups',
+    includes: [
+      'Business-grade firewall / router strategy',
+      'Managed switching and segmentation approach',
+      'Multiple access point deployment planning',
+      'Rack / closet organization structure',
+      'Scalable foundation for future upgrades',
+    ],
+  },
+];
+
+const comparisonRows = [
+  {
+    label: 'Best For',
+    starter: 'Small spaces',
+    growth: 'Growing businesses',
+    complete: 'Long-term setups',
+  },
+  {
+    label: 'Wi-Fi Coverage',
+    starter: 'Basic optimization',
+    growth: 'Improved multi-area coverage',
+    complete: 'Broader coverage planning',
+  },
+  {
+    label: 'Network Segmentation',
+    starter: 'Light / basic',
+    growth: 'Guest + staff separation',
+    complete: 'More complete segmentation',
+  },
+  {
+    label: 'Scalability',
+    starter: 'Entry-level',
+    growth: 'Growth-ready',
+    complete: 'Best long-term path',
+  },
+  {
+    label: 'Support Focus',
+    starter: 'Setup + stability',
+    growth: 'Performance + structure',
+    complete: 'Reliability + expandability',
+  },
+];
+
+const brandLogic = [
+  {
+    icon: Wifi,
+    title: 'UniFi',
+    image: '/images/brands/unifi-stack.webp',
+    eyebrow: 'Polished ecosystem',
+    description:
+      'A strong option when a business wants a polished ecosystem, clean management, and a more unified network experience.',
+  },
+  {
+    icon: Network,
+    title: 'TP-Link Omada',
+    image: '/images/brands/omada-stack.webp',
+    eyebrow: 'Strong value path',
+    description:
+      'A great value-focused choice for businesses that want solid performance and cleaner management without overspending.',
+  },
+  {
+    icon: ShieldCheck,
+    title: 'OPNsense',
+    image: '/images/brands/opnsense-stack.webp',
+    eyebrow: 'Firewall-first control',
+    description:
+      'A flexible firewall-focused option for deployments where stronger control, segmentation, and security-minded design matter.',
+  },
+];
+
+const fitCards = [
+  'Barbershops & salons',
+  'Retail shops',
+  'Small offices',
+  'Restaurants & cafés',
+  'Home offices / creators',
+  'Growing local businesses',
+];
+
+const packageFaqs = [
+  {
+    question: 'Which package is right for my business?',
+    answer:
+      'That depends on your space, number of users and devices, Wi-Fi expectations, and whether you need a cleaner upgrade path for future growth.',
+  },
+  {
+    question: 'Can packages be customized?',
+    answer:
+      'Yes. These packages are designed as starting points, not rigid boxes. The final recommendation can be adjusted to your business needs and budget.',
+  },
+  {
+    question: 'Do you only work with one brand?',
+    answer:
+      'No. Ozony Tech chooses solutions based on reliability, budget, ease of management, and how well the setup fits the business environment.',
+  },
+  {
+    question: 'Can I start with a smaller setup and upgrade later?',
+    answer:
+      'Yes. A good network setup should make it easier to grow over time instead of forcing a full rebuild later.',
+  },
+];
+
+const PackagesPage = () => {
+  const [showBackToTop, setShowBackToTop] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setShowBackToTop(window.scrollY > 500);
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    handleScroll();
+
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
+  return (
+    <>
+      <Helmet>
+        <title>Ozony Tech Packages | Business IT &amp; Network Packages</title>
+        <meta
+          name="description"
+          content="Explore Ozony Tech package options for small businesses, including Starter, Growth, and Complete IT and network solutions."
+        />
+      </Helmet>
+
+      <div className="min-h-screen app-bg">
+        <section className="px-4 pt-8 pb-2">
+          <div className="container mx-auto max-w-7xl">
+            <Link
+              to="/"
+              className="inline-flex items-center gap-2 text-sm text-gray-400 transition-colors hover:text-white"
+            >
+              <ArrowLeft className="h-4 w-4" />
+              Back to Home
+            </Link>
+          </div>
+        </section>
+
+        <main>
+          <section className="relative overflow-hidden px-4 py-14 md:py-20">
+            <StarfieldBackground />
+
+            <div className="relative container mx-auto max-w-7xl">
+              <motion.div
+                initial={{ opacity: 0, y: 24 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6 }}
+                className="mx-auto max-w-5xl text-center"
+              >
+                <p className="mb-4 text-sm font-semibold uppercase tracking-[0.22em] text-blue-400">
+                  Ozony Tech Packages
+                </p>
+
+                <h1 className="mx-auto max-w-4xl text-4xl font-bold leading-tight text-white md:text-6xl">
+                  Business IT &amp; Network Packages Built for Real-World Small Business Needs
+                </h1>
+
+                <p className="mx-auto mt-6 max-w-3xl text-lg leading-relaxed text-gray-400">
+                  These packages are designed to give small businesses a clearer path to reliable
+                  Wi-Fi, stronger networking, cleaner setup, and smarter growth over time. They are
+                  practical starting points built to stay understandable, scalable, and business-ready.
+                </p>
+
+                <div className="mt-10 flex flex-wrap items-center justify-center gap-4">
+                  <Button
+                    asChild
+                    className="bg-blue-600 px-6 py-6 text-base text-white shadow-lg shadow-blue-500/20 hover:bg-blue-700"
+                  >
+                    <Link to="/#contact">
+                      <DecodedText speed={12}>Request a Quote</DecodedText>
+                    </Link>
+                  </Button>
+
+                  <Button
+                    asChild
+                    variant="outline"
+                    className="border-blue-400 px-6 py-6 text-base text-blue-400 hover:bg-blue-400/10"
+                  >
+                    <Link to="/#contact">
+                      <DecodedText speed={12}>Contact Ozony Tech</DecodedText>
+                    </Link>
+                  </Button>
+                </div>
+
+                <div className="mt-10 flex flex-wrap items-center justify-center gap-3 text-sm text-gray-400">
+                  <span className="rounded-full border border-slate-700/60 bg-slate-900/60 px-4 py-2">
+                    Built with trusted platforms
+                  </span>
+                  <span className="rounded-full border border-slate-700/60 bg-slate-900/60 px-4 py-2">
+                    UniFi
+                  </span>
+                  <span className="rounded-full border border-slate-700/60 bg-slate-900/60 px-4 py-2">
+                    Omada
+                  </span>
+                  <span className="rounded-full border border-slate-700/60 bg-slate-900/60 px-4 py-2">
+                    OPNsense
+                  </span>
+                </div>
+              </motion.div>
+            </div>
+          </section>
+
+          <section className="px-4 pb-20 pt-6">
+            <div className="container mx-auto max-w-7xl">
+              <div className="grid gap-6 lg:grid-cols-3">
+                {packageTiers.map((tier, index) => {
+                  const Icon = tier.icon;
+
+                  return (
+                    <motion.div
+                      key={tier.name}
+                      initial={{ opacity: 0, y: 24 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ duration: 0.5, delay: index * 0.08 }}
+                      className="h-full rounded-2xl border border-slate-700/50 bg-gradient-to-br from-slate-900/85 to-slate-800/80 p-8 shadow-lg shadow-blue-500/10"
+                    >
+                      <div className="mb-6 flex items-start justify-between gap-4">
+                        <div className="rounded-xl bg-blue-500/10 p-3">
+                          <Icon className="h-7 w-7 text-blue-400" />
+                        </div>
+
+                        <span className="rounded-full border border-blue-400/20 bg-blue-400/10 px-3 py-1 text-xs font-medium text-blue-300">
+                          {tier.badge}
+                        </span>
+                      </div>
+
+                      <h2 className="text-2xl font-bold text-white">{tier.name}</h2>
+                      <p className="mt-3 leading-relaxed text-gray-400">{tier.description}</p>
+
+                      <div className="mt-6 overflow-hidden rounded-2xl border border-slate-700/50 bg-slate-950/50">
+                        <div className="relative h-44 w-full overflow-hidden">
+                          <div className="absolute inset-0 z-10 bg-gradient-to-br from-blue-500/10 via-transparent to-slate-900/40" />
+                          <img
+                            src={tier.image}
+                            alt={`${tier.name} package recommended stack`}
+                            className="h-full w-full object-contain p-4"
+                            loading="lazy"
+                          />
+                        </div>
+
+                        <div className="border-t border-slate-700/50 px-4 py-3">
+                          <p className="text-xs uppercase tracking-[0.18em] text-blue-400">
+                            {tier.stackLabel}
+                          </p>
+                          <p className="mt-1 text-sm text-gray-300">{tier.stackName}</p>
+                        </div>
+                      </div>
+
+                      <div className="mt-6 rounded-xl border border-slate-700/50 bg-slate-900/40 p-4">
+                        <p className="text-sm font-semibold text-gray-300">Best for</p>
+                        <p className="mt-2 text-sm text-gray-400">{tier.bestFor}</p>
+                      </div>
+
+                      <div className="mt-6 space-y-3">
+                        {tier.includes.map((item) => (
+                          <div key={item} className="flex items-start gap-3">
+                            <BadgeCheck className="mt-0.5 h-4 w-4 shrink-0 text-blue-400" />
+                            <p className="text-sm text-gray-300">{item}</p>
+                          </div>
+                        ))}
+                      </div>
+                    </motion.div>
+                  );
+                })}
+              </div>
+
+              <div className="mt-10 rounded-2xl border border-slate-700/50 bg-slate-900/50 px-6 py-5 text-center">
+                <p className="text-sm uppercase tracking-[0.18em] text-blue-400">
+                  Trusted platforms
+                </p>
+                <p className="mx-auto mt-2 max-w-3xl text-gray-400">
+                  Ozony Tech builds around practical, proven platforms like UniFi, Omada, and
+                  OPNsense based on your budget, layout, management needs, and long-term goals.
+                </p>
+              </div>
+            </div>
+          </section>
+
+          <section className="bg-slate-800/30 px-4 py-20">
+            <div className="container mx-auto max-w-7xl">
+              <div className="mb-12 text-center">
+                <h2 className="mb-4 text-4xl font-bold text-white md:text-5xl">
+                  Compare the Packages
+                </h2>
+                <p className="mx-auto max-w-3xl text-lg text-gray-400">
+                  A simple view of how the tiers scale based on complexity, structure, and long-term growth.
+                </p>
+              </div>
+
+              <div className="overflow-x-auto rounded-2xl border border-slate-700/50 bg-slate-900/70">
+                <div className="min-w-[720px]">
+                  <div className="grid grid-cols-4 border-b border-slate-700/50 bg-slate-900/80">
+                    <div className="p-4 text-sm font-semibold text-gray-400">Category</div>
+                    <div className="p-4 text-sm font-semibold text-white">Starter</div>
+                    <div className="p-4 text-sm font-semibold text-white">Growth</div>
+                    <div className="p-4 text-sm font-semibold text-white">Complete</div>
+                  </div>
+
+                  {comparisonRows.map((row, index) => (
+                    <div
+                      key={row.label}
+                      className={`grid grid-cols-4 ${
+                        index !== comparisonRows.length - 1 ? 'border-b border-slate-700/50' : ''
+                      }`}
+                    >
+                      <div className="p-4 text-sm font-medium text-gray-300">{row.label}</div>
+                      <div className="p-4 text-sm text-gray-400">{row.starter}</div>
+                      <div className="p-4 text-sm text-gray-400">{row.growth}</div>
+                      <div className="p-4 text-sm text-gray-400">{row.complete}</div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <section className="px-4 py-20">
+            <div className="container mx-auto max-w-7xl">
+              <div className="mb-12 text-center">
+                <h2 className="mb-4 text-4xl font-bold text-white md:text-5xl">
+                  Why These Solutions?
+                </h2>
+                <p className="mx-auto max-w-3xl text-lg text-gray-400">
+                  Ozony Tech doesn’t recommend equipment based on hype. The right setup depends on
+                  your space, budget, business type, and how much control or scalability you need.
+                </p>
+              </div>
+
+              <div className="grid gap-6 md:grid-cols-3">
+                {brandLogic.map((item, index) => {
+                  const Icon = item.icon;
+
+                  return (
+                    <motion.div
+                      key={item.title}
+                      initial={{ opacity: 0, y: 20 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      viewport={{ once: true }}
+                      transition={{ duration: 0.5, delay: index * 0.08 }}
+                      className="rounded-2xl border border-slate-700/50 bg-slate-900/60 p-6"
+                    >
+                      <div className="mb-5 overflow-hidden rounded-2xl border border-slate-700/50 bg-slate-950/50">
+                        <div className="relative h-44 overflow-hidden">
+                          <div className="absolute inset-0 z-10 bg-gradient-to-br from-blue-500/10 via-transparent to-slate-900/40" />
+                          <img
+                            src={item.image}
+                            alt={`${item.title} recommended hardware stack`}
+                            className="h-full w-full object-contain p-4"
+                            loading="lazy"
+                          />
+                        </div>
+                      </div>
+
+                      <div className="mb-4 inline-flex rounded-xl bg-blue-500/10 p-3">
+                        <Icon className="h-6 w-6 text-blue-400" />
+                      </div>
+
+                      <p className="text-xs uppercase tracking-[0.18em] text-blue-400">
+                        {item.eyebrow}
+                      </p>
+                      <h3 className="mt-2 text-2xl font-bold text-white">{item.title}</h3>
+                      <p className="mt-3 leading-relaxed text-gray-400">{item.description}</p>
+                    </motion.div>
+                  );
+                })}
+              </div>
+            </div>
+          </section>
+
+          <section className="bg-slate-800/30 px-4 py-20">
+            <div className="container mx-auto max-w-7xl">
+              <div className="mb-12 text-center">
+                <h2 className="mb-4 text-4xl font-bold text-white md:text-5xl">Great Fit For</h2>
+                <p className="mx-auto max-w-3xl text-lg text-gray-400">
+                  These packages are designed around the kinds of businesses that benefit most from clean,
+                  reliable networking and practical IT support.
+                </p>
+              </div>
+
+              <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+                {fitCards.map((item, index) => (
+                  <motion.div
+                    key={item}
+                    initial={{ opacity: 0, y: 16 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.4, delay: index * 0.05 }}
+                    className="rounded-xl border border-slate-700/50 bg-slate-900/60 p-5"
+                  >
+                    <p className="font-medium text-white">{item}</p>
+                  </motion.div>
+                ))}
+              </div>
+            </div>
+          </section>
+
+          <section className="px-4 py-20">
+            <div className="container mx-auto max-w-7xl">
+              <div className="mb-12 text-center">
+                <h2 className="mb-4 text-4xl font-bold text-white md:text-5xl">Packages FAQ</h2>
+                <p className="mx-auto max-w-3xl text-lg text-gray-400">
+                  A few common questions about how the package tiers work.
+                </p>
+              </div>
+
+              <div className="grid gap-6 md:grid-cols-2">
+                {packageFaqs.map((faq, index) => (
+                  <motion.div
+                    key={faq.question}
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.5, delay: index * 0.06 }}
+                    className="rounded-2xl border border-slate-700/50 bg-slate-900/60 p-6"
+                  >
+                    <h3 className="text-xl font-semibold text-white">{faq.question}</h3>
+                    <p className="mt-3 leading-relaxed text-gray-400">{faq.answer}</p>
+                  </motion.div>
+                ))}
+              </div>
+            </div>
+          </section>
+
+          <section className="px-4 pb-20">
+            <div className="container mx-auto max-w-6xl">
+              <div className="rounded-2xl border border-slate-700/50 bg-gradient-to-br from-slate-900/90 to-slate-800/80 px-8 py-14 text-center shadow-lg shadow-blue-500/10">
+                <h2 className="text-3xl font-bold text-white md:text-5xl">
+                  Ready to find the right setup for your business?
+                </h2>
+
+                <p className="mx-auto mt-5 max-w-3xl text-lg leading-relaxed text-gray-400">
+                  Whether you need a smaller starter setup or a more complete long-term solution,
+                  Ozony Tech can help you choose a practical path forward.
+                </p>
+
+                <div className="mt-8 flex flex-wrap items-center justify-center gap-4">
+                  <Button
+                    asChild
+                    className="bg-blue-600 px-6 py-6 text-base text-white hover:bg-blue-700"
+                  >
+                    <Link to="/#contact">
+                      <DecodedText speed={12}>Request a Quote</DecodedText>
+                    </Link>
+                  </Button>
+
+                  <Button
+                    asChild
+                    variant="outline"
+                    className="border-blue-400 px-6 py-6 text-base text-blue-400 hover:bg-blue-400/10"
+                  >
+                    <Link to="/">
+                      <ArrowRight className="mr-2 h-5 w-5" />
+                      <DecodedText speed={12}>Back to Homepage</DecodedText>
+                    </Link>
+                  </Button>
+                </div>
+              </div>
+            </div>
+          </section>
+        </main>
+
+        <AnimatePresence>
+          {showBackToTop && (
+            <motion.div
+              initial={{ opacity: 0, y: 16, scale: 0.95 }}
+              animate={{ opacity: 1, y: 0, scale: 1 }}
+              exit={{ opacity: 0, y: 16, scale: 0.95 }}
+              transition={{ duration: 0.2 }}
+              className="fixed bottom-6 right-6 z-50"
+            >
+              <button
+                onClick={scrollToTop}
+                aria-label="Back to top"
+                className="inline-flex h-12 w-12 items-center justify-center rounded-full border border-blue-400/30 bg-slate-900/90 text-blue-400 shadow-lg shadow-blue-500/20 backdrop-blur-md transition-all hover:-translate-y-0.5 hover:bg-blue-500/10 hover:text-white"
+              >
+                <ArrowUp className="h-5 w-5" />
+              </button>
+            </motion.div>
+          )}
+        </AnimatePresence>
+      </div>
+    </>
+  );
+};
+
+export default PackagesPage;

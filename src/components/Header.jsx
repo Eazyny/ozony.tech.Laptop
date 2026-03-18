@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Menu, X } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
 import DecodedText from '@/components/ui/decode-text';
 
 const Header = () => {
+  const navigate = useNavigate();
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
@@ -33,6 +35,11 @@ const Header = () => {
 
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
+    setIsMobileMenuOpen(false);
+  };
+
+  const goToPackages = () => {
+    navigate('/packages');
     setIsMobileMenuOpen(false);
   };
 
@@ -95,6 +102,16 @@ const Header = () => {
             <motion.button
               initial={{ opacity: 0, y: -20 }}
               animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.36 }}
+              onClick={goToPackages}
+              className="text-gray-300 hover:text-white transition-colors duration-200 font-medium"
+            >
+              <DecodedText speed={12}>Packages</DecodedText>
+            </motion.button>
+
+            <motion.button
+              initial={{ opacity: 0, y: -20 }}
+              animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.45 }}
               onClick={() => scrollToSection('#contact')}
               className="inline-flex items-center rounded-full border border-blue-400/30 bg-blue-500/10 px-5 py-2.5 text-sm font-semibold text-white transition-all duration-200 hover:bg-blue-500/20 hover:border-blue-300/50 hover:shadow-lg hover:shadow-blue-500/20"
@@ -134,6 +151,13 @@ const Header = () => {
                   <DecodedText speed={12}>{item.label}</DecodedText>
                 </button>
               ))}
+
+              <button
+                onClick={goToPackages}
+                className="block w-full text-left py-3 px-4 text-gray-300 hover:text-white hover:bg-white/10 rounded-lg transition-colors duration-200"
+              >
+                <DecodedText speed={12}>Packages</DecodedText>
+              </button>
 
               <button
                 onClick={() => scrollToSection('#contact')}
