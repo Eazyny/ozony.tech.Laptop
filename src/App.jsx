@@ -7,8 +7,8 @@ import { Toaster } from '@/components/ui/toaster';
 import Header from '@/components/Header';
 import Hero from '@/components/Hero';
 import Services from '@/components/Services';
-import Solutions from '@/components/Solutions';
 import Credentials from '@/components/Credentials';
+import CertificationsPage from '@/components/CertificationsPage';
 import About from '@/components/About';
 import Contact from '@/components/Contact';
 import Footer from '@/components/Footer';
@@ -49,7 +49,6 @@ const HomePage = () => {
         <main>
           <Hero />
           <Services />
-          <Solutions />
           <Credentials />
           <About />
           <Contact />
@@ -132,6 +131,7 @@ function App() {
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/packages" element={<PackagesPage />} />
+        <Route path="/certifications" element={<CertificationsPage />} />
       </Routes>
 
       <Toaster />
