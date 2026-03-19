@@ -1,79 +1,55 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Server, HardDrive, Shield, Wifi, Terminal, Share2 } from 'lucide-react';
+import { Building2, Shield, Share2, Wifi } from 'lucide-react';
 
 const Solutions = () => {
   const solutions = [
     {
-      icon: Share2,
-      title: 'Shared Files & Office Access',
-      stack: ['Shared Folders', 'Access Control', 'User Permissions'],
+      icon: Building2,
+      title: 'New Office & Team Setup',
+      stack: ['Workstations', 'Printers', 'Wi-Fi', 'Accounts'],
       description:
-        'Set up and organize shared access for office files, team folders, and common resources so staff can work more efficiently without constant access issues.',
+        'Get new teams, offices, and shared workspaces up and running with a cleaner setup process for devices, connectivity, and day-to-day operations.',
       takeaways: [
-        'Shared folder setup and organization',
-        'User access planning and permission control',
-        'Troubleshooting common access problems',
-      ],
-    },
-    {
-      icon: Terminal,
-      title: 'Remote Access & Admin Workflows',
-      stack: ['Remote Access', 'CLI', 'System Admin'],
-      description:
-        'Support secure remote management and practical admin workflows for maintenance, troubleshooting, and day-to-day IT operations.',
-      takeaways: [
-        'Remote support and management workflows',
-        'Practical admin access methods',
-        'Efficient troubleshooting and maintenance',
+        'New workstation and device readiness',
+        'Printer, shared workspace, and connectivity setup',
+        'Consistent setup flow for smoother onboarding',
       ],
     },
     {
       icon: Wifi,
-      title: 'Business Wi-Fi Optimization',
-      stack: ['Wi-Fi', 'Coverage', 'Performance'],
+      title: 'Guest & Staff Network Separation',
+      stack: ['Guest Wi-Fi', 'Staff Devices', 'Segmentation'],
       description:
-        'Improve wireless coverage, reduce dead zones, and help create a more stable experience for staff, guests, and connected business devices.',
+        'Create cleaner network separation for guests, staff, and business devices so daily operations feel more reliable, organized, and secure.',
       takeaways: [
-        'Coverage and signal improvement',
-        'Performance tuning and troubleshooting',
-        'Wired vs wireless baseline comparisons',
+        'Guest and staff Wi-Fi separation planning',
+        'Cleaner network layout for business devices',
+        'More stable day-to-day connectivity',
       ],
     },
     {
-      icon: Server,
-      title: 'Network Segmentation & Layout',
-      stack: ['TCP/IP', 'DNS', 'DHCP', 'Segmentation'],
+      icon: Share2,
+      title: 'Shared Access & Team Collaboration',
+      stack: ['Shared Files', 'Permissions', 'Cloud Access'],
       description:
-        'Plan cleaner small-business network layouts with separated traffic for staff, guests, and devices to improve reliability and security.',
+        'Help teams work more efficiently with cleaner shared access to files, folders, cloud tools, and common business resources.',
       takeaways: [
-        'Guest and staff network separation',
-        'Better device organization and planning',
-        'Improved reliability through segmentation',
-      ],
-    },
-    {
-      icon: HardDrive,
-      title: 'Device Deployment & Setup',
-      stack: ['Windows', 'Deployment', 'Configuration'],
-      description:
-        'Prepare and configure workstations and business devices with a consistent setup process that helps teams get running faster.',
-      takeaways: [
-        'New device setup and readiness',
-        'Standardized configuration approach',
-        'Validation and post-setup checks',
+        'Shared folder and access organization',
+        'User permission planning and cleanup',
+        'Fewer common access and collaboration issues',
       ],
     },
     {
       icon: Shield,
-      title: 'Security Basics for Small Business',
-      stack: ['MFA', 'Updates', 'Account Security'],
+      title: 'Practical Security for Small Business',
+      stack: ['MFA', 'Updates', 'Accounts', 'Safer Wi-Fi'],
       description:
-        'Strengthen everyday business security with practical protections like multi-factor authentication, update hygiene, and safer user practices.',
+        'Strengthen everyday business security with practical protections that reduce risk without overcomplicating the environment.',
       takeaways: [
         'MFA and account protection basics',
-        'Patch and update best practices',
-        'User awareness and phishing prevention',
+        'Patch/update hygiene and safer user practices',
+        'Cleaner guest Wi-Fi and access security habits',
       ],
     },
   ];
@@ -89,15 +65,16 @@ const Solutions = () => {
           className="text-center mb-16"
         >
           <h2 className="text-4xl md:text-5xl font-bold text-white mb-4">
-            Solutions
+            Built for Real Small Business Needs
           </h2>
           <p className="text-gray-400 text-lg max-w-3xl mx-auto">
-            Practical IT and network solutions built around the common problems small businesses face,
-            from Wi-Fi issues and device setup to shared access and basic security.
+            Ozony Tech helps small businesses solve common day-to-day IT problems,
+            from getting new teams set up to improving Wi-Fi, shared access, and
+            practical security.
           </p>
         </motion.div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid md:grid-cols-2 gap-6">
           {solutions.map((solution, index) => {
             const Icon = solution.icon;
 
@@ -136,7 +113,7 @@ const Solutions = () => {
 
                 <div className="pt-4 border-t border-slate-700/50">
                   <p className="text-xs font-semibold text-gray-300 mb-2">
-                    What it includes
+                    What it helps with
                   </p>
                   <ul className="text-gray-400 text-sm space-y-1 list-disc pl-5">
                     {solution.takeaways.map((item) => (
