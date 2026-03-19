@@ -20,6 +20,7 @@ const packageTiers = [
     name: 'Starter',
     badge: 'Best for small spaces',
     image: '/images/packages/starter-stack.webp',
+    imageClassName: 'object-[center_42%]',
     stackLabel: 'Recommended stack',
     stackName: 'Omada / compact business setup',
     description:
@@ -37,6 +38,7 @@ const packageTiers = [
     name: 'Growth',
     badge: 'Most flexible',
     image: '/images/packages/growth-stack.webp',
+    imageClassName: 'object-[center_46%]',
     stackLabel: 'Recommended stack',
     stackName: 'UniFi / managed small business setup',
     description:
@@ -54,6 +56,8 @@ const packageTiers = [
     name: 'Complete',
     badge: 'Best for long-term setup',
     image: '/images/packages/complete-stack.webp',
+    imageClassName:
+      'object-[center_62%] brightness-[0.52] saturate-[0.72] contrast-[1.04]',
     stackLabel: 'Recommended stack',
     stackName: 'Aruba Instant On / premium SMB setup',
     description:
@@ -106,7 +110,7 @@ const brandLogic = [
   {
     icon: Wifi,
     title: 'UniFi',
-    image: '/images/brands/unifi-stack.webp',
+    image: '/images/brands/Unifi.webp',
     eyebrow: 'Polished ecosystem',
     description:
       'A strong option when a business wants a polished ecosystem, clean management, and a more unified network experience.',
@@ -114,18 +118,18 @@ const brandLogic = [
   {
     icon: Network,
     title: 'TP-Link Omada',
-    image: '/images/brands/omada-stack.webp',
+    image: '/images/brands/Omada.webp',
     eyebrow: 'Strong value path',
     description:
       'A great value-focused choice for businesses that want solid performance and cleaner management without overspending.',
   },
   {
     icon: ShieldCheck,
-    title: 'OPNsense',
-    image: '/images/brands/opnsense-stack.webp',
-    eyebrow: 'Firewall-first control',
+    title: 'Aruba Instant On',
+    image: '/images/brands/Aruba.webp',
+    eyebrow: 'Premium SMB path',
     description:
-      'A flexible firewall-focused option for deployments where stronger control, segmentation, and security-minded design matter.',
+      'A premium small-business option for businesses that want polished networking, simpler management, and a strong long-term setup path.',
   },
 ];
 
@@ -259,7 +263,7 @@ const PackagesPage = () => {
                     Omada
                   </span>
                   <span className="rounded-full border border-slate-700/60 bg-slate-900/60 px-4 py-2">
-                    OPNsense
+                    Aruba Instant On
                   </span>
                 </div>
               </motion.div>
@@ -280,6 +284,7 @@ const PackagesPage = () => {
                       name={tier.name}
                       badge={tier.badge}
                       image={tier.image}
+                      imageClassName={tier.imageClassName}
                       description={tier.description}
                       bestFor={tier.bestFor}
                       includes={tier.includes}
@@ -296,7 +301,7 @@ const PackagesPage = () => {
                 </p>
                 <p className="mx-auto mt-2 max-w-3xl text-gray-400">
                   Ozony Tech builds around practical, proven platforms like UniFi, Omada, and
-                  OPNsense based on your budget, layout, management needs, and long-term goals.
+                  Aruba Instant On based on your budget, layout, management needs, and long-term goals.
                 </p>
               </div>
             </div>

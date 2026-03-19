@@ -6,6 +6,7 @@ const FlipCard = ({
   name,
   badge,
   image,
+  imageClassName = '',
   description,
   bestFor,
   includes = [],
@@ -49,13 +50,14 @@ const FlipCard = ({
               <img
                 src={image}
                 alt={`${name} package visual`}
-                className="h-full w-full object-cover"
+                className={`h-full w-full object-cover object-center brightness-[0.76] contrast-[1.03] saturate-[0.9] ${imageClassName}`}
                 loading="lazy"
               />
             </div>
 
-            <div className="absolute inset-0 bg-gradient-to-b from-slate-950/20 via-slate-950/35 to-slate-950/95" />
-            <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(59,130,246,0.18),transparent_30%)]" />
+            <div className="absolute inset-0 bg-gradient-to-b from-slate-950/8 via-slate-950/28 to-slate-950/95" />
+            <div className="absolute inset-0 bg-gradient-to-r from-slate-950/45 via-slate-950/10 to-transparent" />
+            <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(59,130,246,0.16),transparent_30%)]" />
 
             <div className="relative z-10 flex h-full flex-col justify-between p-6">
               <div className="flex items-start justify-between gap-4">
@@ -70,16 +72,16 @@ const FlipCard = ({
               </div>
 
               <div className="space-y-4">
-                <div>
-                  <h3 className="text-3xl font-bold text-white">{name}</h3>
-                  <p className="mt-3 max-w-md text-sm leading-relaxed text-gray-300 md:text-base">
-                    {description}
-                  </p>
-                </div>
-
-                <div className="rounded-2xl border border-slate-700/60 bg-slate-950/55 p-4 backdrop-blur-sm min-h-[110px]">
-                  <p className="text-xs uppercase tracking-[0.18em] text-blue-400">Best for</p>
-                  <p className="mt-2 text-sm leading-relaxed text-gray-300">{bestFor}</p>
+                <div className="relative isolate mt-8 max-w-md overflow-hidden rounded-2xl border border-white/20 bg-white/[0.08] p-4 shadow-[0_10px_30px_rgba(0,0,0,0.28)] backdrop-blur-[28px] backdrop-brightness-125 backdrop-saturate-150">
+                  <div className="pointer-events-none absolute inset-0 bg-gradient-to-br from-white/[0.18] via-white/[0.08] to-white/[0.03]" />
+                  <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-white/35" />
+                  <div className="pointer-events-none absolute inset-0 ring-1 ring-inset ring-white/8" />
+                  <div className="relative">
+                    <h3 className="text-3xl font-bold text-white">{name}</h3>
+                    <p className="mt-4 text-base leading-relaxed text-gray-100/95 md:text-lg">
+                      {description}
+                    </p>
+                  </div>
                 </div>
               </div>
             </div>
@@ -88,7 +90,7 @@ const FlipCard = ({
           {/* Back */}
           <div className="absolute inset-0 overflow-hidden rounded-2xl border border-slate-700/60 bg-gradient-to-br from-slate-900/95 to-slate-800/95 p-6 shadow-lg shadow-blue-500/10 [backface-visibility:hidden] [transform:rotateY(180deg)]">
             <div className="flex h-full flex-col">
-              <div className="flex items-start justify-between gap-4 min-h-[72px]">
+              <div className="flex min-h-[72px] items-start justify-between gap-4">
                 <div>
                   <p className="text-xs uppercase tracking-[0.18em] text-blue-400">
                     Package details
@@ -103,7 +105,7 @@ const FlipCard = ({
               </div>
 
               {stackName && (
-                <div className="mt-4 rounded-2xl border border-slate-700/60 bg-slate-950/50 p-4 min-h-[108px]">
+                <div className="mt-4 min-h-[108px] rounded-2xl border border-slate-700/60 bg-slate-950/50 p-4">
                   <p className="text-xs uppercase tracking-[0.18em] text-blue-400">
                     {stackLabel}
                   </p>
@@ -111,12 +113,12 @@ const FlipCard = ({
                 </div>
               )}
 
-              <div className="mt-4 flex-1 flex flex-col">
+              <div className="mt-4 flex flex-1 flex-col">
                 <p className="mb-4 text-xs uppercase tracking-[0.18em] text-blue-400">
                   What’s included
                 </p>
 
-                <div className="space-y-3 flex-1">
+                <div className="flex-1 space-y-3">
                   {includes.map((item) => (
                     <div key={item} className="flex items-start gap-3">
                       <BadgeCheck className="mt-0.5 h-4 w-4 shrink-0 text-blue-400" />
@@ -127,9 +129,8 @@ const FlipCard = ({
               </div>
 
               <div className="mt-4 rounded-2xl border border-slate-700/60 bg-blue-500/5 px-4 py-3">
-                <p className="text-sm leading-relaxed text-gray-300">
-                  Every package can be adjusted based on your layout, device count, and business needs.
-                </p>
+                <p className="text-xs uppercase tracking-[0.18em] text-blue-400">Best for</p>
+                <p className="mt-2 text-sm leading-relaxed text-gray-300">{bestFor}</p>
               </div>
             </div>
           </div>
