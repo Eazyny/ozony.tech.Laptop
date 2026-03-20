@@ -130,17 +130,16 @@ const Hero = () => {
               <div className="absolute -inset-6 rounded-[2.5rem] bg-blue-500/10 blur-3xl" />
               <div className="absolute inset-0 rounded-[2rem] border border-blue-500/20 bg-gradient-to-br from-blue-500/10 via-transparent to-slate-900/20" />
 
-              <div className="relative overflow-hidden rounded-[2rem] border border-slate-700/60 bg-slate-900/70 shadow-2xl shadow-blue-500/10 backdrop-blur-sm">
-                <div className="absolute inset-0 z-10 bg-gradient-to-t from-slate-950/30 via-transparent to-blue-500/5" />
+              <div className="relative aspect-[5/4] overflow-hidden rounded-[2rem] border border-slate-700/60 bg-slate-900/70 shadow-2xl shadow-blue-500/10 backdrop-blur-sm">
+                <div className="absolute inset-0 z-10 bg-gradient-to-t from-slate-950/30 via-transparent to-blue-500/5 pointer-events-none" />
 
-                <img
-                  src="/heroimage.webp"
-                  alt="Ozony Tech"
-                  className="relative z-0 h-full w-full object-cover object-[20%_20%] -scale-x-100"
-                  decoding="async"
-                  fetchpriority="high"
-                  loading="eager"
-                />
+                <div className="relative z-0 h-full w-full pointer-events-none">
+                  <spline-viewer
+                    url="https://prod.spline.design/w60jKH7eTZbRjKKR/scene.splinecode"
+                    loading="eager"
+                    style={{ width: '100%', height: '100%', display: 'block' }}
+                  ></spline-viewer>
+                </div>
               </div>
 
               <div className="absolute -bottom-5 left-1/2 z-20 w-[82%] -translate-x-1/2 rounded-2xl border border-slate-700/60 bg-slate-950/80 px-5 py-4 shadow-lg shadow-blue-500/10 backdrop-blur-md">
