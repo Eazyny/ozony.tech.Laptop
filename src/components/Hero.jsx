@@ -94,7 +94,7 @@ const Hero = () => {
                 <div className="pointer-events-none absolute inset-0 z-10 bg-gradient-to-t from-slate-950/25 via-transparent to-blue-500/5" />
 
                 <div className="pointer-events-none relative z-0 h-full w-full">
-                  <spline-viewer url="https://prod.spline.design/c91fD0sLX7xbGC9j/scene.splinecode"></spline-viewer>
+                  <spline-viewer url="https://prod.spline.design/fMnaog7V2cCUbpDk/scene.splinecode"></spline-viewer>
                 </div>
               </div>
             </div>
