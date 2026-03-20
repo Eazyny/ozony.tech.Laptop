@@ -17,13 +17,13 @@ const Hero = () => {
     <section className="relative overflow-hidden px-4 pt-24 pb-12 md:pt-28 md:pb-16 lg:min-h-[780px] lg:flex lg:items-center">
       <StarfieldBackground />
 
-      <div className="relative container mx-auto w-full max-w-7xl">
-        <div className="grid items-center gap-10 lg:grid-cols-[1.12fr_0.88fr] lg:gap-12">
+      <div className="relative mx-auto w-full max-w-[1400px] px-4">
+        <div className="grid items-center gap-10 lg:grid-cols-[1.18fr_0.82fr] lg:gap-12 xl:grid-cols-[1.24fr_0.76fr] xl:gap-16">
           <motion.div
             initial={{ opacity: 0, x: -50 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.6 }}
-            className="space-y-7"
+            className="min-w-0 space-y-7 lg:pr-6 xl:pr-10"
           >
             <motion.div
               initial={{ opacity: 0, y: 20 }}
@@ -40,7 +40,7 @@ const Hero = () => {
                   Ozony Tech
                 </p>
 
-                <h1 className="text-[clamp(3.5rem,5vw,4.85rem)] font-bold leading-[0.94] tracking-[-0.03em] text-white">
+                <h1 className="text-[clamp(3.15rem,4vw,4.55rem)] font-bold leading-[0.94] tracking-[-0.03em] text-white">
                   <span className="block whitespace-nowrap">
                     IT &amp; Networking.
                   </span>
@@ -86,7 +86,7 @@ const Hero = () => {
             transition={{ duration: 0.6, delay: 0.3 }}
             className="relative w-full"
           >
-            <div className="relative mx-auto w-full max-w-[520px] lg:ml-auto">
+            <div className="relative mx-auto w-full max-w-[500px] lg:ml-auto xl:max-w-[520px]">
               <div className="absolute -inset-8 rounded-[2.75rem] bg-blue-500/10 blur-3xl" />
               <div className="absolute inset-0 rounded-[2rem] border border-blue-500/20 bg-gradient-to-br from-blue-500/10 via-transparent to-slate-900/20" />
 
