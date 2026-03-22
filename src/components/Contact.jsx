@@ -1,11 +1,23 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { Mail, Phone, MapPin, Send, Github, Linkedin, Twitter, CheckCircle2 } from 'lucide-react';
+import {
+  Mail,
+  Phone,
+  MapPin,
+  Send,
+  Github,
+  Linkedin,
+  Twitter,
+  CheckCircle2,
+} from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { toast } from '@/components/ui/use-toast';
 import DecodedText from '@/components/ui/decode-text';
 
 const FORMSPREE_ENDPOINT = 'https://formspree.io/f/mdawpzqp';
+
+const SERVICE_AREA_MAP =
+  'https://www.openstreetmap.org/export/embed.html?bbox=-74.25909%2C40.4774%2C-73.70018%2C40.91758&layer=mapnik&marker=40.7128%2C-74.0060';
 
 const Contact = () => {
   const [formData, setFormData] = useState({
@@ -103,67 +115,77 @@ const Contact = () => {
     {
       icon: MapPin,
       label: 'Service Area',
-      value: 'New York, NY',
+      value: 'New York City',
       href: null,
     },
   ];
 
   const socialLinks = [
     { icon: Github, label: 'GitHub', href: 'https://github.com/Eazyny' },
-    { icon: Linkedin, label: 'LinkedIn', href: 'https://www.linkedin.com/in/ozony-elsevif/' },
+    {
+      icon: Linkedin,
+      label: 'LinkedIn',
+      href: 'https://www.linkedin.com/in/ozony-elsevif/',
+    },
     { icon: Twitter, label: 'Twitter', href: 'https://x.com/BlockchainEazy' },
   ];
 
   return (
-    <section id="contact" className="py-20 px-4">
+    <section id="contact" className="px-4 py-20">
       <div className="container mx-auto max-w-7xl">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="text-center mb-16"
+          className="mb-16 text-center"
         >
-          <h2 className="text-4xl md:text-5xl font-bold text-white mb-4">
+          <h2 className="mb-4 text-4xl font-bold text-white md:text-5xl">
             Contact Ozony Tech
           </h2>
-          <p className="text-gray-400 text-lg max-w-3xl mx-auto">
-            Need help with Wi-Fi, networking, device setup, troubleshooting, or general IT support?
-            Send over a few details and let’s talk through your business needs.
+          <p className="mx-auto max-w-3xl text-lg text-gray-400">
+            Need help with Wi-Fi, networking, device setup, troubleshooting, or
+            general IT support? Send over a few details and let’s talk through
+            your business needs.
           </p>
         </motion.div>
 
-        <div className="grid lg:grid-cols-2 gap-12 items-stretch">
-          {/* Contact Information */}
+        <div className="grid items-start gap-12 lg:grid-cols-2">
+          {/* Left Column */}
           <motion.div
             initial={{ opacity: 0, x: -30 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5 }}
-            className="flex h-full flex-col gap-8"
+            className="flex flex-col gap-6"
           >
-            <div className="bg-gradient-to-br from-slate-900/80 to-slate-800/80 backdrop-blur-sm rounded-xl p-8 border border-slate-700/50">
-              <h3 className="text-2xl font-bold text-white mb-6">Business Contact</h3>
+            <div className="rounded-xl border border-slate-700/50 bg-gradient-to-br from-slate-900/80 to-slate-800/80 p-8 backdrop-blur-sm">
+              <h3 className="mb-6 text-2xl font-bold text-white">
+                Business Contact
+              </h3>
 
               <div className="space-y-6">
                 {contactInfo.map((item) => {
                   const Icon = item.icon;
+
                   return (
                     <div key={item.label} className="flex items-start gap-4">
-                      <div className="p-3 bg-blue-500/10 rounded-lg shrink-0">
-                        <Icon className="w-6 h-6 text-blue-400" />
+                      <div className="shrink-0 rounded-lg bg-blue-500/10 p-3">
+                        <Icon className="h-6 w-6 text-blue-400" />
                       </div>
                       <div>
-                        <p className="text-gray-400 text-sm mb-1">{item.label}</p>
+                        <p className="mb-1 text-sm text-gray-400">
+                          {item.label}
+                        </p>
                         {item.href ? (
                           <a
                             href={item.href}
-                            className="text-white font-medium hover:text-blue-400 transition-colors"
+                            className="font-medium text-white transition-colors hover:text-blue-400"
                           >
                             {item.value}
                           </a>
                         ) : (
-                          <p className="text-white font-medium">{item.value}</p>
+                          <p className="font-medium text-white">{item.value}</p>
                         )}
                       </div>
                     </div>
@@ -171,21 +193,22 @@ const Contact = () => {
                 })}
               </div>
 
-              <div className="mt-8 pt-8 border-t border-slate-700/50">
-                <p className="text-gray-400 text-sm mb-4">Connect online</p>
+              <div className="mt-8 border-t border-slate-700/50 pt-8">
+                <p className="mb-4 text-sm text-gray-400">Connect online</p>
                 <div className="flex gap-4">
                   {socialLinks.map((social) => {
                     const Icon = social.icon;
+
                     return (
                       <a
                         key={social.label}
                         href={social.href}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="p-3 bg-slate-800/80 hover:bg-blue-500/10 rounded-lg transition-all duration-200 hover:scale-110"
+                        className="rounded-lg bg-slate-800/80 p-3 transition-all duration-200 hover:scale-110 hover:bg-blue-500/10"
                         aria-label={social.label}
                       >
-                        <Icon className="w-5 h-5 text-gray-400 hover:text-blue-400 transition-colors" />
+                        <Icon className="h-5 w-5 text-gray-400 transition-colors hover:text-blue-400" />
                       </a>
                     );
                   })}
@@ -193,15 +216,23 @@ const Contact = () => {
               </div>
             </div>
 
-            <div className="relative flex-1 min-h-[22rem] lg:min-h-0 rounded-xl overflow-hidden bg-slate-900/60 border border-slate-700/50 p-2">
-              <img
-                src="/contactimage.webp"
-                alt="Ozony Tech network setup"
-                className="w-full h-full object-cover object-center"
-                decoding="async"
-                fetchpriority="high"
-                loading="eager"
-              />
+            <div className="rounded-xl border border-slate-700/50 bg-gradient-to-br from-slate-900/80 to-slate-800/80 p-6 backdrop-blur-sm">
+              <div className="mb-4">
+                <h3 className="text-xl font-bold text-white">Service Area</h3>
+                <p className="mt-2 max-w-lg text-sm leading-relaxed text-gray-400">
+                  Serving businesses across the Tri-State area, with nearby service
+                  availability based on project needs.
+                </p>
+              </div>
+
+              <div className="overflow-hidden rounded-lg border border-slate-700/50 bg-slate-900/70">
+                <iframe
+                  title="Ozony Tech service area map"
+                  src={SERVICE_AREA_MAP}
+                  className="h-[250px] w-full lg:h-[260px]"
+                  loading="lazy"
+                />
+              </div>
             </div>
           </motion.div>
 
@@ -211,15 +242,17 @@ const Contact = () => {
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5 }}
-            className="h-full"
           >
             <form
               onSubmit={handleSubmit}
-              className="h-full bg-gradient-to-br from-slate-900/80 to-slate-800/80 backdrop-blur-sm rounded-xl p-8 border border-slate-700/50 flex flex-col"
+              className="rounded-xl border border-slate-700/50 bg-gradient-to-br from-slate-900/80 to-slate-800/80 p-8 backdrop-blur-sm"
             >
-              <div className="space-y-6 flex-1">
+              <div className="space-y-6">
                 <div>
-                  <label htmlFor="name" className="block text-white font-medium mb-2">
+                  <label
+                    htmlFor="name"
+                    className="mb-2 block font-medium text-white"
+                  >
                     Name *
                   </label>
                   <input
@@ -229,13 +262,16 @@ const Contact = () => {
                     value={formData.name}
                     onChange={handleChange}
                     required
-                    className="w-full px-4 py-3 bg-slate-900/50 border border-slate-700 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
+                    className="w-full rounded-lg border border-slate-700 bg-slate-900/50 px-4 py-3 text-white placeholder-gray-500 transition-all focus:border-transparent focus:outline-none focus:ring-2 focus:ring-blue-500"
                     placeholder="Your name"
                   />
                 </div>
 
                 <div>
-                  <label htmlFor="businessName" className="block text-white font-medium mb-2">
+                  <label
+                    htmlFor="businessName"
+                    className="mb-2 block font-medium text-white"
+                  >
                     Business Name
                   </label>
                   <input
@@ -244,13 +280,16 @@ const Contact = () => {
                     name="businessName"
                     value={formData.businessName}
                     onChange={handleChange}
-                    className="w-full px-4 py-3 bg-slate-900/50 border border-slate-700 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
+                    className="w-full rounded-lg border border-slate-700 bg-slate-900/50 px-4 py-3 text-white placeholder-gray-500 transition-all focus:border-transparent focus:outline-none focus:ring-2 focus:ring-blue-500"
                     placeholder="Your business or organization"
                   />
                 </div>
 
                 <div>
-                  <label htmlFor="email" className="block text-white font-medium mb-2">
+                  <label
+                    htmlFor="email"
+                    className="mb-2 block font-medium text-white"
+                  >
                     Email *
                   </label>
                   <input
@@ -260,13 +299,16 @@ const Contact = () => {
                     value={formData.email}
                     onChange={handleChange}
                     required
-                    className="w-full px-4 py-3 bg-slate-900/50 border border-slate-700 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
+                    className="w-full rounded-lg border border-slate-700 bg-slate-900/50 px-4 py-3 text-white placeholder-gray-500 transition-all focus:border-transparent focus:outline-none focus:ring-2 focus:ring-blue-500"
                     placeholder="your.email@example.com"
                   />
                 </div>
 
                 <div>
-                  <label htmlFor="service" className="block text-white font-medium mb-2">
+                  <label
+                    htmlFor="service"
+                    className="mb-2 block font-medium text-white"
+                  >
                     Service Needed
                   </label>
                   <input
@@ -275,13 +317,16 @@ const Contact = () => {
                     name="service"
                     value={formData.service}
                     onChange={handleChange}
-                    className="w-full px-4 py-3 bg-slate-900/50 border border-slate-700 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
+                    className="w-full rounded-lg border border-slate-700 bg-slate-900/50 px-4 py-3 text-white placeholder-gray-500 transition-all focus:border-transparent focus:outline-none focus:ring-2 focus:ring-blue-500"
                     placeholder="Wi-Fi, networking, setup, troubleshooting, etc."
                   />
                 </div>
 
                 <div>
-                  <label htmlFor="message" className="block text-white font-medium mb-2">
+                  <label
+                    htmlFor="message"
+                    className="mb-2 block font-medium text-white"
+                  >
                     Project Details *
                   </label>
                   <textarea
@@ -291,7 +336,7 @@ const Contact = () => {
                     onChange={handleChange}
                     required
                     rows={6}
-                    className="w-full px-4 py-3 bg-slate-900/50 border border-slate-700 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all resize-none"
+                    className="w-full resize-none rounded-lg border border-slate-700 bg-slate-900/50 px-4 py-3 text-white placeholder-gray-500 transition-all focus:border-transparent focus:outline-none focus:ring-2 focus:ring-blue-500"
                     placeholder="Tell me about your setup, the issue you’re having, or the kind of help you need."
                   />
                 </div>
@@ -300,9 +345,9 @@ const Contact = () => {
               <Button
                 type="submit"
                 disabled={isSubmitting}
-                className="w-full mt-6 bg-blue-600 hover:bg-blue-700 text-white py-6 text-base font-semibold disabled:opacity-60 disabled:cursor-not-allowed"
+                className="mt-6 w-full bg-blue-600 py-6 text-base font-semibold text-white hover:bg-blue-700 disabled:cursor-not-allowed disabled:opacity-60"
               >
-                <Send className="w-5 h-5 mr-2" />
+                <Send className="mr-2 h-5 w-5" />
                 {isSubmitting ? (
                   'Sending...'
                 ) : (
