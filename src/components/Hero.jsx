@@ -40,11 +40,19 @@ const Hero = () => {
                   Ozony Tech
                 </p>
 
-                <h1 className="text-[clamp(3.15rem,4vw,4.55rem)] font-bold leading-[0.94] tracking-[-0.03em] text-white">
-                  <span className="block whitespace-nowrap">
+                <h1 className="text-[clamp(2.85rem,12vw,4.55rem)] font-bold leading-[0.92] tracking-[-0.03em] text-white">
+                  <span className="block sm:whitespace-nowrap">
                     IT &amp; Networking.
                   </span>
-                  <span className="block whitespace-nowrap text-white/95">
+
+                  <span className="block text-white/95 sm:hidden">
+                    Built for Small
+                  </span>
+                  <span className="block text-white/95 sm:hidden">
+                    Business.
+                  </span>
+
+                  <span className="hidden text-white/95 sm:block lg:whitespace-nowrap">
                     Built for Small Business.
                   </span>
                 </h1>
