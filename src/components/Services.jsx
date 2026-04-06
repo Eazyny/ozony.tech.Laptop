@@ -1,6 +1,7 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { Building2, Network, Shield, Wrench } from 'lucide-react';
+import { ArrowRight, Building2, Network, Shield, Wrench } from 'lucide-react';
 
 const Services = () => {
   const serviceGroups = [
@@ -15,6 +16,8 @@ const Services = () => {
         'Guest and staff network separation',
         'Coverage, performance, and connectivity troubleshooting',
       ],
+      href: '/network-setup-nyc',
+      linkLabel: 'Explore network setup',
     },
     {
       icon: Building2,
@@ -27,6 +30,8 @@ const Services = () => {
         'Shared workspace and new-user readiness',
         'Basic Windows and macOS support',
       ],
+      href: '/it-support-nyc',
+      linkLabel: 'Explore IT support',
     },
     {
       icon: Shield,
@@ -39,6 +44,8 @@ const Services = () => {
         'User account setup and permission planning',
         'MFA, update hygiene, and safer access practices',
       ],
+      href: '/firewall-setup-nyc',
+      linkLabel: 'Explore firewall setup',
     },
     {
       icon: Wrench,
@@ -51,30 +58,32 @@ const Services = () => {
         'Root-cause investigation and practical fixes',
         'Remote assistance, follow-ups, and ongoing help',
       ],
+      href: '/it-support-nyc',
+      linkLabel: 'Explore IT support',
     },
   ];
 
   return (
-    <section id="services" className="py-20 px-4 bg-slate-800/30">
+    <section id="services" className="bg-slate-800/30 px-4 py-20">
       <div className="container mx-auto max-w-7xl">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="text-center mb-16"
+          className="mb-16 text-center"
         >
-          <h2 className="text-4xl md:text-5xl font-bold text-white mb-4">
-            Built for Small Business Needs
+          <h2 className="mb-4 text-4xl font-bold text-white md:text-5xl">
+            Services Built for Small Business Needs
           </h2>
-          <p className="text-gray-400 text-lg max-w-3xl mx-auto">
+          <p className="mx-auto max-w-3xl text-lg text-gray-400">
             Ozony Tech provides practical IT and network help for the everyday needs
             small businesses face, from connectivity and device setup to shared
             access, security, and ongoing support.
           </p>
         </motion.div>
 
-        <div className="grid md:grid-cols-2 gap-6">
+        <div className="grid gap-6 md:grid-cols-2">
           {serviceGroups.map((group, index) => {
             const Icon = group.icon;
 
@@ -85,42 +94,51 @@ const Services = () => {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: index * 0.08 }}
-                className="bg-slate-900/50 backdrop-blur-sm rounded-xl p-6 border border-slate-700/50 hover:border-blue-500/50 transition-all duration-300 hover:shadow-lg hover:shadow-blue-500/10"
               >
-                <div className="flex items-center gap-3 mb-4">
-                  <div className="p-2 bg-blue-500/10 rounded-lg">
-                    <Icon className="w-6 h-6 text-blue-400" />
+                <Link
+                  to={group.href}
+                  className="group block h-full rounded-xl border border-slate-700/50 bg-slate-900/50 p-6 backdrop-blur-sm transition-all duration-300 hover:border-blue-500/50 hover:shadow-lg hover:shadow-blue-500/10"
+                >
+                  <div className="mb-4 flex items-center gap-3">
+                    <div className="rounded-lg bg-blue-500/10 p-2">
+                      <Icon className="h-6 w-6 text-blue-400" />
+                    </div>
+                    <h3 className="text-xl font-semibold leading-tight text-white">
+                      {group.title}
+                    </h3>
                   </div>
-                  <h3 className="text-xl font-semibold text-white leading-tight">
-                    {group.title}
-                  </h3>
-                </div>
 
-                <div className="flex flex-wrap gap-2 mb-4">
-                  {group.stack.map((item) => (
-                    <span
-                      key={item}
-                      className="px-3 py-1 bg-slate-800/80 text-gray-300 rounded-full text-sm border border-slate-700/50"
-                    >
-                      {item}
-                    </span>
-                  ))}
-                </div>
-
-                <p className="text-gray-400 text-sm leading-relaxed mb-4">
-                  {group.description}
-                </p>
-
-                <div className="pt-4 border-t border-slate-700/50">
-                  <p className="text-xs font-semibold text-gray-300 mb-2">
-                    What it covers
-                  </p>
-                  <ul className="text-gray-400 text-sm space-y-1 list-disc pl-5">
-                    {group.takeaways.map((item) => (
-                      <li key={item}>{item}</li>
+                  <div className="mb-4 flex flex-wrap gap-2">
+                    {group.stack.map((item) => (
+                      <span
+                        key={item}
+                        className="rounded-full border border-slate-700/50 bg-slate-800/80 px-3 py-1 text-sm text-gray-300"
+                      >
+                        {item}
+                      </span>
                     ))}
-                  </ul>
-                </div>
+                  </div>
+
+                  <p className="mb-4 text-sm leading-relaxed text-gray-400">
+                    {group.description}
+                  </p>
+
+                  <div className="border-t border-slate-700/50 pt-4">
+                    <p className="mb-2 text-xs font-semibold text-gray-300">
+                      What it covers
+                    </p>
+                    <ul className="list-disc space-y-1 pl-5 text-sm text-gray-400">
+                      {group.takeaways.map((item) => (
+                        <li key={item}>{item}</li>
+                      ))}
+                    </ul>
+                  </div>
+
+                  <div className="mt-5 inline-flex items-center gap-2 text-sm font-medium text-blue-400 transition-colors duration-200 group-hover:text-blue-300">
+                    <span>{group.linkLabel}</span>
+                    <ArrowRight className="h-4 w-4 transition-transform duration-200 group-hover:translate-x-0.5" />
+                  </div>
+                </Link>
               </motion.div>
             );
           })}

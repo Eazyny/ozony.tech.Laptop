@@ -14,6 +14,10 @@ import Contact from '@/components/Contact';
 import Footer from '@/components/Footer';
 import CallToAction from '@/components/CallToAction';
 import PackagesPage from '@/components/PackagesPage';
+import NetworkSetupNYC from '@/pages/NetworkSetupNYC';
+import BusinessWifiNYC from '@/pages/BusinessWifiNYC';
+import FirewallSetupNYC from '@/pages/FirewallSetupNYC';
+import ITSupportNYC from '@/pages/ITSupportNYC';
 
 const HomePage = () => {
   const [showBackToTop, setShowBackToTop] = useState(false);
@@ -132,6 +136,10 @@ function App() {
         <Route path="/" element={<HomePage />} />
         <Route path="/packages" element={<PackagesPage />} />
         <Route path="/certifications" element={<CertificationsPage />} />
+        <Route path="/network-setup-nyc" element={<NetworkSetupNYC />} />
+        <Route path="/business-wifi-nyc" element={<BusinessWifiNYC />} />
+        <Route path="/firewall-setup-nyc" element={<FirewallSetupNYC />} />
+        <Route path="/it-support-nyc" element={<ITSupportNYC />} />
       </Routes>
 
       <Toaster />

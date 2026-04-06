@@ -1,13 +1,17 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Menu, X } from 'lucide-react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import DecodedText from '@/components/ui/decode-text';
 
 const Header = () => {
   const navigate = useNavigate();
+  const location = useLocation();
+
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+
+  const isHomePage = location.pathname === '/';
 
   useEffect(() => {
     const handleScroll = () => setIsScrolled(window.scrollY > 10);
@@ -24,22 +28,38 @@ const Header = () => {
     { label: 'Contact', href: '#contact' },
   ];
 
-  const scrollToSection = (href) => {
-    const element = document.querySelector(href);
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
-      setIsMobileMenuOpen(false);
+  const goToSection = (href) => {
+    setIsMobileMenuOpen(false);
+
+    if (isHomePage) {
+      const element = document.querySelector(href);
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth' });
+      }
+      return;
     }
+
+    navigate(`/${href}`);
   };
 
-  const scrollToTop = () => {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+  const handleBrandClick = () => {
     setIsMobileMenuOpen(false);
+
+    if (isHomePage) {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      return;
+    }
+
+    navigate('/');
   };
 
   const goToPackages = () => {
     navigate('/packages');
     setIsMobileMenuOpen(false);
+  };
+
+  const goToContact = () => {
+    goToSection('#contact');
   };
 
   return (
@@ -49,33 +69,31 @@ const Header = () => {
       className={[
         'fixed top-0 left-0 right-0 z-50 transition-all duration-300',
         isScrolled
-          ? 'bg-slate-900/35 backdrop-blur-lg border-b border-white/10 shadow-lg shadow-blue-500/10'
-          : 'bg-slate-900/35 backdrop-blur-lg border-b border-white/10 lg:bg-transparent lg:backdrop-blur-none lg:border-transparent'
+          ? 'border-b border-white/10 bg-slate-900/35 backdrop-blur-lg shadow-lg shadow-blue-500/10'
+          : 'border-b border-white/10 bg-slate-900/35 backdrop-blur-lg lg:border-transparent lg:bg-transparent lg:backdrop-blur-none',
       ].join(' ')}
     >
-      {/* Glow layer */}
       <div
         className={[
           'pointer-events-none absolute inset-x-0 top-0 h-24 -z-10 transition-opacity duration-300',
-          isScrolled ? 'opacity-100' : 'opacity-0 lg:opacity-0'
+          isScrolled ? 'opacity-100' : 'opacity-0 lg:opacity-0',
         ].join(' ')}
         style={{
           background:
             'radial-gradient(circle at 20% 20%, rgba(59,130,246,.18), transparent 60%), radial-gradient(circle at 80% 30%, rgba(168,85,247,.14), transparent 60%)',
-          filter: 'blur(16px)'
+          filter: 'blur(16px)',
         }}
       />
 
       <nav className="container mx-auto px-4 py-4">
         <div className="flex items-center justify-between gap-4">
-          {/* Brand */}
           <motion.button
             type="button"
-            onClick={scrollToTop}
+            onClick={handleBrandClick}
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            className="flex items-center gap-3 text-xl font-bold text-white shrink-0"
-            aria-label="Go to top"
+            className="flex shrink-0 items-center gap-3 text-xl font-bold text-white"
+            aria-label="Go to homepage"
           >
             <span className="oz-logo-wrap" aria-hidden="true">
               <span className="oz-logo" />
@@ -83,7 +101,6 @@ const Header = () => {
             <span>Ozony Tech</span>
           </motion.button>
 
-          {/* Desktop Navigation */}
           <div className="hidden lg:flex items-center gap-8">
             {navItems.map((item, index) => (
               <motion.button
@@ -91,8 +108,8 @@ const Header = () => {
                 initial={{ opacity: 0, y: -20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: index * 0.08 }}
-                onClick={() => scrollToSection(item.href)}
-                className="text-gray-300 hover:text-white transition-colors duration-200 font-medium"
+                onClick={() => goToSection(item.href)}
+                className="font-medium text-gray-300 transition-colors duration-200 hover:text-white"
               >
                 <DecodedText speed={12}>{item.label}</DecodedText>
               </motion.button>
@@ -103,7 +120,7 @@ const Header = () => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.36 }}
               onClick={goToPackages}
-              className="text-gray-300 hover:text-white transition-colors duration-200 font-medium"
+              className="font-medium text-gray-300 transition-colors duration-200 hover:text-white"
             >
               <DecodedText speed={12}>Packages</DecodedText>
             </motion.button>
@@ -112,40 +129,38 @@ const Header = () => {
               initial={{ opacity: 0, y: -20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.45 }}
-              onClick={() => scrollToSection('#contact')}
-              className="inline-flex items-center rounded-full border border-blue-400/30 bg-blue-500/10 px-5 py-2.5 text-sm font-semibold text-white transition-all duration-200 hover:bg-blue-500/20 hover:border-blue-300/50 hover:shadow-lg hover:shadow-blue-500/20"
+              onClick={goToContact}
+              className="inline-flex items-center rounded-full border border-blue-400/30 bg-blue-500/10 px-5 py-2.5 text-sm font-semibold text-white transition-all duration-200 hover:border-blue-300/50 hover:bg-blue-500/20 hover:shadow-lg hover:shadow-blue-500/20"
             >
               Request a Quote
             </motion.button>
           </div>
 
-          {/* Mobile Menu Button */}
           <button
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            className="lg:hidden text-white p-2 hover:bg-white/10 rounded-lg transition-colors"
+            className="rounded-lg p-2 text-white transition-colors hover:bg-white/10 lg:hidden"
             aria-label={isMobileMenuOpen ? 'Close menu' : 'Open menu'}
           >
             {isMobileMenuOpen ? (
-              <X className="w-6 h-6" />
+              <X className="h-6 w-6" />
             ) : (
-              <Menu className="w-6 h-6" />
+              <Menu className="h-6 w-6" />
             )}
           </button>
         </div>
 
-        {/* Mobile Navigation */}
         {isMobileMenuOpen && (
           <motion.div
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: 'auto' }}
-            className="lg:hidden mt-4 p-3 bg-slate-900/60 backdrop-blur-md rounded-xl border border-white/10"
+            className="mt-4 rounded-xl border border-white/10 bg-slate-900/60 p-3 backdrop-blur-md lg:hidden"
           >
             <div className="flex flex-col gap-1">
               {navItems.map((item) => (
                 <button
                   key={item.label}
-                  onClick={() => scrollToSection(item.href)}
-                  className="block w-full text-left py-3 px-4 text-gray-300 hover:text-white hover:bg-white/10 rounded-lg transition-colors duration-200"
+                  onClick={() => goToSection(item.href)}
+                  className="block w-full rounded-lg px-4 py-3 text-left text-gray-300 transition-colors duration-200 hover:bg-white/10 hover:text-white"
                 >
                   <DecodedText speed={12}>{item.label}</DecodedText>
                 </button>
@@ -153,13 +168,13 @@ const Header = () => {
 
               <button
                 onClick={goToPackages}
-                className="block w-full text-left py-3 px-4 text-gray-300 hover:text-white hover:bg-white/10 rounded-lg transition-colors duration-200"
+                className="block w-full rounded-lg px-4 py-3 text-left text-gray-300 transition-colors duration-200 hover:bg-white/10 hover:text-white"
               >
                 <DecodedText speed={12}>Packages</DecodedText>
               </button>
 
               <button
-                onClick={() => scrollToSection('#contact')}
+                onClick={goToContact}
                 className="mt-2 w-full rounded-lg border border-blue-400/30 bg-blue-500/10 px-4 py-3 text-sm font-semibold text-white transition-all duration-200 hover:bg-blue-500/20"
               >
                 Request a Quote

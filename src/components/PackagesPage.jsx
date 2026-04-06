@@ -33,6 +33,8 @@ const packageTiers = [
       'Printer / workstation connectivity help',
       'Basic security and account setup guidance',
     ],
+    serviceLink: '/network-setup-nyc',
+    serviceLabel: 'Explore network setup',
   },
   {
     name: 'Growth',
@@ -51,6 +53,8 @@ const packageTiers = [
       'Improved wireless coverage planning',
       'Cleaner organization and business-ready structure',
     ],
+    serviceLink: '/business-wifi-nyc',
+    serviceLabel: 'Explore business Wi-Fi',
   },
   {
     name: 'Complete',
@@ -70,6 +74,8 @@ const packageTiers = [
       'Cleaner organization for long-term reliability',
       'Scalable foundation for future upgrades',
     ],
+    serviceLink: '/firewall-setup-nyc',
+    serviceLabel: 'Explore firewall setup',
   },
 ];
 
@@ -279,6 +285,7 @@ const PackagesPage = () => {
                     initial={{ opacity: 0, y: 24 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.5, delay: index * 0.08 }}
+                    className="flex h-full flex-col"
                   >
                     <FlipCard
                       name={tier.name}
@@ -291,6 +298,16 @@ const PackagesPage = () => {
                       stackLabel={tier.stackLabel}
                       stackName={tier.stackName}
                     />
+
+                    <div className="mt-4">
+                      <Link
+                        to={tier.serviceLink}
+                        className="group inline-flex items-center gap-2 text-sm font-medium text-blue-400 transition-colors hover:text-blue-300"
+                      >
+                        <span>{tier.serviceLabel}</span>
+                        <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
+                      </Link>
+                    </div>
                   </motion.div>
                 ))}
               </div>
