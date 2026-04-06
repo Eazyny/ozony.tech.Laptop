@@ -29,7 +29,7 @@ const Hero = () => {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.2 }}
-              className="space-y-5 max-w-[760px]"
+              className="max-w-[760px] space-y-5"
             >
               <p className="text-sm font-semibold uppercase tracking-[0.18em] text-blue-400 md:text-base">
                 Serving NYC | Small Business IT Solutions
@@ -101,8 +101,17 @@ const Hero = () => {
               <div className="relative aspect-[5/4] overflow-hidden rounded-[2rem] border border-slate-700/60 bg-slate-900/65 shadow-2xl shadow-blue-500/10 backdrop-blur-sm">
                 <div className="pointer-events-none absolute inset-0 z-10 bg-gradient-to-t from-slate-950/25 via-transparent to-blue-500/5" />
 
-                <div className="pointer-events-none relative z-0 h-full w-full">
-                  <spline-viewer url="https://prod.spline.design/fMnaog7V2cCUbpDk/scene.splinecode"></spline-viewer>
+                <div className="relative z-0 h-full w-full">
+                  <video
+                    className="h-full w-full object-cover"
+                    autoPlay
+                    muted
+                    loop
+                    playsInline
+                    preload="metadata"
+                  >
+                    <source src="/videos/it_services.mp4" type="video/mp4" />
+                  </video>
                 </div>
               </div>
             </div>

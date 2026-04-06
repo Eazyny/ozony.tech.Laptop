@@ -117,7 +117,7 @@ const Footer = () => {
 
           <div className="flex flex-col gap-3 border-t border-slate-800 pt-6 text-sm text-gray-500 md:flex-row md:items-center md:justify-between">
             <p>© {currentYear} Ozony Tech. All rights reserved.</p>
-            <p>Serving New York, NY and surrounding businesses.</p>
+            <p>Serving CT, PA, NJ, and NY/NYC businesses.</p>
           </div>
         </div>
       </div>
