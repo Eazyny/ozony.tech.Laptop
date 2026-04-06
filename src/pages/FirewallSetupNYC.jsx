@@ -5,17 +5,17 @@ import ServiceLandingTemplate from '@/components/service-pages/ServiceLandingTem
 const FirewallSetupNYC = () => {
   return (
     <ServiceLandingTemplate
-      pageTitle="Firewall Setup in NYC | Ozony Tech"
-      pageDescription="Business firewall setup in NYC for small businesses that want stronger protection, cleaner network control, and better security foundations."
+      pageTitle="Business Firewall Setup in NYC for Small Businesses | Ozony Tech"
+      pageDescription="Ozony Tech provides business firewall setup in NYC for small businesses that want stronger protection, cleaner network control, and a better security foundation."
       eyebrow="OZONY TECH · FIREWALL SETUP NYC"
-      title="Firewall Setup in NYC for Small Businesses"
-      description="Security-focused firewall setup for small businesses that want stronger protection, better network control, and a cleaner foundation for growth."
+      title="Business Firewall Setup in NYC for Small Businesses"
+      description="If you need business firewall setup in NYC, Ozony Tech provides practical, security-focused solutions for small businesses that want stronger protection, better network control, and a cleaner foundation for growth."
       heroImage="/images/services/firewall-setup-nyc.webp"
-      heroImageAlt="Business firewall setup in NYC"
+      heroImageAlt="Business firewall setup in NYC for small businesses"
       includeTitle="What’s Included"
-      includeDescription="Practical firewall setup and network protection built around the needs of small businesses."
+      includeDescription="Practical firewall setup and network protection built around the day-to-day needs of small businesses."
       serviceIncludes={[
-        'Firewall device setup and configuration',
+        'Business firewall setup and configuration',
         'Basic security rule creation',
         'Guest and staff traffic separation',
         'Network segmentation support',
@@ -26,25 +26,43 @@ const FirewallSetupNYC = () => {
         {
           icon: Shield,
           title: 'Stronger Protection',
-          text: 'Create a stronger first line of defense for your business network with more intentional traffic control.',
+          text: 'Create a stronger first line of defense for your business network with more intentional traffic control and cleaner security boundaries.',
         },
         {
           icon: Lock,
           title: 'Better Network Control',
-          text: 'Improve visibility, segmentation, and policy structure so your network is easier to manage safely.',
+          text: 'Improve visibility, segmentation, and policy structure so your network is easier to manage safely and more confidently.',
         },
         {
           icon: Network,
           title: 'Cleaner Security Foundation',
-          text: 'Build a more professional security baseline for growth, troubleshooting, and future improvements.',
+          text: 'Build a more professional security baseline for future growth, troubleshooting, remote access, and long-term reliability.',
         },
       ]}
-      seoTitle="Professional Firewall Setup in NYC"
+      seoTitle="Why Choose Ozony Tech for Firewall Setup in NYC"
       seoParagraphs={[
-        'Ozony Tech provides firewall setup in NYC for small businesses that want stronger security, cleaner network organization, and better control over how business traffic flows. A properly configured firewall helps protect business devices, improve segmentation, and create a more stable foundation for future network growth.',
-        'Our firewall setup services can include initial configuration, basic rule creation, staff and guest separation, and practical security hardening for small business environments. We focus on setups that are realistic, useful, and built around daily operations.',
+        'Ozony Tech provides business firewall setup in NYC for small businesses that want stronger security, cleaner network organization, and better control over how business traffic flows. A properly configured firewall helps protect business devices, improve segmentation, and create a more stable foundation for future network growth.',
+        'Our firewall setup services can include initial configuration, basic rule creation, staff and guest separation, network segmentation support, and practical security hardening for small business environments. The goal is to build security that is useful, understandable, and aligned with daily operations.',
+        'Businesses choose Ozony Tech because the focus is on practical security for real small business environments, not unnecessary complexity. The result is a cleaner, more controlled network setup that supports both protection and growth.',
       ]}
-      areasServed="Serving businesses across Manhattan, Brooklyn, Queens, the Bronx, Staten Island, and nearby areas."
+      areasServed="Serving businesses across Manhattan, Brooklyn, Queens, the Bronx, Staten Island, and nearby areas in NYC."
+      faqItems={[
+        {
+          question: 'Do you provide business firewall setup for small businesses in NYC?',
+          answer:
+            'Yes. Ozony Tech provides business firewall setup in NYC for offices, retail stores, restaurants, and other small business environments that want stronger network protection and cleaner traffic control.',
+        },
+        {
+          question: 'What does business firewall setup include?',
+          answer:
+            'Business firewall setup can include firewall configuration, basic security rules, guest and staff separation, network segmentation support, and practical policy hardening based on your business environment.',
+        },
+        {
+          question: 'Can a firewall improve an existing business network?',
+          answer:
+            'Yes. A properly configured firewall can improve security, support cleaner segmentation, and create better control over how devices and traffic move across the network.',
+        },
+      ]}
       relatedServices={[
         { label: 'Network Setup NYC', to: '/network-setup-nyc' },
         { label: 'Business Wi-Fi NYC', to: '/business-wifi-nyc' },
