@@ -110,6 +110,7 @@ const Hero = () => {
                     playsInline
                     preload="metadata"
                   >
+                    <source src="/videos/it_services.webm" type="video/webm" />
                     <source src="/videos/it_services.mp4" type="video/mp4" />
                   </video>
                 </div>
