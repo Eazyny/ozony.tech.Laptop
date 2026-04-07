@@ -16,9 +16,6 @@ import DecodedText from '@/components/ui/decode-text';
 
 const FORMSPREE_ENDPOINT = 'https://formspree.io/f/mdawpzqp';
 
-const SERVICE_AREA_MAP =
-  'https://www.openstreetmap.org/export/embed.html?bbox=-74.25909%2C40.4774%2C-73.70018%2C40.91758&layer=mapnik&marker=40.7128%2C-74.0060';
-
 const Contact = () => {
   const [formData, setFormData] = useState({
     name: '',
@@ -225,12 +222,12 @@ const Contact = () => {
                 </p>
               </div>
 
-              <div className="overflow-hidden rounded-lg border border-slate-700/50 bg-slate-900/70">
-                <iframe
-                  title="Ozony Tech service area map"
-                  src={SERVICE_AREA_MAP}
-                  className="h-[250px] w-full lg:h-[260px]"
+              <div className="relative h-[250px] overflow-hidden rounded-lg border border-slate-700/50 bg-slate-900/70 lg:h-[260px]">
+                <img
+                  src="/service_area_map.png"
+                  alt="Ozony Tech service area map covering the Tri-State area"
                   loading="lazy"
+                  className="absolute left-1/2 top-1/2 h-full w-full min-h-full min-w-full -translate-x-1/2 -translate-y-1/2 scale-[1.5] object-cover object-center"
                 />
               </div>
             </div>
