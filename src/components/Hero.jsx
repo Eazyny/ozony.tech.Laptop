@@ -18,12 +18,12 @@ const Hero = () => {
       <StarfieldBackground />
 
       <div className="relative mx-auto w-full max-w-[1400px] px-4">
-        <div className="grid items-center gap-10 lg:grid-cols-[1.18fr_0.82fr] lg:gap-12 xl:grid-cols-[1.24fr_0.76fr] xl:gap-16">
+        <div className="grid items-center gap-10 lg:grid-cols-[1.08fr_0.92fr] lg:gap-10 xl:grid-cols-[1.16fr_0.84fr] xl:gap-12 2xl:grid-cols-[1.2fr_0.8fr] 2xl:gap-16">
           <motion.div
             initial={{ opacity: 0, x: -50 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.6 }}
-            className="min-w-0 space-y-7 lg:pr-6 xl:pr-10"
+            className="min-w-0 space-y-7 lg:pr-2 xl:pr-6 2xl:pr-10"
           >
             <motion.div
               initial={{ opacity: 0, y: 20 }}
@@ -40,8 +40,8 @@ const Hero = () => {
                   Ozony Tech
                 </p>
 
-                <h1 className="text-[clamp(2.85rem,12vw,4.55rem)] font-bold leading-[0.92] tracking-[-0.03em] text-white">
-                  <span className="block sm:whitespace-nowrap">
+                <h1 className="text-[clamp(2.45rem,8vw,4.35rem)] font-bold leading-[0.92] tracking-[-0.03em] text-white">
+                  <span className="block md:whitespace-nowrap">
                     IT &amp; Networking.
                   </span>
 
@@ -52,7 +52,14 @@ const Hero = () => {
                     Business.
                   </span>
 
-                  <span className="hidden text-white/95 sm:block lg:whitespace-nowrap">
+                  <span className="hidden text-white/95 sm:block xl:hidden">
+                    Built for Small
+                  </span>
+                  <span className="hidden text-white/95 sm:block xl:hidden">
+                    Business.
+                  </span>
+
+                  <span className="hidden text-white/95 xl:block 2xl:whitespace-nowrap">
                     Built for Small Business.
                   </span>
                 </h1>
@@ -94,7 +101,7 @@ const Hero = () => {
             transition={{ duration: 0.6, delay: 0.3 }}
             className="relative w-full"
           >
-            <div className="relative mx-auto w-full max-w-[500px] lg:ml-auto xl:max-w-[520px]">
+            <div className="relative mx-auto w-full max-w-[420px] sm:max-w-[460px] lg:ml-auto lg:max-w-[460px] xl:max-w-[500px] 2xl:max-w-[520px]">
               <div className="absolute -inset-8 rounded-[2.75rem] bg-blue-500/10 blur-3xl" />
               <div className="absolute inset-0 rounded-[2rem] border border-blue-500/20 bg-gradient-to-br from-blue-500/10 via-transparent to-slate-900/20" />
 
