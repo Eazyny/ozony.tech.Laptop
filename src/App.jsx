@@ -18,6 +18,7 @@ import NetworkSetupNYC from '@/pages/NetworkSetupNYC';
 import BusinessWifiNYC from '@/pages/BusinessWifiNYC';
 import FirewallSetupNYC from '@/pages/FirewallSetupNYC';
 import ITSupportNYC from '@/pages/ITSupportNYC';
+import NotFound from '@/pages/not-found';
 
 const HomePage = () => {
   const [showBackToTop, setShowBackToTop] = useState(false);
@@ -140,6 +141,7 @@ function App() {
         <Route path="/business-wifi-nyc" element={<BusinessWifiNYC />} />
         <Route path="/firewall-setup-nyc" element={<FirewallSetupNYC />} />
         <Route path="/it-support-nyc" element={<ITSupportNYC />} />
+        <Route path="*" element={<NotFound />} />
       </Routes>
 
       <Toaster />
