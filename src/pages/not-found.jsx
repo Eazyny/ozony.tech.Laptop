@@ -81,19 +81,21 @@ const NotFound = () => {
         }
 
         .scene404 {
+          --scene-scale: 0.9;
           position: relative;
-          width: 440px;
-          height: 820px;
-          margin-left: auto;
+          width: calc(400px * var(--scene-scale));
+          height: calc(800px * var(--scene-scale));
+          flex: 0 0 auto;
         }
 
         .error404page {
           width: 400px;
           height: 800px;
           position: absolute;
-          top: 50%;
           left: 50%;
-          transform: translate(-50%, -50%);
+          bottom: 0;
+          transform: translateX(-50%) scale(var(--scene-scale));
+          transform-origin: bottom center;
         }
 
         .body404,
@@ -178,13 +180,13 @@ const NotFound = () => {
           height: 73px;
           background-position: -265px -341px;
           transform-origin: 9% 35%;
-          transform: rotateZ(0deg);
           animation: typeLeft 0.4s linear infinite;
         }
 
         .rightarm404 {
           top: 148px;
           left: 231px;
+ left: 231px;
           width: 157px;
           height: 91px;
           background-position: -442px -323px;
@@ -236,29 +238,34 @@ const NotFound = () => {
           animation: tapWobble 0.4s linear infinite;
         }
 
+        @media (max-width: 1536px) {
+          .scene404 {
+            --scene-scale: 0.84;
+          }
+        }
+
         @media (max-width: 1280px) {
           .scene404 {
-            transform: scale(0.9);
-            transform-origin: center;
+            --scene-scale: 0.74;
           }
         }
 
         @media (max-width: 1024px) {
           .scene404 {
-            width: 380px;
-            height: 700px;
-            transform: scale(0.82);
-            transform-origin: center;
+            --scene-scale: 0.64;
           }
         }
 
         @media (max-width: 768px) {
           .scene404 {
-            width: 320px;
-            height: 620px;
-            transform: scale(0.7);
-            transform-origin: center;
-            opacity: 0.34;
+            --scene-scale: 0.54;
+            margin-inline: auto;
+          }
+        }
+
+        @media (max-width: 520px) {
+          .scene404 {
+            --scene-scale: 0.46;
           }
         }
       `}</style>
@@ -287,18 +294,6 @@ const NotFound = () => {
 
           <rect width="1600" height="900" fill="url(#ozSkyOnly)" />
 
-          <text
-            x="1160"
-            y="250"
-            textAnchor="middle"
-            fontSize="112"
-            fontWeight="800"
-            fill="rgba(255,255,255,0.045)"
-            letterSpacing="10"
-          >
-            404
-          </text>
-
           <path
             d="M0 690 C185 655 345 680 530 700 C720 722 910 730 1110 690 C1285 655 1440 655 1600 690 L1600 900 L0 900 Z"
             fill="#08111f"
@@ -311,9 +306,15 @@ const NotFound = () => {
         </svg>
       </div>
 
-      <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(1,8,24,0.96)_0%,rgba(1,8,24,0.92)_34%,rgba(1,8,24,0.72)_56%,rgba(1,8,24,0.32)_76%,rgba(1,8,24,0.12)_100%)]" />
+      <div className="absolute inset-0 z-[1] flex items-center justify-center pointer-events-none">
+        <span className="select-none font-black leading-none text-white/[0.04] text-[clamp(8rem,22vw,22rem)]">
+          404
+        </span>
+      </div>
 
-      <div className="relative z-10 container mx-auto grid min-h-screen items-center gap-10 px-4 py-16 lg:grid-cols-[1.05fr_0.95fr]">
+      <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(1,8,24,0.97)_0%,rgba(1,8,24,0.93)_34%,rgba(1,8,24,0.76)_56%,rgba(1,8,24,0.36)_76%,rgba(1,8,24,0.12)_100%)]" />
+
+      <div className="relative z-10 container mx-auto grid min-h-screen items-center gap-10 px-4 py-16 lg:grid-cols-[minmax(0,1.08fr)_minmax(320px,460px)] xl:gap-16">
         <div className="max-w-3xl">
           <div className="inline-flex items-center rounded-full border border-blue-500/20 bg-blue-500/10 px-4 py-2 text-xs font-semibold uppercase tracking-[0.28em] text-blue-300">
             404 • Not Found
@@ -379,7 +380,7 @@ const NotFound = () => {
           </div>
         </div>
 
-        <div className="relative flex min-h-[620px] items-center justify-center lg:justify-end">
+        <div className="relative flex min-h-[340px] items-end justify-center lg:min-h-[680px] lg:justify-end lg:pr-4 xl:pr-8">
           <div className="scene404" aria-hidden="true">
             <div className="error404page">
               <div className="newcharacter404">
