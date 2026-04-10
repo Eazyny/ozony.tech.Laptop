@@ -14,6 +14,8 @@ import { Button } from '@/components/ui/button';
 import DecodedText from '@/components/ui/decode-text';
 import StarfieldBackground from '@/components/ui/starfield-background';
 import FlipCard from '@/components/FlipCard';
+import Header from '@/components/Header';
+import Footer from '@/components/Footer';
 
 const packageTiers = [
   {
@@ -200,7 +202,9 @@ const PackagesPage = () => {
       </Helmet>
 
       <div className="min-h-screen app-bg">
-        <section className="px-4 pt-8 pb-2">
+        <Header />
+
+        <section className="px-4 pt-28 pb-2 md:pt-32">
           <div className="container mx-auto max-w-7xl">
             <Link
               to="/"
@@ -506,6 +510,8 @@ const PackagesPage = () => {
             </div>
           </section>
         </main>
+
+        <Footer />
 
         <AnimatePresence>
           {showBackToTop && (

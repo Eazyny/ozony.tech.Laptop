@@ -92,10 +92,13 @@ const Header = () => {
             onClick={handleBrandClick}
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            className="flex shrink-0 items-center gap-3 text-xl font-bold text-white"
+            className="flex shrink-0 items-center gap-3.5 text-[1.35rem] font-bold leading-none tracking-tight text-white"
             aria-label="Go to homepage"
           >
-            <span className="oz-logo-wrap" aria-hidden="true">
+            <span
+              className="oz-logo-wrap scale-[1.12] transform"
+              aria-hidden="true"
+            >
               <span className="oz-logo" />
             </span>
             <span>Ozony Tech</span>

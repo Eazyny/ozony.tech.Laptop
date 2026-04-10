@@ -16,11 +16,11 @@ const NetworkSetupNYC = () => {
       pageDescription="Ozony Tech provides business network setup in NYC for small businesses that need reliable Wi-Fi, clean network structure, secure connectivity, and room to grow."
       eyebrow="OZONY TECH · NETWORK SETUP NYC"
       title="Network Setup in NYC for Small Businesses"
-      description="If you're looking for reliable business network setup in NYC, Ozony Tech provides clean, scalable, and practical network solutions for small businesses. We design and configure office, retail, and restaurant networks that support real-world daily operations without unnecessary complexity."
+      description="Ozony Tech provides business network setup in NYC for small businesses that need reliable Wi-Fi, organized connectivity, secure network structure, and a setup built to support real-world daily operations."
       heroImage="/images/services/network-setup-nyc.webp"
       heroImageAlt="Business network setup in NYC for small businesses"
       includeTitle="What’s Included"
-      includeDescription="Everything needed to create a reliable, organized, and business-ready network environment for day-to-day operations."
+      includeDescription="Everything needed to build a reliable, organized, and business-ready network without the clutter, confusion, or day-to-day connectivity issues that slow work down."
       serviceIncludes={[
         'Business network setup and configuration',
         'Router and firewall setup',
@@ -32,18 +32,18 @@ const NetworkSetupNYC = () => {
       outcomes={[
         {
           icon: Network,
-          title: 'Clean Network Setup',
-          text: 'Build a more organized business network with practical structure, dependable connectivity, and less day-to-day friction.',
+          title: 'Cleaner Network Structure',
+          text: 'Build a more organized business network with practical structure, dependable connectivity, and less day-to-day friction for your team.',
         },
         {
           icon: Shield,
-          title: 'Better Reliability',
+          title: 'More Reliable Connectivity',
           text: 'Create a stronger foundation for business devices, internet access, wireless coverage, and long-term network stability.',
         },
         {
           icon: CheckCircle2,
-          title: 'Growth-Ready Design',
-          text: 'Set up your business with a network that is easier to manage now and easier to expand later.',
+          title: 'Built to Grow With You',
+          text: 'Set up your business with a network that is easier to manage now and easier to expand as your needs grow.',
         },
       ]}
       industriesTitle="Built for Local Businesses"
@@ -67,10 +67,13 @@ const NetworkSetupNYC = () => {
           icon: Building2,
         },
       ]}
+      midCtaEyebrow="Need a Better Setup?"
+      midCtaTitle="Get a Business Network That Works the Way It Should"
+      midCtaDescription="From Wi-Fi and device connectivity to cleaner structure and better reliability, Ozony Tech helps build business networks that support daily operations without unnecessary complexity."
       seoTitle="Why Choose Ozony Tech for Network Setup in NYC"
       seoParagraphs={[
         'Ozony Tech provides business network setup in NYC for small businesses that need dependable internet, organized internal connectivity, and room to grow. We help design and configure networks that support daily business operations without overcomplicating the environment.',
-        'From office network setup and Wi-Fi deployment to router configuration, device connectivity, and guest and staff segmentation, our approach is focused on practical, professional systems built for real-world small business use across New York City.',
+        'From office network setup and Wi-Fi deployment to router configuration, device connectivity, and guest and staff segmentation, the focus is on practical systems built for real-world small business use across New York City.',
         'Businesses choose Ozony Tech because the goal is not to overengineer the setup. The goal is to create a clean, scalable network that works well, feels organized, and supports long-term reliability.',
       ]}
       areasServed="Serving businesses across Manhattan, Brooklyn, Queens, the Bronx, Staten Island, and nearby areas in NYC."
@@ -83,12 +86,17 @@ const NetworkSetupNYC = () => {
         {
           question: 'What does a business network setup include?',
           answer:
-            'A network setup can include router and firewall configuration, Wi-Fi setup, printer and workstation connectivity, network segmentation, and overall business-ready organization.',
+            'A business network setup can include router and firewall configuration, Wi-Fi deployment, printer and workstation connectivity, network segmentation, and a cleaner overall structure for everyday business use.',
         },
         {
           question: 'Can you improve an existing network instead of building a new one?',
           answer:
             'Yes. Existing networks can often be cleaned up, reorganized, and optimized to improve performance, coverage, reliability, and day-to-day usability.',
+        },
+        {
+          question: 'Can you separate guest, staff, and business devices on the network?',
+          answer:
+            'Yes. Networks can be segmented to better separate guest access, staff use, and business-critical devices for stronger organization and security.',
         },
       ]}
       relatedServices={[
@@ -96,6 +104,8 @@ const NetworkSetupNYC = () => {
         { label: 'Firewall Setup NYC', to: '/firewall-setup-nyc' },
         { label: 'IT Support NYC', to: '/it-support-nyc' },
       ]}
+      finalTitle="Need Business Network Setup in NYC?"
+      finalDescription="Get a clean, reliable network setup built for your business, your devices, and the way your team actually works."
     />
   );
 };

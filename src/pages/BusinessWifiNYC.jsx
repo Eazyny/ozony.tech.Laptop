@@ -16,34 +16,34 @@ const BusinessWifiNYC = () => {
       pageDescription="Ozony Tech provides business Wi-Fi installation in NYC for small businesses that need stronger coverage, better wireless performance, and a more reliable setup."
       eyebrow="OZONY TECH · BUSINESS WI-FI NYC"
       title="Business Wi-Fi Installation in NYC for Small Businesses"
-      description="If you need business Wi-Fi installation in NYC, Ozony Tech provides practical wireless solutions for small businesses that need stronger coverage, cleaner performance, and a better experience for staff and customers."
+      description="Ozony Tech provides business Wi-Fi installation in NYC for small businesses that need stronger coverage, cleaner performance, and a more reliable wireless experience for staff, guests, and daily operations."
       heroImage="/images/services/business-wifi-nyc.webp"
       heroImageAlt="Business Wi-Fi installation in NYC for small businesses"
       includeTitle="What’s Included"
-      includeDescription="Everything needed to create a stronger, more reliable wireless environment for your business."
+      includeDescription="Everything needed to build a stronger, more reliable wireless setup for your business without the signal issues, dead zones, and inconsistent performance."
       serviceIncludes={[
         'Business Wi-Fi design and installation',
         'Access point placement planning',
-        'Coverage and dead zone improvement',
+        'Coverage improvements and dead zone reduction',
         'Guest and staff Wi-Fi separation',
-        'Wireless performance optimization',
+        'Wireless performance tuning and optimization',
         'Basic wireless security and password hardening',
       ]}
       outcomes={[
         {
           icon: Radio,
           title: 'Better Coverage',
-          text: 'Improve signal strength and reduce dead zones so staff and customers stay connected where it matters most.',
+          text: 'Improve signal strength and reduce dead zones so staff and customers stay connected where it matters most throughout your space.',
         },
         {
           icon: Gauge,
-          title: 'Cleaner Performance',
-          text: 'Support smoother browsing, wireless device use, and day-to-day business operations with a more reliable setup.',
+          title: 'More Reliable Performance',
+          text: 'Support smoother browsing, stronger device connectivity, and more dependable day-to-day operations with a cleaner wireless setup.',
         },
         {
           icon: Wifi,
-          title: 'Smarter Wireless Setup',
-          text: 'Get a practical Wi-Fi layout designed around your space, number of users, and future business growth.',
+          title: 'Smarter Wi-Fi Design',
+          text: 'Get a practical wireless layout built around your space, your users, and the way your business actually operates.',
         },
       ]}
       industriesTitle="Built for Local Businesses"
@@ -67,10 +67,13 @@ const BusinessWifiNYC = () => {
           icon: Briefcase,
         },
       ]}
+      midCtaEyebrow="Need Better Wi-Fi?"
+      midCtaTitle="Get Business Wi-Fi That Actually Reaches Where You Need It"
+      midCtaDescription="From weak coverage to dead zones and unstable connections, Ozony Tech helps build a wireless setup that works better for staff, customers, and everyday business use."
       seoTitle="Why Choose Ozony Tech for Business Wi-Fi Installation in NYC"
       seoParagraphs={[
-        'Ozony Tech provides business Wi-Fi installation in NYC for small businesses that need stronger wireless coverage, more dependable performance, and a cleaner setup overall. Whether you are upgrading a weak Wi-Fi environment or launching a new location, we help create wireless systems that feel reliable in real-world use.',
-        'Our business Wi-Fi installation services can include access point planning, coverage improvements, guest and staff separation, performance tuning, and practical wireless organization. The goal is to deliver Wi-Fi that supports your business instead of slowing it down.',
+        'Ozony Tech provides business Wi-Fi installation in NYC for small businesses that need stronger coverage, more dependable performance, and a cleaner wireless setup overall. Whether you are upgrading weak Wi-Fi in an existing location or setting up a new space, we help create wireless systems that feel reliable in real-world use.',
+        'Business Wi-Fi installation can include access point planning, coverage improvements, guest and staff separation, performance tuning, and practical wireless organization. The goal is to deliver Wi-Fi that supports your business instead of slowing it down with dead zones, poor signal, or unstable connections.',
         'Businesses choose Ozony Tech because the focus is on practical wireless setups that work well, feel organized, and are built around the real needs of small business spaces across NYC.',
       ]}
       areasServed="Serving businesses across Manhattan, Brooklyn, Queens, the Bronx, Staten Island, and nearby areas in NYC."
@@ -90,12 +93,19 @@ const BusinessWifiNYC = () => {
           answer:
             'Yes. Existing Wi-Fi setups can often be improved through better placement, cleaner wireless design, stronger segmentation, and practical performance optimization.',
         },
+        {
+          question: 'Can you separate guest Wi-Fi from staff and business devices?',
+          answer:
+            'Yes. Guest and staff Wi-Fi can be separated to improve security, organization, and overall performance for your business network.',
+        },
       ]}
       relatedServices={[
         { label: 'Network Setup NYC', to: '/network-setup-nyc' },
         { label: 'Firewall Setup NYC', to: '/firewall-setup-nyc' },
         { label: 'IT Support NYC', to: '/it-support-nyc' },
       ]}
+      finalTitle="Need Business Wi-Fi Installation in NYC?"
+      finalDescription="Get stronger coverage, better wireless performance, and a cleaner setup built for the way your business actually operates."
     />
   );
 };

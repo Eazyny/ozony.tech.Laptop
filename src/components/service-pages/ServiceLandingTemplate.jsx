@@ -1,10 +1,11 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Helmet } from 'react-helmet';
 import { Link } from 'react-router-dom';
-import { motion } from 'framer-motion';
+import { AnimatePresence, motion } from 'framer-motion';
 import {
   ArrowLeft,
   ArrowRight,
+  ArrowUp,
   MapPin,
   Network,
   Shield,
@@ -117,9 +118,29 @@ const ServiceLandingTemplate = ({
   areasServed = 'Serving businesses across NYC, including Manhattan, Brooklyn, Queens, the Bronx, Staten Island, and nearby areas.',
   faqItems = defaultFaqItems,
   relatedServices = [],
+  midCtaEyebrow = 'Get Started',
+  midCtaTitle = 'Ready to Get Your Business Network Setup?',
+  midCtaDescription = 'Get a clean, reliable solution built for your business without unnecessary complexity or guesswork.',
   finalTitle = 'Ready to Improve Your Business Network?',
   finalDescription = 'Whether you need a fresh install, stronger Wi-Fi, or a cleaner setup for your business, Ozony Tech can help you move forward with confidence.',
 }) => {
+  const [showBackToTop, setShowBackToTop] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setShowBackToTop(window.scrollY > 500);
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    handleScroll();
+
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
   return (
     <>
       <Helmet>
@@ -275,6 +296,37 @@ const ServiceLandingTemplate = ({
               </div>
             </section>
 
+            <section className="border-t border-white/5 px-4 py-16 md:px-6 lg:px-8">
+              <div className="mx-auto max-w-6xl rounded-[2rem] border border-blue-400/15 bg-gradient-to-br from-white/8 to-blue-500/10 p-8 text-center shadow-[0_0_50px_rgba(37,99,235,0.10)] backdrop-blur md:p-12">
+                <p className="text-sm uppercase tracking-[0.22em] text-blue-400/85">
+                  {midCtaEyebrow}
+                </p>
+                <h2 className="mt-4 text-3xl font-semibold md:text-5xl">
+                  {midCtaTitle}
+                </h2>
+                <p className="mx-auto mt-5 max-w-3xl text-lg leading-8 text-white/65">
+                  {midCtaDescription}
+                </p>
+
+                <div className="mt-8 flex flex-col justify-center gap-4 sm:flex-row">
+                  <Button asChild size="lg" className="group min-w-[190px]">
+                    <Link to={primaryCtaTo}>
+                      {primaryCta}
+                      <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-0.5" />
+                    </Link>
+                  </Button>
+                  <Button
+                    asChild
+                    size="lg"
+                    variant="outline"
+                    className="min-w-[190px] border-blue-400/30 bg-transparent text-white hover:bg-blue-500/10"
+                  >
+                    <Link to={secondaryCtaTo}>{secondaryCta}</Link>
+                  </Button>
+                </div>
+              </div>
+            </section>
+
             <section className={sectionClass}>
               <div className="mx-auto max-w-7xl">
                 <div className="max-w-3xl">
@@ -310,7 +362,7 @@ const ServiceLandingTemplate = ({
               <div className="mx-auto grid max-w-7xl gap-6 lg:grid-cols-[1fr_1fr]">
                 <div className="rounded-[2rem] border border-white/10 bg-white/5 p-8 md:p-10 backdrop-blur">
                   <p className="text-sm uppercase tracking-[0.22em] text-blue-400/85">
-                    Local SEO
+                    Why Ozony Tech
                   </p>
                   <h2 className="mt-4 text-3xl font-semibold md:text-5xl">
                     {seoTitle}
@@ -396,8 +448,11 @@ const ServiceLandingTemplate = ({
                 </p>
 
                 <div className="mt-8 flex flex-col justify-center gap-4 sm:flex-row">
-                  <Button asChild size="lg" className="min-w-[190px]">
-                    <Link to={primaryCtaTo}>{primaryCta}</Link>
+                  <Button asChild size="lg" className="group min-w-[190px]">
+                    <Link to={primaryCtaTo}>
+                      {primaryCta}
+                      <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-0.5" />
+                    </Link>
                   </Button>
                   <Button
                     asChild
@@ -414,6 +469,26 @@ const ServiceLandingTemplate = ({
         </main>
 
         <Footer />
+
+        <AnimatePresence>
+          {showBackToTop && (
+            <motion.div
+              initial={{ opacity: 0, y: 16, scale: 0.95 }}
+              animate={{ opacity: 1, y: 0, scale: 1 }}
+              exit={{ opacity: 0, y: 16, scale: 0.95 }}
+              transition={{ duration: 0.2 }}
+              className="fixed bottom-6 right-6 z-50"
+            >
+              <button
+                onClick={scrollToTop}
+                aria-label="Back to top"
+                className="inline-flex h-12 w-12 items-center justify-center rounded-full border border-blue-400/30 bg-slate-900/90 text-blue-400 shadow-lg shadow-blue-500/20 backdrop-blur-md transition-all hover:-translate-y-0.5 hover:bg-blue-500/10 hover:text-white"
+              >
+                <ArrowUp className="h-5 w-5" />
+              </button>
+            </motion.div>
+          )}
+        </AnimatePresence>
       </div>
     </>
   );
