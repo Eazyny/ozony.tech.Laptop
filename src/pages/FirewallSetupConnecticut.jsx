@@ -2,16 +2,16 @@ import React from 'react';
 import { Shield, Lock, Network } from 'lucide-react';
 import ServiceLandingTemplate from '@/components/service-pages/ServiceLandingTemplate';
 
-const FirewallSetupNYC = () => {
+const FirewallSetupConnecticut = () => {
   return (
     <ServiceLandingTemplate
-      pageTitle="Firewall Setup in NYC for Small Businesses | Ozony Tech"
-      pageDescription="Ozony Tech provides business firewall setup in NYC for small businesses that want stronger protection, cleaner network control, and a better security foundation."
-      eyebrow="OZONY TECH · FIREWALL SETUP NYC"
-      title="Firewall Setup in NYC for Small Businesses"
-      description="Ozony Tech provides business firewall setup in NYC for small businesses that want stronger protection, better network control, cleaner traffic separation, and a more secure foundation for daily operations."
+      pageTitle="Business Firewall Setup in Connecticut for Small Businesses | Ozony Tech"
+      pageDescription="Ozony Tech provides business firewall setup in Connecticut for small businesses that want stronger protection, cleaner network control, and a better security foundation."
+      eyebrow="OZONY TECH · FIREWALL SETUP CONNECTICUT"
+      title="Business Firewall Setup in Connecticut for Small Businesses"
+      description="Ozony Tech provides business firewall setup in Connecticut for small businesses that want stronger protection, better network control, cleaner traffic separation, and a more secure foundation for daily operations."
       heroImage="/images/services/firewall-setup-nyc.webp"
-      heroImageAlt="Business firewall setup in NYC for small businesses"
+      heroImageAlt="Business firewall setup in Connecticut for small businesses"
       includeTitle="What’s Included"
       includeDescription="Practical firewall setup and network protection built around the day-to-day needs of small businesses that want stronger security without unnecessary complexity."
       serviceIncludes={[
@@ -42,18 +42,18 @@ const FirewallSetupNYC = () => {
       midCtaEyebrow="Need Better Protection?"
       midCtaTitle="Get a Firewall Setup That Helps Protect Your Business"
       midCtaDescription="From cleaner traffic control to stronger segmentation and a better security baseline, Ozony Tech helps small businesses build firewall setups that support both protection and daily operations."
-      seoTitle="Why Choose Ozony Tech for Firewall Setup in NYC"
+      seoTitle="Why Choose Ozony Tech for Firewall Setup in Connecticut"
       seoParagraphs={[
-        'Ozony Tech provides business firewall setup in NYC for small businesses that want stronger security, cleaner network organization, and better control over how business traffic flows. A properly configured firewall helps protect business devices, improve segmentation, and create a more stable foundation for future network growth.',
-        'Firewall setup can include initial configuration, basic rule creation, guest and staff separation, network segmentation support, and practical security hardening for small business environments. The goal is to build security that is useful, understandable, and aligned with daily operations.',
+        'Ozony Tech provides business firewall setup in Connecticut for small businesses that want stronger security, cleaner network organization, and better control over how business traffic flows. A properly configured firewall helps protect business devices, improve segmentation, and create a more stable foundation for future network growth.',
+        'Firewall setup can include initial configuration, basic rule creation, guest and staff separation, network segmentation support, remote access preparation where needed, and practical security hardening for small business environments. The goal is to build security that is useful, understandable, and aligned with daily operations.',
         'Businesses choose Ozony Tech because the focus is on practical security for real small business environments, not unnecessary complexity. The result is a cleaner, more controlled network setup that supports both protection and growth.',
       ]}
-      areasServed="Serving businesses across Manhattan, Brooklyn, Queens, the Bronx, Staten Island, and nearby areas in NYC."
+      areasServed="Serving businesses across Connecticut, including Stamford, Greenwich, Norwalk, and nearby areas."
       faqItems={[
         {
-          question: 'Do you provide business firewall setup for small businesses in NYC?',
+          question: 'Do you provide business firewall setup for small businesses in Connecticut?',
           answer:
-            'Yes. Ozony Tech provides business firewall setup in NYC for offices, retail stores, restaurants, and other small business environments that want stronger network protection and cleaner traffic control.',
+            'Yes. Ozony Tech provides business firewall setup in Connecticut for offices, retail stores, restaurants, and other small business environments that want stronger network protection and cleaner traffic control.',
         },
         {
           question: 'What does business firewall setup include?',
@@ -74,7 +74,7 @@ const FirewallSetupNYC = () => {
       relatedServices={[
         { label: 'Business Wi-Fi Connecticut', to: '/business-wifi-connecticut' },
         { label: 'Business Wi-Fi NYC', to: '/business-wifi-nyc' },
-        { label: 'Firewall Setup Connecticut', to: '/firewall-setup-connecticut' },
+        { label: 'Firewall Setup NYC', to: '/firewall-setup-nyc' },
         { label: 'IT Services Near Me', to: '/it-services-near-me' },
         { label: 'IT Support', to: '/it-support' },
         { label: 'IT Support Connecticut', to: '/it-support-connecticut' },
@@ -87,10 +87,10 @@ const FirewallSetupNYC = () => {
         { label: 'Network Setup NYC', to: '/network-setup-nyc' },
         { label: 'Network Troubleshooting NYC', to: '/network-troubleshooting-nyc' },
       ]}
-      finalTitle="Need Business Firewall Setup in NYC?"
+      finalTitle="Need Business Firewall Setup in Connecticut?"
       finalDescription="Get stronger protection, cleaner traffic control, and a better security foundation built around the way your business actually operates."
     />
   );
 };
 
-export default FirewallSetupNYC;
+export default FirewallSetupConnecticut;

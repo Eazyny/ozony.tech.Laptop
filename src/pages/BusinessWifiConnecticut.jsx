@@ -9,16 +9,16 @@ import {
 } from 'lucide-react';
 import ServiceLandingTemplate from '@/components/service-pages/ServiceLandingTemplate';
 
-const BusinessWifiNYC = () => {
+const BusinessWifiConnecticut = () => {
   return (
     <ServiceLandingTemplate
-      pageTitle="Business Wi-Fi Installation in NYC for Small Businesses | Ozony Tech"
-      pageDescription="Ozony Tech provides business Wi-Fi installation in NYC for small businesses that need stronger coverage, better wireless performance, and a more reliable setup."
-      eyebrow="OZONY TECH · BUSINESS WI-FI NYC"
-      title="Business Wi-Fi Installation in NYC for Small Businesses"
-      description="Ozony Tech provides business Wi-Fi installation in NYC for small businesses that need stronger coverage, cleaner performance, and a more reliable wireless experience for staff, guests, and daily operations."
+      pageTitle="Business Wi-Fi Installation in Connecticut for Small Businesses | Ozony Tech"
+      pageDescription="Ozony Tech provides business Wi-Fi installation in Connecticut for small businesses that need stronger coverage, better wireless performance, and a more reliable setup."
+      eyebrow="OZONY TECH · BUSINESS WI-FI CONNECTICUT"
+      title="Business Wi-Fi Installation in Connecticut for Small Businesses"
+      description="Ozony Tech provides business Wi-Fi installation in Connecticut for small businesses that need stronger coverage, cleaner performance, and a more reliable wireless experience for staff, guests, and daily operations."
       heroImage="/images/services/business-wifi-nyc.webp"
-      heroImageAlt="Business Wi-Fi installation in NYC for small businesses"
+      heroImageAlt="Business Wi-Fi installation in Connecticut for small businesses"
       includeTitle="What’s Included"
       includeDescription="Everything needed to build a stronger, more reliable wireless setup for your business without the signal issues, dead zones, and inconsistent performance."
       serviceIncludes={[
@@ -70,18 +70,18 @@ const BusinessWifiNYC = () => {
       midCtaEyebrow="Need Better Wi-Fi?"
       midCtaTitle="Get Business Wi-Fi That Actually Reaches Where You Need It"
       midCtaDescription="From weak coverage to dead zones and unstable connections, Ozony Tech helps build a wireless setup that works better for staff, customers, and everyday business use."
-      seoTitle="Why Choose Ozony Tech for Business Wi-Fi Installation in NYC"
+      seoTitle="Why Choose Ozony Tech for Business Wi-Fi Installation in Connecticut"
       seoParagraphs={[
-        'Ozony Tech provides business Wi-Fi installation in NYC for small businesses that need stronger coverage, more dependable performance, and a cleaner wireless setup overall. Whether you are upgrading weak Wi-Fi in an existing location or setting up a new space, we help create wireless systems that feel reliable in real-world use.',
+        'Ozony Tech provides business Wi-Fi installation in Connecticut for small businesses that need stronger coverage, more dependable performance, and a cleaner wireless setup overall. Whether you are upgrading weak Wi-Fi in an existing location or setting up a new space, we help create wireless systems that feel reliable in real-world use.',
         'Business Wi-Fi installation can include access point planning, coverage improvements, guest and staff separation, performance tuning, and practical wireless organization. The goal is to deliver Wi-Fi that supports your business instead of slowing it down with dead zones, poor signal, or unstable connections.',
-        'Businesses choose Ozony Tech because the focus is on practical wireless setups that work well, feel organized, and are built around the real needs of small business spaces across NYC.',
+        'Businesses choose Ozony Tech because the focus is on practical wireless setups that work well, feel organized, and are built around the real needs of small business spaces across Connecticut.',
       ]}
-      areasServed="Serving businesses across Manhattan, Brooklyn, Queens, the Bronx, Staten Island, and nearby areas in NYC."
+      areasServed="Serving businesses across Connecticut, including Stamford, Greenwich, Norwalk, and nearby areas."
       faqItems={[
         {
-          question: 'Do you provide business Wi-Fi installation for small businesses in NYC?',
+          question: 'Do you provide business Wi-Fi installation for small businesses in Connecticut?',
           answer:
-            'Yes. Ozony Tech provides business Wi-Fi installation in NYC for offices, retail stores, restaurants, and other small business spaces that need stronger and more reliable wireless coverage.',
+            'Yes. Ozony Tech provides business Wi-Fi installation in Connecticut for offices, retail stores, restaurants, and other small business spaces that need stronger and more reliable wireless coverage.',
         },
         {
           question: 'What does business Wi-Fi installation include?',
@@ -100,7 +100,7 @@ const BusinessWifiNYC = () => {
         },
       ]}
       relatedServices={[
-        { label: 'Business Wi-Fi Connecticut', to: '/business-wifi-connecticut' },
+        { label: 'Business Wi-Fi NYC', to: '/business-wifi-nyc' },
         { label: 'Firewall Setup Connecticut', to: '/firewall-setup-connecticut' },
         { label: 'Firewall Setup NYC', to: '/firewall-setup-nyc' },
         { label: 'IT Services Near Me', to: '/it-services-near-me' },
@@ -115,10 +115,10 @@ const BusinessWifiNYC = () => {
         { label: 'Network Setup NYC', to: '/network-setup-nyc' },
         { label: 'Network Troubleshooting NYC', to: '/network-troubleshooting-nyc' },
       ]}
-      finalTitle="Need Business Wi-Fi Installation in NYC?"
+      finalTitle="Need Business Wi-Fi Installation in Connecticut?"
       finalDescription="Get stronger coverage, better wireless performance, and a cleaner setup built for the way your business actually operates."
     />
   );
 };
 
-export default BusinessWifiNYC;
+export default BusinessWifiConnecticut;

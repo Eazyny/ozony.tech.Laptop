@@ -3,24 +3,24 @@ import {
   Network,
   Shield,
   Briefcase,
-  Building2,
   Store,
+  Building2,
   CheckCircle2,
 } from 'lucide-react';
 import ServiceLandingTemplate from '@/components/service-pages/ServiceLandingTemplate';
 
-const NetworkSetupNYC = () => {
+const NetworkSetupConnecticut = () => {
   return (
     <ServiceLandingTemplate
-      pageTitle="Business Network Setup in NYC for Small Businesses | Ozony Tech"
-      pageDescription="Ozony Tech provides business network setup in NYC for small businesses that need reliable Wi-Fi, clean network structure, secure connectivity, and room to grow."
-      eyebrow="OZONY TECH · NETWORK SETUP NYC"
-      title="Network Setup in NYC for Small Businesses"
-      description="Ozony Tech provides business network setup in NYC for small businesses that need reliable Wi-Fi, organized connectivity, secure network structure, and a setup built to support real-world daily operations."
+      pageTitle="Business Network Setup in Connecticut for Small Businesses | Ozony Tech"
+      pageDescription="Ozony Tech provides business network setup in Connecticut for small businesses that need reliable Wi-Fi, secure connectivity, clean network structure, and room to grow."
+      eyebrow="OZONY TECH · NETWORK SETUP CONNECTICUT"
+      title="Business Network Setup in Connecticut for Small Businesses"
+      description="Ozony Tech provides business network setup in Connecticut for small businesses that need reliable Wi-Fi, organized connectivity, secure network structure, and a setup built to support daily business operations."
       heroImage="/images/services/network-setup-nyc.webp"
-      heroImageAlt="Business network setup in NYC for small businesses"
+      heroImageAlt="Business network setup in Connecticut for small businesses"
       includeTitle="What’s Included"
-      includeDescription="Everything needed to build a reliable, organized, and business-ready network without the clutter, confusion, or day-to-day connectivity issues that slow work down."
+      includeDescription="Everything needed to build a reliable, organized, and business-ready network environment without the clutter, confusion, or day-to-day connectivity issues that slow work down."
       serviceIncludes={[
         'Business network setup and configuration',
         'Router and firewall setup',
@@ -69,19 +69,19 @@ const NetworkSetupNYC = () => {
       ]}
       midCtaEyebrow="Need a Better Setup?"
       midCtaTitle="Get a Business Network That Works the Way It Should"
-      midCtaDescription="From Wi-Fi and device connectivity to cleaner structure and better reliability, Ozony Tech helps build business networks that support daily operations without unnecessary complexity."
-      seoTitle="Why Choose Ozony Tech for Network Setup in NYC"
+      midCtaDescription="From Wi-Fi and device connectivity to cleaner structure and better reliability, Ozony Tech helps build business networks in Connecticut that support daily operations without unnecessary complexity."
+      seoTitle="Why Choose Ozony Tech for Network Setup in Connecticut"
       seoParagraphs={[
-        'Ozony Tech provides business network setup in NYC for small businesses that need dependable internet, organized internal connectivity, and room to grow. We help design and configure networks that support daily business operations without overcomplicating the environment.',
-        'From office network setup and Wi-Fi deployment to router configuration, device connectivity, and guest and staff segmentation, the focus is on practical systems built for real-world small business use across New York City.',
+        'Ozony Tech provides business network setup in Connecticut for small businesses that need dependable internet, organized internal connectivity, and room to grow. We help design and configure networks that support daily business operations without overcomplicating the environment.',
+        'From office network setup and Wi-Fi deployment to router configuration, device connectivity, and guest and staff segmentation, the focus is on practical systems built for real-world small business use across Connecticut.',
         'Businesses choose Ozony Tech because the goal is not to overengineer the setup. The goal is to create a clean, scalable network that works well, feels organized, and supports long-term reliability.',
       ]}
-      areasServed="Serving businesses across Manhattan, Brooklyn, Queens, the Bronx, Staten Island, and nearby areas in NYC."
+      areasServed="Serving businesses across Connecticut, including Stamford, Greenwich, Norwalk, and nearby areas."
       faqItems={[
         {
-          question: 'Do you provide business network setup for small businesses in NYC?',
+          question: 'Do you provide business network setup for small businesses in Connecticut?',
           answer:
-            'Yes. Ozony Tech provides business network setup in NYC for offices, retail stores, restaurants, and other small business environments that need reliable and organized connectivity.',
+            'Yes. Ozony Tech provides business network setup in Connecticut for offices, retail stores, restaurants, and other small business environments that need reliable and organized connectivity.',
         },
         {
           question: 'What does a business network setup include?',
@@ -111,15 +111,14 @@ const NetworkSetupNYC = () => {
         { label: 'IT Support NYC', to: '/it-support-nyc' },
         { label: 'Managed IT Services', to: '/managed-it-services' },
         { label: 'Network Services Near Me', to: '/network-services-near-me' },
-        { label: 'Network Setup Connecticut', to: '/network-setup-connecticut' },
         { label: 'Network Setup NJ', to: '/network-setup-nj' },
+        { label: 'Network Setup NYC', to: '/network-setup-nyc' },
         { label: 'Network Troubleshooting NYC', to: '/network-troubleshooting-nyc' },
-        { label: 'Small Business Network NYC', to: '/small-business-network-nyc' },
       ]}
-      finalTitle="Need Business Network Setup in NYC?"
+      finalTitle="Need Business Network Setup in Connecticut?"
       finalDescription="Get a clean, reliable network setup built for your business, your devices, and the way your team actually works."
     />
   );
 };
 
-export default NetworkSetupNYC;
+export default NetworkSetupConnecticut;

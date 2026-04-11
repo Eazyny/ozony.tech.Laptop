@@ -18,6 +18,18 @@ import NetworkSetupNYC from '@/pages/NetworkSetupNYC';
 import BusinessWifiNYC from '@/pages/BusinessWifiNYC';
 import FirewallSetupNYC from '@/pages/FirewallSetupNYC';
 import ITSupportNYC from '@/pages/ITSupportNYC';
+import NetworkTroubleshootingNYC from '@/pages/NetworkTroubleshootingNYC';
+import SmallBusinessNetworkNYC from '@/pages/SmallBusinessNetworkNYC';
+import NetworkSetupNJ from '@/pages/NetworkSetupNJ';
+import ITSupportNJ from '@/pages/ITSupportNJ';
+import NetworkSetupConnecticut from '@/pages/NetworkSetupConnecticut';
+import ITSupportConnecticut from '@/pages/ITSupportConnecticut';
+import FirewallSetupConnecticut from '@/pages/FirewallSetupConnecticut';
+import BusinessWifiConnecticut from '@/pages/BusinessWifiConnecticut';
+import ITServicesNearMe from '@/pages/ITServicesNearMe';
+import NetworkServicesNearMe from '@/pages/NetworkServicesNearMe';
+import ManagedITServices from './pages/ManagedITServices';
+import ITSupport from './pages/ITSupport';
 import NotFound from '@/pages/not-found';
 
 const HomePage = () => {
@@ -141,6 +153,18 @@ function App() {
         <Route path="/business-wifi-nyc" element={<BusinessWifiNYC />} />
         <Route path="/firewall-setup-nyc" element={<FirewallSetupNYC />} />
         <Route path="/it-support-nyc" element={<ITSupportNYC />} />
+        <Route path="/network-troubleshooting-nyc" element={<NetworkTroubleshootingNYC />} />
+        <Route path="/small-business-network-nyc" element={<SmallBusinessNetworkNYC />} />
+        <Route path="/network-setup-nj" element={<NetworkSetupNJ />} />
+        <Route path="/it-support-nj" element={<ITSupportNJ />} />
+        <Route path="/network-setup-connecticut" element={<NetworkSetupConnecticut />} />
+        <Route path="/it-support-connecticut" element={<ITSupportConnecticut />} />
+        <Route path="/firewall-setup-connecticut" element={<FirewallSetupConnecticut />} />
+        <Route path="/business-wifi-connecticut" element={<BusinessWifiConnecticut />} />
+        <Route path="/it-services-near-me" element={<ITServicesNearMe />} />
+        <Route path="/network-services-near-me" element={<NetworkServicesNearMe />} />
+        <Route path="/managed-it-services" element={<ManagedITServices />} />
+        <Route path="/it-support" element={<ITSupport />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
 

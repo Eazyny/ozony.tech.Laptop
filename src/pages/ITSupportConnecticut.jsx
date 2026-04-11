@@ -2,16 +2,16 @@ import React from 'react';
 import { Wrench, Monitor, Headphones } from 'lucide-react';
 import ServiceLandingTemplate from '@/components/service-pages/ServiceLandingTemplate';
 
-const ITSupportNYC = () => {
+const ITSupportConnecticut = () => {
   return (
     <ServiceLandingTemplate
-      pageTitle="Small Business IT Support in NYC for Growing Teams | Ozony Tech"
-      pageDescription="Ozony Tech provides small business IT support in NYC for companies that need dependable help with devices, connectivity, troubleshooting, and everyday technology issues."
-      eyebrow="OZONY TECH · IT SUPPORT NYC"
-      title="Small Business IT Support in NYC"
-      description="Ozony Tech provides small business IT support in NYC for teams that need reliable help with devices, connectivity, troubleshooting, and the day-to-day tech issues that slow business down."
+      pageTitle="Small Business IT Support in Connecticut | Ozony Tech"
+      pageDescription="Ozony Tech provides small business IT support in Connecticut for companies that need dependable help with devices, connectivity, troubleshooting, and everyday technology issues."
+      eyebrow="OZONY TECH · IT SUPPORT CONNECTICUT"
+      title="Small Business IT Support in Connecticut"
+      description="Ozony Tech provides small business IT support in Connecticut for teams that need reliable help with devices, connectivity, troubleshooting, and the day-to-day tech issues that slow business down."
       heroImage="/images/services/it-support-nyc.webp"
-      heroImageAlt="Small business IT support in NYC for growing teams"
+      heroImageAlt="Small business IT support in Connecticut"
       includeTitle="What’s Included"
       includeDescription="Straightforward support for the business tech issues that disrupt daily operations, waste time, and create unnecessary frustration."
       serviceIncludes={[
@@ -42,18 +42,18 @@ const ITSupportNYC = () => {
       midCtaEyebrow="Need Reliable IT Help?"
       midCtaTitle="Get Small Business IT Support Without the Headaches"
       midCtaDescription="From device issues to connectivity problems, Ozony Tech helps keep your business running with practical support that makes day-to-day tech easier to manage."
-      seoTitle="Why Choose Ozony Tech for Small Business IT Support in NYC"
+      seoTitle="Why Choose Ozony Tech for Small Business IT Support in Connecticut"
       seoParagraphs={[
-        'Ozony Tech provides small business IT support in NYC for teams that need practical help with devices, connectivity, shared access, and everyday troubleshooting. We focus on the problems that actually get in the way of business, from workstation setup and printer issues to unreliable Wi-Fi and general tech headaches.',
+        'Ozony Tech provides small business IT support in Connecticut for teams that need practical help with devices, connectivity, shared access, and everyday troubleshooting. We focus on the problems that actually get in the way of business, from workstation setup and printer issues to unreliable Wi-Fi and general tech headaches.',
         'Support can include device setup, workstation help, troubleshooting, printer and shared device issues, Wi-Fi and connectivity support, and general cleanup of business technology environments. The goal is simple: make your setup easier to manage, more reliable to use, and less frustrating for your team.',
         'Businesses choose Ozony Tech because the focus is on straightforward support that fits real small business environments. That means less confusion, less downtime, and dependable help that keeps your business moving.',
       ]}
-      areasServed="Serving businesses across Manhattan, Brooklyn, Queens, the Bronx, Staten Island, and nearby areas in NYC."
+      areasServed="Serving businesses across Connecticut, including Stamford, Greenwich, Norwalk, and nearby areas."
       faqItems={[
         {
-          question: 'Do you provide small business IT support in NYC?',
+          question: 'Do you provide small business IT support in Connecticut?',
           answer:
-            'Yes. Ozony Tech provides small business IT support in NYC for offices, retail shops, restaurants, and other business environments that need practical day-to-day technology help.',
+            'Yes. Ozony Tech provides small business IT support in Connecticut for offices, retail shops, restaurants, and other business environments that need practical day-to-day technology help.',
         },
         {
           question: 'What does small business IT support include?',
@@ -78,8 +78,8 @@ const ITSupportNYC = () => {
         { label: 'Firewall Setup NYC', to: '/firewall-setup-nyc' },
         { label: 'IT Services Near Me', to: '/it-services-near-me' },
         { label: 'IT Support', to: '/it-support' },
-        { label: 'IT Support Connecticut', to: '/it-support-connecticut' },
         { label: 'IT Support NJ', to: '/it-support-nj' },
+        { label: 'IT Support NYC', to: '/it-support-nyc' },
         { label: 'Managed IT Services', to: '/managed-it-services' },
         { label: 'Network Services Near Me', to: '/network-services-near-me' },
         { label: 'Network Setup Connecticut', to: '/network-setup-connecticut' },
@@ -87,10 +87,10 @@ const ITSupportNYC = () => {
         { label: 'Network Setup NYC', to: '/network-setup-nyc' },
         { label: 'Network Troubleshooting NYC', to: '/network-troubleshooting-nyc' },
       ]}
-      finalTitle="Need Small Business IT Support in NYC?"
+      finalTitle="Need Small Business IT Support in Connecticut?"
       finalDescription="Get dependable help with devices, connectivity, troubleshooting, and the everyday tech issues that slow your business down."
     />
   );
 };
 
-export default ITSupportNYC;
+export default ITSupportConnecticut;
