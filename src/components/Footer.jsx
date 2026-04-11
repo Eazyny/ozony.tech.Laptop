@@ -46,22 +46,22 @@ const Footer = () => {
   const socialLinks = [
     {
       label: 'X / Twitter',
-      href: 'https://x.com/yourhandle',
+      href: 'https://x.com/ozonytech',
       icon: Twitter,
     },
     {
       label: 'Facebook',
-      href: 'https://facebook.com/yourpage',
+      href: 'https://facebook.com/ozony.tech',
       icon: Facebook,
     },
     {
       label: 'GitHub',
-      href: 'https://github.com/yourusername',
+      href: 'https://github.com/eazyny',
       icon: Github,
     },
     {
       label: 'LinkedIn',
-      href: 'https://linkedin.com/in/yourprofile',
+      href: 'https://linkedin.com/in/ozony-elsevif',
       icon: Linkedin,
     },
   ];

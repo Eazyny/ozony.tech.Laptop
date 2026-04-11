@@ -9,6 +9,8 @@ import {
   ExternalLink,
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import Header from '@/components/Header';
+import Footer from '@/components/Footer';
 import StarfieldBackground from '@/components/ui/starfield-background';
 
 const Credentials = () => {
@@ -105,19 +107,21 @@ const Credentials = () => {
       </Helmet>
 
       <div className="min-h-screen app-bg">
-        <section className="px-4 pt-8 pb-2">
-          <div className="container mx-auto max-w-7xl">
-            <Link
-              to="/"
-              className="inline-flex items-center gap-2 text-sm text-gray-400 transition-colors hover:text-white"
-            >
-              <ArrowLeft className="h-4 w-4" />
-              Back to Home
-            </Link>
-          </div>
-        </section>
+        <Header />
 
         <main>
+          <section className="px-4 pt-24 pb-2 md:pt-28">
+            <div className="container mx-auto max-w-7xl">
+              <Link
+                to="/"
+                className="inline-flex items-center gap-2 text-sm text-gray-400 transition-colors hover:text-white"
+              >
+                <ArrowLeft className="h-4 w-4" />
+                Back to Home
+              </Link>
+            </div>
+          </section>
+
           {/* Hero */}
           <section className="relative overflow-hidden px-4 py-14 md:py-20">
             <StarfieldBackground />
@@ -166,7 +170,7 @@ const Credentials = () => {
                 transition={{ duration: 0.55 }}
                 className="overflow-hidden rounded-2xl border border-slate-700/50 bg-gradient-to-br from-slate-900/85 to-slate-800/70 shadow-lg shadow-blue-500/10"
               >
-                <div className="grid gap-6 lg:grid-cols-[0.95fr_1.05fr] p-6 lg:p-8">
+                <div className="grid gap-6 p-6 lg:grid-cols-[0.95fr_1.05fr] lg:p-8">
                   <div className="relative min-h-[280px] overflow-hidden rounded-2xl border border-slate-700/50 bg-slate-950/50">
                     <div className="absolute inset-0">
                       <img
@@ -197,7 +201,7 @@ const Credentials = () => {
                         <p className="mb-3 text-sm font-semibold uppercase tracking-[0.2em] text-blue-400">
                           Featured Certification
                         </p>
-                        <h2 className="text-2xl md:text-3xl font-bold leading-tight text-white">
+                        <h2 className="text-2xl font-bold leading-tight text-white md:text-3xl">
                           {featuredCert.title}
                         </h2>
                         <p className="mt-3 text-sm font-medium text-blue-300">
@@ -209,7 +213,7 @@ const Credentials = () => {
 
                   <div className="flex flex-col justify-between">
                     <div>
-                      <p className="rounded-full border border-slate-700/60 bg-slate-900/60 px-3 py-1 text-xs font-medium text-blue-300 w-fit">
+                      <p className="w-fit rounded-full border border-slate-700/60 bg-slate-900/60 px-3 py-1 text-xs font-medium text-blue-300">
                         {featuredCert.category}
                       </p>
 
@@ -241,7 +245,7 @@ const Credentials = () => {
                     <div className="mt-8 flex flex-wrap gap-4">
                       <Button
                         asChild
-                        className="bg-blue-600 hover:bg-blue-700 text-white"
+                        className="bg-blue-600 text-white hover:bg-blue-700"
                       >
                         <a
                           href={featuredCert.verificationUrl}
@@ -265,22 +269,22 @@ const Credentials = () => {
             <div className="container mx-auto max-w-7xl">
               <div className="mb-10 flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
                 <div>
-                  <h2 className="text-3xl md:text-5xl font-bold text-white mb-3">
+                  <h2 className="mb-3 text-3xl font-bold text-white md:text-5xl">
                     All Certifications
                   </h2>
-                  <p className="text-gray-400 text-lg max-w-3xl">
+                  <p className="max-w-3xl text-lg text-gray-400">
                     Explore the full credential set behind Ozony Tech’s support, networking,
                     systems, and security foundation.
                   </p>
                 </div>
 
-                <div className="hidden lg:inline-flex rounded-full border border-slate-700/60 bg-slate-900/60 px-4 py-2 text-sm text-gray-300">
+                <div className="hidden rounded-full border border-slate-700/60 bg-slate-900/60 px-4 py-2 text-sm text-gray-300 lg:inline-flex">
                   Hover cards to expand
                 </div>
               </div>
 
               {/* Mobile / Tablet */}
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:hidden">
+              <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:hidden">
                 {credentials.map((cert, index) => (
                   <motion.a
                     key={cert.credentialId}
@@ -344,7 +348,7 @@ const Credentials = () => {
               </div>
 
               {/* Desktop expandable strip */}
-              <div className="hidden lg:block rounded-2xl border border-slate-700/50 bg-slate-900/35 p-2 shadow-lg shadow-blue-500/5">
+              <div className="hidden rounded-2xl border border-slate-700/50 bg-slate-900/35 p-2 shadow-lg shadow-blue-500/5 lg:block">
                 <div className="flex h-[430px] overflow-hidden rounded-xl">
                   {credentials.map((cert, index) => (
                     <motion.a
@@ -416,6 +420,8 @@ const Credentials = () => {
             </div>
           </section>
         </main>
+
+        <Footer />
       </div>
     </>
   );
