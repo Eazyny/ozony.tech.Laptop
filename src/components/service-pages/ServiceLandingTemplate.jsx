@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Helmet } from 'react-helmet';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { AnimatePresence, motion } from 'framer-motion';
 import {
   ArrowLeft,
@@ -18,6 +18,8 @@ import { Button } from '@/components/ui/button';
 import StarfieldBackground from '@/components/ui/starfield-background';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
+
+const SITE_URL = 'https://ozony.tech';
 
 const defaultIncludes = [
   'Router and firewall configuration',
@@ -69,6 +71,14 @@ const defaultFaqItems = [
 
 const sectionClass =
   'border-t border-white/5 px-4 py-20 md:px-6 lg:px-8';
+
+const normalizePathname = (pathname) => {
+  if (!pathname) return '/';
+  if (pathname.length > 1 && pathname.endsWith('/')) {
+    return pathname.slice(0, -1);
+  }
+  return pathname;
+};
 
 const ServiceLandingTemplate = ({
   pageTitle = 'Network Setup Services in NYC | Ozony Tech',
@@ -125,6 +135,10 @@ const ServiceLandingTemplate = ({
   finalDescription = 'Whether you need a fresh install, stronger Wi-Fi, or a cleaner setup for your business, Ozony Tech can help you move forward with confidence.',
 }) => {
   const [showBackToTop, setShowBackToTop] = useState(false);
+  const location = useLocation();
+
+  const normalizedPathname = normalizePathname(location.pathname);
+  const canonicalUrl = `${SITE_URL}${normalizedPathname}`;
 
   useEffect(() => {
     const handleScroll = () => {
@@ -146,6 +160,7 @@ const ServiceLandingTemplate = ({
       <Helmet>
         <title>{pageTitle}</title>
         <meta name="description" content={pageDescription} />
+        <link rel="canonical" href={canonicalUrl} />
       </Helmet>
 
       <div className="min-h-screen app-bg text-white">
