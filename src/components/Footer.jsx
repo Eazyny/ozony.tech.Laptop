@@ -239,9 +239,9 @@ const Footer = () => {
                   className={`w-full overflow-hidden transition-all duration-300 ${
                     servicePagesOpen
                       ? 'max-h-[500px] opacity-100'
-                      : 'max-h-0 opacity-0'
+                      : 'max-h-0 opacity-0 pointer-events-none'
                   }`}
-                  aria-hidden={!servicePagesOpen}
+                  {...(!servicePagesOpen ? { inert: '' } : {})}
                 >
                   <div className="rounded-2xl border border-slate-800 bg-slate-950/30 p-4">
                     <div className="grid gap-x-8 gap-y-2 sm:grid-cols-2 lg:grid-cols-3">
