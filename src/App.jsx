@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { Suspense, lazy, useEffect, useState } from 'react';
 import { Helmet } from 'react-helmet';
 import { Routes, Route, useLocation } from 'react-router-dom';
 import { AnimatePresence, motion } from 'framer-motion';
@@ -8,30 +8,30 @@ import Header from '@/components/Header';
 import Hero from '@/components/Hero';
 import Services from '@/components/Services';
 import Credentials from '@/components/Credentials';
-import CertificationsPage from '@/components/CertificationsPage';
 import About from '@/components/About';
 import Faq from './components/faq';
 import Contact from '@/components/Contact';
 import Footer from '@/components/Footer';
-import CallToAction from '@/components/CallToAction';
-import PackagesPage from '@/components/PackagesPage';
-import NetworkSetupNYC from '@/pages/NetworkSetupNYC';
-import BusinessWifiNYC from '@/pages/BusinessWifiNYC';
-import FirewallSetupNYC from '@/pages/FirewallSetupNYC';
-import ITSupportNYC from '@/pages/ITSupportNYC';
-import NetworkTroubleshootingNYC from '@/pages/NetworkTroubleshootingNYC';
-import SmallBusinessNetworkNYC from '@/pages/SmallBusinessNetworkNYC';
-import NetworkSetupNJ from '@/pages/NetworkSetupNJ';
-import ITSupportNJ from '@/pages/ITSupportNJ';
-import NetworkSetupConnecticut from '@/pages/NetworkSetupConnecticut';
-import ITSupportConnecticut from '@/pages/ITSupportConnecticut';
-import FirewallSetupConnecticut from '@/pages/FirewallSetupConnecticut';
-import BusinessWifiConnecticut from '@/pages/BusinessWifiConnecticut';
-import ITServicesNearMe from '@/pages/ITServicesNearMe';
-import NetworkServicesNearMe from '@/pages/NetworkServicesNearMe';
-import ManagedITServices from '@/pages/ManagedITServices';
-import ITSupport from '@/pages/ITSupport';
-import NotFound from '@/pages/not-found';
+
+const PackagesPage = lazy(() => import('@/components/PackagesPage'));
+const CertificationsPage = lazy(() => import('@/components/CertificationsPage'));
+const NetworkSetupNYC = lazy(() => import('@/pages/NetworkSetupNYC'));
+const BusinessWifiNYC = lazy(() => import('@/pages/BusinessWifiNYC'));
+const FirewallSetupNYC = lazy(() => import('@/pages/FirewallSetupNYC'));
+const ITSupportNYC = lazy(() => import('@/pages/ITSupportNYC'));
+const NetworkTroubleshootingNYC = lazy(() => import('@/pages/NetworkTroubleshootingNYC'));
+const SmallBusinessNetworkNYC = lazy(() => import('@/pages/SmallBusinessNetworkNYC'));
+const NetworkSetupNJ = lazy(() => import('@/pages/NetworkSetupNJ'));
+const ITSupportNJ = lazy(() => import('@/pages/ITSupportNJ'));
+const NetworkSetupConnecticut = lazy(() => import('@/pages/NetworkSetupConnecticut'));
+const ITSupportConnecticut = lazy(() => import('@/pages/ITSupportConnecticut'));
+const FirewallSetupConnecticut = lazy(() => import('@/pages/FirewallSetupConnecticut'));
+const BusinessWifiConnecticut = lazy(() => import('@/pages/BusinessWifiConnecticut'));
+const ITServicesNearMe = lazy(() => import('@/pages/ITServicesNearMe'));
+const NetworkServicesNearMe = lazy(() => import('@/pages/NetworkServicesNearMe'));
+const ManagedITServices = lazy(() => import('@/pages/ManagedITServices'));
+const ITSupport = lazy(() => import('@/pages/ITSupport'));
+const NotFound = lazy(() => import('@/pages/not-found'));
 
 const HomePage = () => {
   const [showBackToTop, setShowBackToTop] = useState(false);
@@ -141,33 +141,64 @@ const ScrollManager = () => {
   return null;
 };
 
+const RouteLoader = () => (
+  <div className="min-h-screen app-bg flex items-center justify-center px-4">
+    <div className="text-sm uppercase tracking-[0.2em] text-blue-400">
+      Loading...
+    </div>
+  </div>
+);
+
 function App() {
   return (
     <>
       <ScrollManager />
 
-      <Routes>
-        <Route path="/" element={<HomePage />} />
-        <Route path="/packages" element={<PackagesPage />} />
-        <Route path="/certifications" element={<CertificationsPage />} />
-        <Route path="/network-setup-nyc" element={<NetworkSetupNYC />} />
-        <Route path="/business-wifi-nyc" element={<BusinessWifiNYC />} />
-        <Route path="/firewall-setup-nyc" element={<FirewallSetupNYC />} />
-        <Route path="/it-support-nyc" element={<ITSupportNYC />} />
-        <Route path="/network-troubleshooting-nyc" element={<NetworkTroubleshootingNYC />} />
-        <Route path="/small-business-network-nyc" element={<SmallBusinessNetworkNYC />} />
-        <Route path="/network-setup-nj" element={<NetworkSetupNJ />} />
-        <Route path="/it-support-nj" element={<ITSupportNJ />} />
-        <Route path="/network-setup-connecticut" element={<NetworkSetupConnecticut />} />
-        <Route path="/it-support-connecticut" element={<ITSupportConnecticut />} />
-        <Route path="/firewall-setup-connecticut" element={<FirewallSetupConnecticut />} />
-        <Route path="/business-wifi-connecticut" element={<BusinessWifiConnecticut />} />
-        <Route path="/it-services-near-me" element={<ITServicesNearMe />} />
-        <Route path="/network-services-near-me" element={<NetworkServicesNearMe />} />
-        <Route path="/managed-it-services" element={<ManagedITServices />} />
-        <Route path="/it-support" element={<ITSupport />} />
-        <Route path="*" element={<NotFound />} />
-      </Routes>
+      <Suspense fallback={<RouteLoader />}>
+        <Routes>
+          <Route path="/" element={<HomePage />} />
+          <Route path="/packages" element={<PackagesPage />} />
+          <Route path="/certifications" element={<CertificationsPage />} />
+          <Route path="/network-setup-nyc" element={<NetworkSetupNYC />} />
+          <Route path="/business-wifi-nyc" element={<BusinessWifiNYC />} />
+          <Route path="/firewall-setup-nyc" element={<FirewallSetupNYC />} />
+          <Route path="/it-support-nyc" element={<ITSupportNYC />} />
+          <Route
+            path="/network-troubleshooting-nyc"
+            element={<NetworkTroubleshootingNYC />}
+          />
+          <Route
+            path="/small-business-network-nyc"
+            element={<SmallBusinessNetworkNYC />}
+          />
+          <Route path="/network-setup-nj" element={<NetworkSetupNJ />} />
+          <Route path="/it-support-nj" element={<ITSupportNJ />} />
+          <Route
+            path="/network-setup-connecticut"
+            element={<NetworkSetupConnecticut />}
+          />
+          <Route
+            path="/it-support-connecticut"
+            element={<ITSupportConnecticut />}
+          />
+          <Route
+            path="/firewall-setup-connecticut"
+            element={<FirewallSetupConnecticut />}
+          />
+          <Route
+            path="/business-wifi-connecticut"
+            element={<BusinessWifiConnecticut />}
+          />
+          <Route path="/it-services-near-me" element={<ITServicesNearMe />} />
+          <Route
+            path="/network-services-near-me"
+            element={<NetworkServicesNearMe />}
+          />
+          <Route path="/managed-it-services" element={<ManagedITServices />} />
+          <Route path="/it-support" element={<ITSupport />} />
+          <Route path="*" element={<NotFound />} />
+        </Routes>
+      </Suspense>
 
       <Toaster />
     </>
