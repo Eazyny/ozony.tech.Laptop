@@ -124,11 +124,11 @@ const Contact = () => {
       label: 'LinkedIn',
       href: 'https://www.linkedin.com/in/ozony-elsevif/',
     },
-    { icon: Twitter, label: 'Twitter', href: 'https://x.com/BlockchainEazy' },
+    { icon: Twitter, label: 'Twitter', href: 'https://x.com/ozonytech' },
   ];
 
   return (
-    <section id="contact" className="px-4 py-20">
+    <section id="contact" className="py-20 px-4 bg-slate-800/30">
       <div className="container mx-auto max-w-7xl">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -148,7 +148,6 @@ const Contact = () => {
         </motion.div>
 
         <div className="grid items-start gap-12 lg:grid-cols-2">
-          {/* Left Column */}
           <motion.div
             initial={{ opacity: 0, x: -30 }}
             whileInView={{ opacity: 1, x: 0 }}
@@ -233,7 +232,6 @@ const Contact = () => {
             </div>
           </motion.div>
 
-          {/* Contact Form */}
           <motion.div
             initial={{ opacity: 0, x: 30 }}
             whileInView={{ opacity: 1, x: 0 }}

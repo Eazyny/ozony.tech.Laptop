@@ -10,6 +10,7 @@ import Services from '@/components/Services';
 import Credentials from '@/components/Credentials';
 import CertificationsPage from '@/components/CertificationsPage';
 import About from '@/components/About';
+import Faq from './components/faq';
 import Contact from '@/components/Contact';
 import Footer from '@/components/Footer';
 import CallToAction from '@/components/CallToAction';
@@ -28,8 +29,8 @@ import FirewallSetupConnecticut from '@/pages/FirewallSetupConnecticut';
 import BusinessWifiConnecticut from '@/pages/BusinessWifiConnecticut';
 import ITServicesNearMe from '@/pages/ITServicesNearMe';
 import NetworkServicesNearMe from '@/pages/NetworkServicesNearMe';
-import ManagedITServices from './pages/ManagedITServices';
-import ITSupport from './pages/ITSupport';
+import ManagedITServices from '@/pages/ManagedITServices';
+import ITSupport from '@/pages/ITSupport';
 import NotFound from '@/pages/not-found';
 
 const HomePage = () => {
@@ -68,8 +69,8 @@ const HomePage = () => {
           <Services />
           <Credentials />
           <About />
+          <Faq />
           <Contact />
-          <CallToAction />
         </main>
 
         <Footer />
