@@ -31,12 +31,12 @@ const Hero = () => {
               transition={{ delay: 0.2 }}
               className="max-w-[760px] space-y-5"
             >
-              <p className="text-sm font-semibold uppercase tracking-[0.18em] text-blue-400 md:text-base">
-                Serving NYC | Small Business IT Solutions
+              <p className="text-sm font-semibold uppercase tracking-[0.18em] text-white md:text-base">
+                Small Business IT Solutions
               </p>
 
               <div className="space-y-4">
-                <p className="text-3xl font-bold uppercase tracking-[0.08em] text-white/90 md:text-4xl xl:text-5xl">
+                <p className="text-3xl font-bold uppercase tracking-[0.08em] text-blue-400 md:text-4xl xl:text-5xl">
                   Ozony Tech
                 </p>
 
