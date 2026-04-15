@@ -20,9 +20,9 @@ const Credentials = () => {
     shortDescription:
       'Completion of the full Google IT Support Professional Certificate, covering troubleshooting, networking, operating systems, system administration, and security.',
     verificationUrl: 'https://coursera.org/verify/professional-cert/2FLTPOHX1URJ',
-    image: '/images/credentials/GoogleITSupportCert.webp',
-    image320: '/images/credentials/GoogleITSupportCert-320.webp',
+    image565: '/images/credentials/GoogleITSupportCert.webp',
     image440: '/images/credentials/GoogleITSupportCert-440.webp',
+    image320: '/images/credentials/GoogleITSupportCert-320.webp',
   };
 
   return (
@@ -56,13 +56,13 @@ const Credentials = () => {
             <div className="relative min-h-[340px] lg:min-h-[460px]">
               <div className="absolute inset-0">
                 <img
-                  src={featuredCert.image}
+                  src={featuredCert.image440}
                   srcSet={`
                     ${featuredCert.image320} 320w,
                     ${featuredCert.image440} 440w,
-                    ${featuredCert.image} 565w
+                    ${featuredCert.image565} 565w
                   `}
-                  sizes="(min-width: 1024px) 440px, (min-width: 768px) 90vw, 92vw"
+                  sizes="(min-width: 1024px) 440px, 92vw"
                   width="565"
                   height="612"
                   alt={`${featuredCert.title} certificate preview`}
