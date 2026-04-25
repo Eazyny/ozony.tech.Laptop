@@ -92,22 +92,6 @@ const ITSupport = () => {
             'No. IT support also covers the everyday issues that waste time and interrupt work, including device setup problems, access issues, printer trouble, and inconsistent connectivity.',
         },
       ]}
-      relatedServices={[
-        { label: 'Business Wi-Fi Connecticut', to: '/business-wifi-connecticut' },
-        { label: 'Business Wi-Fi NYC', to: '/business-wifi-nyc' },
-        { label: 'Firewall Setup Connecticut', to: '/firewall-setup-connecticut' },
-        { label: 'Firewall Setup NYC', to: '/firewall-setup-nyc' },
-        { label: 'IT Services Near Me', to: '/it-services-near-me' },
-        { label: 'IT Support Connecticut', to: '/it-support-connecticut' },
-        { label: 'IT Support NJ', to: '/it-support-nj' },
-        { label: 'IT Support NYC', to: '/it-support-nyc' },
-        { label: 'Managed IT Services', to: '/managed-it-services' },
-        { label: 'Network Services Near Me', to: '/network-services-near-me' },
-        { label: 'Network Setup Connecticut', to: '/network-setup-connecticut' },
-        { label: 'Network Setup NJ', to: '/network-setup-nj' },
-        { label: 'Network Setup NYC', to: '/network-setup-nyc' },
-        { label: 'Network Troubleshooting NYC', to: '/network-troubleshooting-nyc' },
-      ]}
       finalTitle="Need IT Support for Your Business?"
       finalDescription="Get practical help with devices, connectivity, troubleshooting, and the everyday tech issues that slow work down."
     />

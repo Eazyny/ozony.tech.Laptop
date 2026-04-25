@@ -21,6 +21,26 @@ import Footer from '@/components/Footer';
 
 const SITE_URL = 'https://ozony.tech';
 
+const ALL_SERVICE_LINKS = [
+  { label: 'Business Wi-Fi Connecticut', to: '/business-wifi-connecticut' },
+  { label: 'Business Wi-Fi NYC', to: '/business-wifi-nyc' },
+  { label: 'Firewall Setup Connecticut', to: '/firewall-setup-connecticut' },
+  { label: 'Firewall Setup NYC', to: '/firewall-setup-nyc' },
+  { label: 'IT Services Near Me', to: '/it-services-near-me' },
+  { label: 'IT Solutions', to: '/it-solutions' },
+  { label: 'IT Support', to: '/it-support' },
+  { label: 'IT Support Connecticut', to: '/it-support-connecticut' },
+  { label: 'IT Support NJ', to: '/it-support-nj' },
+  { label: 'IT Support NYC', to: '/it-support-nyc' },
+  { label: 'Managed IT Services', to: '/managed-it-services' },
+  { label: 'Network Services Near Me', to: '/network-services-near-me' },
+  { label: 'Network Setup Connecticut', to: '/network-setup-connecticut' },
+  { label: 'Network Setup NJ', to: '/network-setup-nj' },
+  { label: 'Network Setup NYC', to: '/network-setup-nyc' },
+  { label: 'Network Troubleshooting NYC', to: '/network-troubleshooting-nyc' },
+  { label: 'Small Business Network NYC', to: '/small-business-network-nyc' },
+];
+
 const defaultIncludes = [
   'Router and firewall configuration',
   'Business Wi-Fi setup and optimization',
@@ -127,7 +147,7 @@ const ServiceLandingTemplate = ({
   ],
   areasServed = 'Serving businesses across NYC, including Manhattan, Brooklyn, Queens, the Bronx, Staten Island, and nearby areas.',
   faqItems = defaultFaqItems,
-  relatedServices = [],
+  relatedServices = null,
   midCtaEyebrow = 'Get Started',
   midCtaTitle = 'Ready to Get Your Business Network Setup?',
   midCtaDescription = 'Get a clean, reliable solution built for your business without unnecessary complexity or guesswork.',
@@ -139,6 +159,11 @@ const ServiceLandingTemplate = ({
 
   const normalizedPathname = normalizePathname(location.pathname);
   const canonicalUrl = `${SITE_URL}${normalizedPathname}`;
+
+  const relatedServicesToRender =
+    relatedServices && relatedServices.length > 0
+      ? relatedServices
+      : ALL_SERVICE_LINKS.filter((service) => service.to !== normalizedPathname);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -413,7 +438,7 @@ const ServiceLandingTemplate = ({
               </div>
             </section>
 
-            {relatedServices.length > 0 && (
+            {relatedServicesToRender.length > 0 && (
               <section className={sectionClass}>
                 <div className="mx-auto max-w-7xl">
                   <div className="max-w-3xl">
@@ -429,7 +454,7 @@ const ServiceLandingTemplate = ({
                   </div>
 
                   <div className="mt-10 grid gap-5 md:grid-cols-2 lg:grid-cols-4">
-                    {relatedServices.map((service) => (
+                    {relatedServicesToRender.map((service) => (
                       <Link
                         key={service.to}
                         to={service.to}

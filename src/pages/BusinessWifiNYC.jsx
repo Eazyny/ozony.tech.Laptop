@@ -99,22 +99,6 @@ const BusinessWifiNYC = () => {
             'Yes. Guest and staff Wi-Fi can be separated to improve security, organization, and overall performance for your business network.',
         },
       ]}
-      relatedServices={[
-        { label: 'Business Wi-Fi Connecticut', to: '/business-wifi-connecticut' },
-        { label: 'Firewall Setup Connecticut', to: '/firewall-setup-connecticut' },
-        { label: 'Firewall Setup NYC', to: '/firewall-setup-nyc' },
-        { label: 'IT Services Near Me', to: '/it-services-near-me' },
-        { label: 'IT Support', to: '/it-support' },
-        { label: 'IT Support Connecticut', to: '/it-support-connecticut' },
-        { label: 'IT Support NJ', to: '/it-support-nj' },
-        { label: 'IT Support NYC', to: '/it-support-nyc' },
-        { label: 'Managed IT Services', to: '/managed-it-services' },
-        { label: 'Network Services Near Me', to: '/network-services-near-me' },
-        { label: 'Network Setup Connecticut', to: '/network-setup-connecticut' },
-        { label: 'Network Setup NJ', to: '/network-setup-nj' },
-        { label: 'Network Setup NYC', to: '/network-setup-nyc' },
-        { label: 'Network Troubleshooting NYC', to: '/network-troubleshooting-nyc' },
-      ]}
       finalTitle="Need Business Wi-Fi Installation in NYC?"
       finalDescription="Get stronger coverage, better wireless performance, and a cleaner setup built for the way your business actually operates."
     />

@@ -99,23 +99,6 @@ const SmallBusinessNetworkNYC = () => {
             'Yes. Networks can be segmented to better separate guest access, staff use, and business-critical devices for stronger organization and security.',
         },
       ]}
-      relatedServices={[
-        { label: 'Business Wi-Fi Connecticut', to: '/business-wifi-connecticut' },
-        { label: 'Business Wi-Fi NYC', to: '/business-wifi-nyc' },
-        { label: 'Firewall Setup Connecticut', to: '/firewall-setup-connecticut' },
-        { label: 'Firewall Setup NYC', to: '/firewall-setup-nyc' },
-        { label: 'IT Services Near Me', to: '/it-services-near-me' },
-        { label: 'IT Support', to: '/it-support' },
-        { label: 'IT Support Connecticut', to: '/it-support-connecticut' },
-        { label: 'IT Support NJ', to: '/it-support-nj' },
-        { label: 'IT Support NYC', to: '/it-support-nyc' },
-        { label: 'Managed IT Services', to: '/managed-it-services' },
-        { label: 'Network Services Near Me', to: '/network-services-near-me' },
-        { label: 'Network Setup Connecticut', to: '/network-setup-connecticut' },
-        { label: 'Network Setup NJ', to: '/network-setup-nj' },
-        { label: 'Network Setup NYC', to: '/network-setup-nyc' },
-        { label: 'Network Troubleshooting NYC', to: '/network-troubleshooting-nyc' },
-      ]}
       finalTitle="Need Small Business Network Setup in NYC?"
       finalDescription="Get a clean, reliable network setup built around your business, your devices, and the way your team works every day."
     />

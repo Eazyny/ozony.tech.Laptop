@@ -32,6 +32,7 @@ const NetworkServicesNearMe = lazy(() => import('@/pages/NetworkServicesNearMe')
 const ManagedITServices = lazy(() => import('@/pages/ManagedITServices'));
 const ITSupport = lazy(() => import('@/pages/ITSupport'));
 const NotFound = lazy(() => import('@/pages/not-found'));
+const ITSolutions = lazy(() => import('@/pages/ITSolutions'));
 
 const HomePage = () => {
   const [showBackToTop, setShowBackToTop] = useState(false);
@@ -196,6 +197,7 @@ function App() {
           />
           <Route path="/managed-it-services" element={<ManagedITServices />} />
           <Route path="/it-support" element={<ITSupport />} />
+          <Route path="/it-solutions" element={<ITSolutions />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </Suspense>
