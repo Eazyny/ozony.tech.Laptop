@@ -5,6 +5,7 @@ import { motion } from 'framer-motion';
 import {
   ArrowRight,
   CheckCircle,
+  CheckCircle2,
   Clock,
   Mail,
   MapPin,
@@ -16,6 +17,9 @@ import {
 
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
+import { toast } from '@/components/ui/use-toast';
+
+const FORMSPREE_ENDPOINT = 'https://formspree.io/f/mdawpzqp';
 
 const serviceOptions = [
   'Network Setup',
@@ -62,6 +66,8 @@ const ContactPage = () => {
     message: '',
   });
 
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
   const handleChange = (event) => {
     const { name, value } = event.target;
 
@@ -71,26 +77,72 @@ const ContactPage = () => {
     }));
   };
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
 
-    const subject = encodeURIComponent(
-      `New Ozony Tech Contact Request${formData.service ? ` - ${formData.service}` : ''}`
-    );
+    if (!formData.name || !formData.email || !formData.message) {
+      toast({
+        title: 'Please fill in all required fields',
+        variant: 'destructive',
+      });
+      return;
+    }
 
-    const body = encodeURIComponent(
-      `Name: ${formData.name}
-Business Name: ${formData.business}
-Email: ${formData.email}
-Phone: ${formData.phone}
-Location: ${formData.location}
-Service Needed: ${formData.service}
+    setIsSubmitting(true);
 
-Message:
-${formData.message}`
-    );
+    try {
+      const res = await fetch(FORMSPREE_ENDPOINT, {
+        method: 'POST',
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          source: 'Dedicated Contact Page',
+          name: formData.name,
+          business: formData.business,
+          email: formData.email,
+          phone: formData.phone,
+          location: formData.location,
+          service: formData.service,
+          message: formData.message,
+        }),
+      });
 
-    window.location.href = `mailto:contact@ozony.tech?subject=${subject}&body=${body}`;
+      const data = await res.json().catch(() => ({}));
+
+      if (!res.ok) {
+        const msg =
+          data?.errors?.[0]?.message ||
+          'Something went wrong sending your message. Please try again.';
+
+        throw new Error(msg);
+      }
+
+      toast({
+        title: 'Inquiry sent successfully!',
+        description: "Thanks for reaching out to Ozony Tech. I'll get back to you soon.",
+        icon: <CheckCircle2 className="h-4 w-4 text-emerald-300" />,
+      });
+
+      setFormData({
+        name: '',
+        business: '',
+        email: '',
+        phone: '',
+        location: '',
+        service: '',
+        message: '',
+      });
+    } catch (err) {
+      toast({
+        title: 'Message failed to send',
+        description: err?.message || 'Please try again in a moment.',
+        variant: 'destructive',
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -207,8 +259,7 @@ ${formData.message}`
                   <div className="mb-7">
                     <h2 className="text-2xl font-bold text-white">Send a request</h2>
                     <p className="mt-2 text-sm leading-6 text-slate-400">
-                      This form opens your email app with the request filled in. A full
-                      backend form or ticketing system can be connected later.
+                      Send your request directly to Ozony Tech. No email app needed.
                     </p>
                   </div>
 
@@ -355,9 +406,10 @@ ${formData.message}`
 
                     <button
                       type="submit"
-                      className="inline-flex w-full items-center justify-center rounded-xl bg-blue-500 px-6 py-4 text-sm font-bold text-white shadow-lg shadow-blue-500/25 transition hover:bg-blue-400"
+                      disabled={isSubmitting}
+                      className="inline-flex w-full items-center justify-center rounded-xl bg-blue-500 px-6 py-4 text-sm font-bold text-white shadow-lg shadow-blue-500/25 transition hover:bg-blue-400 disabled:cursor-not-allowed disabled:opacity-60"
                     >
-                      Open Email Request
+                      {isSubmitting ? 'Sending...' : 'Send Inquiry'}
                       <Send className="ml-2 h-4 w-4" />
                     </button>
                   </form>
