@@ -4,6 +4,8 @@ import { Menu, X } from 'lucide-react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import DecodedText from '@/components/ui/decode-text';
 
+const CONTACT_PAGE_PATH = '/contactpage';
+
 const Header = () => {
   const navigate = useNavigate();
   const location = useLocation();
@@ -25,7 +27,7 @@ const Header = () => {
     { label: 'Services', href: '#services' },
     { label: 'Credentials', href: '#credentials' },
     { label: 'About', href: '#about' },
-    { label: 'Contact', href: '#contact' },
+    { label: 'Contact', to: CONTACT_PAGE_PATH },
   ];
 
   const goToSection = (href) => {
@@ -42,6 +44,20 @@ const Header = () => {
     navigate(`/${href}`);
   };
 
+  const goToPage = (path) => {
+    setIsMobileMenuOpen(false);
+    navigate(path);
+  };
+
+  const handleNavItemClick = (item) => {
+    if (item.to) {
+      goToPage(item.to);
+      return;
+    }
+
+    goToSection(item.href);
+  };
+
   const handleBrandClick = () => {
     setIsMobileMenuOpen(false);
 
@@ -54,12 +70,11 @@ const Header = () => {
   };
 
   const goToPackages = () => {
-    navigate('/packages');
-    setIsMobileMenuOpen(false);
+    goToPage('/packages');
   };
 
   const goToContact = () => {
-    goToSection('#contact');
+    goToPage(CONTACT_PAGE_PATH);
   };
 
   return (
@@ -111,7 +126,7 @@ const Header = () => {
                 initial={{ opacity: 0, y: -20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: index * 0.08 }}
-                onClick={() => goToSection(item.href)}
+                onClick={() => handleNavItemClick(item)}
                 className="font-medium text-gray-300 transition-colors duration-200 hover:text-white"
               >
                 <DecodedText speed={12}>{item.label}</DecodedText>
@@ -162,7 +177,7 @@ const Header = () => {
               {navItems.map((item) => (
                 <button
                   key={item.label}
-                  onClick={() => goToSection(item.href)}
+                  onClick={() => handleNavItemClick(item)}
                   className="block w-full rounded-lg px-4 py-3 text-left text-gray-300 transition-colors duration-200 hover:bg-white/10 hover:text-white"
                 >
                   <DecodedText speed={12}>{item.label}</DecodedText>

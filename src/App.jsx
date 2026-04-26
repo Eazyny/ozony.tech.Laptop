@@ -12,6 +12,7 @@ import About from '@/components/About';
 import Faq from './components/faq';
 import Contact from '@/components/Contact';
 import Footer from '@/components/Footer';
+import ContactPage from '@/pages/ContactPage';
 
 const PackagesPage = lazy(() => import('@/components/PackagesPage'));
 const CertificationsPage = lazy(() => import('@/components/CertificationsPage'));
@@ -198,6 +199,7 @@ function App() {
           <Route path="/managed-it-services" element={<ManagedITServices />} />
           <Route path="/it-support" element={<ITSupport />} />
           <Route path="/it-solutions" element={<ITSolutions />} />
+          <Route path="/contactPage" element={<ContactPage />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </Suspense>

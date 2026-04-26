@@ -4,8 +4,11 @@ import { Mail } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import DecodedText from '@/components/ui/decode-text';
 import StarfieldBackground from '@/components/ui/starfield-background';
+import { useNavigate } from 'react-router-dom';
 
 const Hero = () => {
+  const navigate = useNavigate();
+
   const scrollToSection = (selector) => {
     const element = document.querySelector(selector);
     if (element) {
@@ -78,7 +81,7 @@ const Hero = () => {
               className="flex flex-col gap-4 sm:flex-row sm:flex-wrap"
             >
               <Button
-                onClick={() => scrollToSection('#contact')}
+                onClick={() => navigate('/contactpage')}
                 className="bg-blue-600 px-6 py-6 text-base text-white shadow-lg shadow-blue-500/20 hover:bg-blue-700"
               >
                 <Mail className="mr-2 h-5 w-5" />

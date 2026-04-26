@@ -246,7 +246,7 @@ const PackagesPage = () => {
                     asChild
                     className="bg-blue-600 px-6 py-6 text-base text-white shadow-lg shadow-blue-500/20 hover:bg-blue-700"
                   >
-                    <Link to="/#contact">
+                    <Link to="/contactpage">
                       <DecodedText speed={12}>Request a Quote</DecodedText>
                     </Link>
                   </Button>
@@ -490,7 +490,7 @@ const PackagesPage = () => {
                     asChild
                     className="bg-blue-600 px-6 py-6 text-base text-white hover:bg-blue-700"
                   >
-                    <Link to="/#contact">
+                    <Link to="/contactpage">
                       <DecodedText speed={12}>Request a Quote</DecodedText>
                     </Link>
                   </Button>

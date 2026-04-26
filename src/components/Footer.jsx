@@ -20,7 +20,7 @@ const Footer = () => {
     { label: 'Services', href: '#services' },
     { label: 'Credentials', href: '#credentials' },
     { label: 'About', href: '#about' },
-    { label: 'Contact', href: '#contact' },
+    { label: 'Contact', to: '/contact' },
     { label: 'Packages', to: '/packages' },
   ];
 
@@ -30,6 +30,7 @@ const Footer = () => {
     { label: 'Firewall Setup Connecticut', to: '/firewall-setup-connecticut' },
     { label: 'Firewall Setup NYC', to: '/firewall-setup-nyc' },
     { label: 'IT Services Near Me', to: '/it-services-near-me' },
+    { label: 'IT Solutions', to: '/it-solutions' },
     { label: 'IT Support', to: '/it-support' },
     { label: 'IT Support Connecticut', to: '/it-support-connecticut' },
     { label: 'IT Support NJ', to: '/it-support-nj' },
@@ -194,7 +195,7 @@ const Footer = () => {
 
                   <button
                     type="button"
-                    onClick={() => goToSection('#contact')}
+                    onClick={() => navigate('/contactpage')}
                     className="inline-flex w-fit items-center rounded-full border border-slate-800 bg-slate-950/40 px-4 py-2 text-sm text-gray-400 transition-all hover:border-slate-700 hover:text-white"
                   >
                     Get a Quote
