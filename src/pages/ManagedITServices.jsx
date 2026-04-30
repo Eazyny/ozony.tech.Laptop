@@ -19,6 +19,8 @@ const ManagedITServices = () => {
       description="Ozony Tech provides managed IT services for small businesses that need dependable support, cleaner technology management, stronger network performance, and practical help keeping business systems running smoothly."
       heroImage="/images/services/it-support-nyc.webp"
       heroImageAlt="Managed IT services for small businesses"
+      ogImage="/service_area_map.png"
+      twitterImage="/service_area_map.png"
       includeTitle="What’s Included"
       includeDescription="Practical managed IT support for businesses that want fewer technology headaches, more reliable systems, and a cleaner day-to-day support experience."
       serviceIncludes={[

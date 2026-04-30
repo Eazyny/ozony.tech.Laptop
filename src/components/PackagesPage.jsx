@@ -191,6 +191,9 @@ const PackagesPage = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
+  const canonicalUrl = 'https://ozony.tech/packages';
+  const ogImage = 'https://ozony.tech/images/packages/complete-stack.webp';
+
   return (
     <>
       <Helmet>
@@ -199,6 +202,69 @@ const PackagesPage = () => {
           name="description"
           content="Explore Ozony Tech package options for small businesses, including Starter, Growth, and Complete IT and network solutions."
         />
+        <meta
+          name="robots"
+          content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1"
+        />
+        <link rel="canonical" href={canonicalUrl} />
+
+        <meta property="og:title" content="Ozony Tech Packages | Business IT & Network Packages" />
+        <meta
+          property="og:description"
+          content="Explore Starter, Growth, and Complete package options for practical small-business IT and networking."
+        />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content={canonicalUrl} />
+        <meta property="og:site_name" content="Ozony Tech" />
+        <meta property="og:image" content={ogImage} />
+        <meta property="og:image:alt" content="Ozony Tech Complete package recommended network hardware stack" />
+
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Ozony Tech Packages | Business IT & Network Packages" />
+        <meta
+          name="twitter:description"
+          content="Compare Starter, Growth, and Complete package options for small-business IT and networking."
+        />
+        <meta name="twitter:image" content={ogImage} />
+
+        <script type="application/ld+json">
+          {JSON.stringify({
+            '@context': 'https://schema.org',
+            '@type': 'Service',
+            name: 'Ozony Tech Business IT & Network Packages',
+            provider: {
+              '@type': 'ProfessionalService',
+              name: 'Ozony Tech',
+              url: 'https://ozony.tech',
+              email: 'contact@ozony.tech',
+              telephone: '+1-347-653-7655',
+            },
+            url: canonicalUrl,
+            areaServed: ['New York City', 'New Jersey', 'Connecticut'],
+            serviceType: [
+              'Network Setup',
+              'Business Wi-Fi',
+              'Firewall Setup',
+              'IT Support',
+              'Managed IT Services',
+            ],
+          })}
+        </script>
+
+        <script type="application/ld+json">
+          {JSON.stringify({
+            '@context': 'https://schema.org',
+            '@type': 'FAQPage',
+            mainEntity: packageFaqs.map((faq) => ({
+              '@type': 'Question',
+              name: faq.question,
+              acceptedAnswer: {
+                '@type': 'Answer',
+                text: faq.answer,
+              },
+            })),
+          })}
+        </script>
       </Helmet>
 
       <div className="min-h-screen app-bg">

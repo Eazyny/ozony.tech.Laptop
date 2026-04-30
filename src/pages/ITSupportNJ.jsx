@@ -12,6 +12,8 @@ const ITSupportNJ = () => {
       description="Ozony Tech provides small business IT support in NJ for teams that need reliable help with devices, connectivity, troubleshooting, and the day-to-day tech issues that slow business down."
       heroImage="/images/services/it-support-nyc.webp"
       heroImageAlt="Small business IT support in New Jersey"
+      ogImage="/images/services/it-support-nyc.webp"
+      twitterImage="/images/services/it-support-nyc.webp"
       includeTitle="What’s Included"
       includeDescription="Straightforward support for the business tech issues that disrupt daily operations, waste time, and create unnecessary frustration."
       serviceIncludes={[

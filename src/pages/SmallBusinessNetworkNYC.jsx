@@ -19,6 +19,8 @@ const SmallBusinessNetworkNYC = () => {
       description="Ozony Tech provides small business network setup in NYC for offices, retail stores, restaurants, and growing teams that need reliable connectivity, stronger organization, and a network built to support daily business operations."
       heroImage="/images/services/small-business-network-nyc.webp"
       heroImageAlt="Small business network setup in NYC"
+      ogImage="/images/services/small-business-network-nyc.webp"
+      twitterImage="/images/services/small-business-network-nyc.webp"
       includeTitle="What’s Included"
       includeDescription="Everything needed to build a reliable, organized, and business-ready network for small businesses that need their internet, Wi-Fi, and devices to work without constant issues."
       serviceIncludes={[

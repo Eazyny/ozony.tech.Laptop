@@ -18,7 +18,9 @@ const NetworkServicesNearMe = () => {
       title="Network Services Near Me for Small Businesses"
       description="Ozony Tech provides practical network services for small businesses looking for reliable local help with Wi-Fi, connectivity, firewall setup, troubleshooting, and the network issues that interrupt daily operations."
       heroImage="/images/services/network-setup-nyc.webp"
-      heroImageAlt="Local network services for small businesses"
+      heroImageAlt="Local network services for small businesses"    
+      ogImage="/service_area_map.png"
+      twitterImage="/service_area_map.png"
       includeTitle="What’s Included"
       includeDescription="Practical network services for businesses that need stronger connectivity, cleaner structure, better wireless performance, and more reliable day-to-day operation."
       serviceIncludes={[

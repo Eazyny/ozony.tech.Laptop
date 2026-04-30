@@ -18,7 +18,9 @@ const NetworkTroubleshootingNYC = () => {
       title="Network Troubleshooting in NYC for Small Businesses"
       description="Ozony Tech provides network troubleshooting in NYC for small businesses dealing with slow internet, Wi-Fi issues, dropped connections, and network problems that interrupt daily operations."
       heroImage="/images/services/network-troubleshooting-nyc.webp"
-      heroImageAlt="Network troubleshooting services in NYC for small businesses"
+      heroImageAlt="Network troubleshooting services in NYC for small businesses"     
+      ogImage="/images/services/network-troubleshooting-nyc.webp"
+      twitterImage="/images/services/network-troubleshooting-nyc.webp"
       includeTitle="What’s Included"
       includeDescription="Practical troubleshooting to identify, fix, and stabilize the network issues that slow your business down."
       serviceIncludes={[

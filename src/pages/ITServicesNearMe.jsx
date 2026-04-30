@@ -12,6 +12,8 @@ const ITServicesNearMe = () => {
       description="Ozony Tech provides practical IT services for small businesses looking for reliable local help with devices, connectivity, troubleshooting, Wi-Fi issues, and everyday technology problems that slow work down."
       heroImage="/images/services/it-support-nyc.webp"
       heroImageAlt="Local IT services for small businesses"
+      ogImage="/service_area_map.png"
+      twitterImage="/service_area_map.png"
       includeTitle="What’s Included"
       includeDescription="Straightforward IT help for the day-to-day technology issues that interrupt operations, waste time, and create unnecessary frustration."
       serviceIncludes={[

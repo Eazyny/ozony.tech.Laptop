@@ -20,6 +20,8 @@ const BusinessWifiConnecticut = () => {
       heroImage="/images/services/business-wifi-nyc.webp"
       heroImageAlt="Business Wi-Fi installation in Connecticut for small businesses"
       includeTitle="What’s Included"
+      ogImage="/images/services/business-wifi-nyc.webp"
+      twitterImage="/images/services/business-wifi-nyc.webp"
       includeDescription="Everything needed to build a stronger, more reliable wireless setup for your business without the signal issues, dead zones, and inconsistent performance."
       serviceIncludes={[
         'Business Wi-Fi design and installation',

@@ -19,6 +19,8 @@ const ITSolutions = () => {
       description="Ozony Tech provides practical IT solutions for small businesses that need reliable technology, stronger connectivity, cleaner network structure, and dependable support for day-to-day operations."
       heroImage="/images/services/it-support-nyc.webp"
       heroImageAlt="IT solutions for small businesses"
+      ogImage="/service_area_map.png"
+      twitterImage="/service_area_map.png"
       includeTitle="What’s Included"
       includeDescription="Practical technology solutions built around the real issues small businesses deal with every day, from unreliable Wi-Fi to device problems and network headaches."
       serviceIncludes={[

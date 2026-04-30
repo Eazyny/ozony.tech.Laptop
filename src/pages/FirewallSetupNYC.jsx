@@ -13,6 +13,8 @@ const FirewallSetupNYC = () => {
       heroImage="/images/services/firewall-setup-nyc.webp"
       heroImageAlt="Business firewall setup in NYC for small businesses"
       includeTitle="What’s Included"
+      ogImage="/images/services/firewall-setup-nyc.webp"
+      twitterImage="/images/services/firewall-setup-nyc.webp"
       includeDescription="Practical firewall setup and network protection built around the day-to-day needs of small businesses that want stronger security without unnecessary complexity."
       serviceIncludes={[
         'Business firewall setup and configuration',

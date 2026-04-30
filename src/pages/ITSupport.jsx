@@ -12,6 +12,8 @@ const ITSupport = () => {
       description="Ozony Tech provides practical IT support for small businesses that need reliable help with devices, connectivity, troubleshooting, Wi-Fi issues, and the everyday technology problems that slow work down."
       heroImage="/images/services/it-support-nyc.webp"
       heroImageAlt="IT support for small businesses"
+      ogImage="/images/services/it-support-nyc.webp"
+      twitterImage="/images/services/it-support-nyc.webp"
       includeTitle="What’s Included"
       includeDescription="Straightforward support for the business tech issues that interrupt operations, waste time, and create unnecessary frustration."
       serviceIncludes={[

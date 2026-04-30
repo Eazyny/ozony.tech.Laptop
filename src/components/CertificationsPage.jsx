@@ -96,6 +96,9 @@ const Credentials = () => {
     'Verified Google Training',
   ];
 
+  const canonicalUrl = 'https://ozony.tech/certifications';
+  const ogImage = 'https://ozony.tech/images/credentials/GoogleITSupportCert.webp';
+
   return (
     <>
       <Helmet>
@@ -104,6 +107,46 @@ const Credentials = () => {
           name="description"
           content="Explore Ozony Tech certifications and verified Google IT training in IT support, networking, operating systems, system administration, and security."
         />
+        <meta
+          name="robots"
+          content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1"
+        />
+        <link rel="canonical" href={canonicalUrl} />
+
+        <meta property="og:title" content="Ozony Tech Certifications | Verified IT Training & Credentials" />
+        <meta
+          property="og:description"
+          content="View Ozony Tech’s verified Google IT training credentials across support, networking, systems, and security."
+        />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content={canonicalUrl} />
+        <meta property="og:site_name" content="Ozony Tech" />
+        <meta property="og:image" content={ogImage} />
+        <meta property="og:image:alt" content="Google IT Support Professional Certificate credential preview" />
+
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Ozony Tech Certifications | Verified IT Training & Credentials" />
+        <meta
+          name="twitter:description"
+          content="Explore verified Google IT credentials behind Ozony Tech’s support, networking, systems, and security services."
+        />
+        <meta name="twitter:image" content={ogImage} />
+
+        <script type="application/ld+json">
+          {JSON.stringify({
+            '@context': 'https://schema.org',
+            '@type': 'EducationalOccupationalCredential',
+            name: 'Google IT Support Professional Certificate',
+            credentialCategory: 'Professional Certificate',
+            recognizedBy: {
+              '@type': 'Organization',
+              name: 'Google',
+            },
+            url: 'https://coursera.org/verify/professional-cert/2FLTPOHX1URJ',
+            description:
+              'Professional certificate covering IT support, networking, operating systems, system administration, and security.',
+          })}
+        </script>
       </Helmet>
 
       <div className="min-h-screen app-bg">

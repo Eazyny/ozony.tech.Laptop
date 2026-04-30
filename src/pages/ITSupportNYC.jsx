@@ -13,6 +13,8 @@ const ITSupportNYC = () => {
       heroImage="/images/services/it-support-nyc.webp"
       heroImageAlt="Small business IT support in NYC for growing teams"
       includeTitle="What’s Included"
+      ogImage="/images/services/it-support-nyc.webp"
+      twitterImage="/images/services/it-support-nyc.webp"
       includeDescription="Straightforward support for the business tech issues that disrupt daily operations, waste time, and create unnecessary frustration."
       serviceIncludes={[
         'Device and workstation setup and support',

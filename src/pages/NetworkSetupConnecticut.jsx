@@ -19,6 +19,8 @@ const NetworkSetupConnecticut = () => {
       description="Ozony Tech provides business network setup in Connecticut for small businesses that need reliable Wi-Fi, organized connectivity, secure network structure, and a setup built to support daily business operations."
       heroImage="/images/services/network-setup-nyc.webp"
       heroImageAlt="Business network setup in Connecticut for small businesses"
+      ogImage="/images/services/network-setup-nyc.webp"
+      twitterImage="/images/services/network-setup-nyc.webp"
       includeTitle="What’s Included"
       includeDescription="Everything needed to build a reliable, organized, and business-ready network environment without the clutter, confusion, or day-to-day connectivity issues that slow work down."
       serviceIncludes={[
