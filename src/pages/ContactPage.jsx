@@ -163,6 +163,14 @@ const ContactPage = () => {
         <meta property="og:url" content="https://ozony.tech/contactpage" />
         <meta property="og:type" content="website" />
 
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Contact Ozony Tech | IT & Network Support" />
+        <meta
+          name="twitter:description"
+          content="Need help with business Wi-Fi, network setup, firewall configuration, or IT support? Contact Ozony Tech today."
+        />
+        <meta name="twitter:image" content="https://ozony.tech/service_area_map.png" />
+
         <script type="application/ld+json">
           {JSON.stringify({
             '@context': 'https://schema.org',
