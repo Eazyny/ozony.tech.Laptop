@@ -9,7 +9,7 @@ import Hero from '@/components/Hero';
 import Services from '@/components/Services';
 import Credentials from '@/components/Credentials';
 import About from '@/components/About';
-import Faq from './components/faq';
+import Faq from '@/components/Faq';
 import Contact from '@/components/Contact';
 import Footer from '@/components/Footer';
 import ContactPage from '@/pages/ContactPage';
@@ -61,6 +61,7 @@ const HomePage = () => {
           name="description"
           content="Ozony Tech provides practical IT and network solutions for small businesses, including Wi-Fi setup, networking, device support, troubleshooting, and business IT services."
         />
+        <link rel="canonical" href="https://ozony.tech/" />
       </Helmet>
 
       <div className="min-h-screen app-bg">
@@ -199,7 +200,7 @@ function App() {
           <Route path="/managed-it-services" element={<ManagedITServices />} />
           <Route path="/it-support" element={<ITSupport />} />
           <Route path="/it-solutions" element={<ITSolutions />} />
-          <Route path="/contactPage" element={<ContactPage />} />
+          <Route path="/contactpage" element={<ContactPage />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </Suspense>

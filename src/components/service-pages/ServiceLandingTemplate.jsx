@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import { Helmet } from 'react-helmet';
 import { Link, useLocation } from 'react-router-dom';
 import { AnimatePresence, motion } from 'framer-motion';
@@ -100,6 +100,13 @@ const normalizePathname = (pathname) => {
   return pathname;
 };
 
+const absoluteUrl = (value) => {
+  if (!value) return '';
+  if (value.startsWith('http://') || value.startsWith('https://')) return value;
+  if (value.startsWith('/')) return `${SITE_URL}${value}`;
+  return `${SITE_URL}/${value}`;
+};
+
 const ServiceLandingTemplate = ({
   pageTitle = 'Network Setup Services in NYC | Ozony Tech',
   pageDescription = 'Professional network setup services in NYC for small businesses that need reliable, secure, and scalable connectivity.',
@@ -153,17 +160,59 @@ const ServiceLandingTemplate = ({
   midCtaDescription = 'Get a clean, reliable solution built for your business without unnecessary complexity or guesswork.',
   finalTitle = 'Ready to Improve Your Business Network?',
   finalDescription = 'Whether you need a fresh install, stronger Wi-Fi, or a cleaner setup for your business, Ozony Tech can help you move forward with confidence.',
+  ogImage = '/service_area_map.png',
+  twitterImage = '/service_area_map.png',
+  ogType = 'website',
 }) => {
   const [showBackToTop, setShowBackToTop] = useState(false);
   const location = useLocation();
 
   const normalizedPathname = normalizePathname(location.pathname);
   const canonicalUrl = `${SITE_URL}${normalizedPathname}`;
+  const ogImageUrl = absoluteUrl(ogImage || heroImage);
+  const twitterImageUrl = absoluteUrl(twitterImage || ogImage || heroImage);
 
   const relatedServicesToRender =
     relatedServices && relatedServices.length > 0
       ? relatedServices
       : ALL_SERVICE_LINKS.filter((service) => service.to !== normalizedPathname);
+
+  const faqSchema = useMemo(
+    () => ({
+      '@context': 'https://schema.org',
+      '@type': 'FAQPage',
+      mainEntity: faqItems.map((item) => ({
+        '@type': 'Question',
+        name: item.question,
+        acceptedAnswer: {
+          '@type': 'Answer',
+          text: item.answer,
+        },
+      })),
+    }),
+    [faqItems]
+  );
+
+  const serviceSchema = useMemo(
+    () => ({
+      '@context': 'https://schema.org',
+      '@type': 'Service',
+      serviceType: title,
+      name: pageTitle,
+      description: pageDescription,
+      provider: {
+        '@type': 'ProfessionalService',
+        name: 'Ozony Tech',
+        url: SITE_URL,
+        email: 'contact@ozony.tech',
+        telephone: '+1-347-653-7655',
+      },
+      areaServed: areasServed,
+      url: canonicalUrl,
+      image: ogImageUrl,
+    }),
+    [title, pageTitle, pageDescription, areasServed, canonicalUrl, ogImageUrl]
+  );
 
   useEffect(() => {
     const handleScroll = () => {
@@ -185,7 +234,33 @@ const ServiceLandingTemplate = ({
       <Helmet>
         <title>{pageTitle}</title>
         <meta name="description" content={pageDescription} />
+        <meta
+          name="robots"
+          content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1"
+        />
         <link rel="canonical" href={canonicalUrl} />
+
+        <meta property="og:title" content={pageTitle} />
+        <meta property="og:description" content={pageDescription} />
+        <meta property="og:type" content={ogType} />
+        <meta property="og:url" content={canonicalUrl} />
+        <meta property="og:site_name" content="Ozony Tech" />
+        <meta property="og:image" content={ogImageUrl} />
+        <meta property="og:image:alt" content={heroImageAlt} />
+
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content={pageTitle} />
+        <meta name="twitter:description" content={pageDescription} />
+        <meta name="twitter:image" content={twitterImageUrl} />
+
+        <script type="application/ld+json">
+          {JSON.stringify(serviceSchema)}
+        </script>
+        {faqItems.length > 0 && (
+          <script type="application/ld+json">
+            {JSON.stringify(faqSchema)}
+          </script>
+        )}
       </Helmet>
 
       <div className="min-h-screen app-bg text-white">
