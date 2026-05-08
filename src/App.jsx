@@ -61,7 +61,48 @@ const HomePage = () => {
           name="description"
           content="Ozony Tech provides practical IT and network solutions for small businesses, including Wi-Fi setup, networking, device support, troubleshooting, and business IT services."
         />
+
         <link rel="canonical" href="https://ozony.tech/" />
+
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://ozony.tech/" />
+        <meta
+          property="og:title"
+          content="Ozony Tech | IT & Network Solutions for Small Businesses"
+        />
+        <meta
+          property="og:description"
+          content="Practical IT, Wi-Fi, networking, and website solutions for small businesses in NYC, NJ, and CT."
+        />
+        <meta
+          property="og:image"
+          content="https://ozony.tech/images/ozony-og-preview.png"
+        />
+        <meta
+          property="og:image:secure_url"
+          content="https://ozony.tech/images/ozony-og-preview.png"
+        />
+        <meta property="og:image:type" content="image/png" />
+        <meta property="og:image:width" content="1200" />
+        <meta property="og:image:height" content="630" />
+        <meta
+          property="og:image:alt"
+          content="Ozony Tech IT and network solutions for small businesses"
+        />
+
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta
+          name="twitter:title"
+          content="Ozony Tech | IT & Network Solutions for Small Businesses"
+        />
+        <meta
+          name="twitter:description"
+          content="Practical IT, Wi-Fi, networking, and website solutions for small businesses in NYC, NJ, and CT."
+        />
+        <meta
+          name="twitter:image"
+          content="https://ozony.tech/images/ozony-og-preview.png"
+        />
       </Helmet>
 
       <div className="min-h-screen app-bg">
