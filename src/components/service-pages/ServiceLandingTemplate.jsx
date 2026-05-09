@@ -214,6 +214,34 @@ const ServiceLandingTemplate = ({
     [title, pageTitle, pageDescription, areasServed, canonicalUrl, ogImageUrl]
   );
 
+  const breadcrumbSchema = useMemo(
+    () => ({
+      '@context': 'https://schema.org',
+      '@type': 'BreadcrumbList',
+      itemListElement: [
+        {
+          '@type': 'ListItem',
+          position: 1,
+          name: 'Home',
+          item: SITE_URL,
+        },
+        {
+          '@type': 'ListItem',
+          position: 2,
+          name: 'Services',
+          item: `${SITE_URL}/#services`,
+        },
+        {
+          '@type': 'ListItem',
+          position: 3,
+          name: title,
+          item: canonicalUrl,
+        },
+      ],
+    }),
+    [title, canonicalUrl]
+  );
+
   useEffect(() => {
     const handleScroll = () => {
       setShowBackToTop(window.scrollY > 500);
@@ -255,6 +283,9 @@ const ServiceLandingTemplate = ({
 
         <script type="application/ld+json">
           {JSON.stringify(serviceSchema)}
+        </script>
+        <script type="application/ld+json">
+          {JSON.stringify(breadcrumbSchema)}
         </script>
         {faqItems.length > 0 && (
           <script type="application/ld+json">

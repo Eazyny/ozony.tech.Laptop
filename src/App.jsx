@@ -103,6 +103,32 @@ const HomePage = () => {
           name="twitter:image"
           content="https://ozony.tech/images/ozony-og-preview.png"
         />
+
+        <script type="application/ld+json">
+          {JSON.stringify({
+            '@context': 'https://schema.org',
+            '@type': 'ProfessionalService',
+            name: 'Ozony Tech',
+            url: 'https://ozony.tech',
+            email: 'contact@ozony.tech',
+            telephone: '+1-347-653-7655',
+            image: 'https://ozony.tech/images/ozony-og-preview.png',
+            areaServed: ['New York City', 'New Jersey', 'Connecticut'],
+            serviceType: [
+              'IT Support',
+              'Network Setup',
+              'Business Wi-Fi',
+              'Firewall Setup',
+              'Managed IT Services',
+              'Website Services',
+            ],
+            sameAs: [
+              'https://x.com/ozonytech',
+              'https://github.com/eazyny',
+              'https://linkedin.com/in/ozony-elsevif',
+            ],
+          })}
+        </script>
       </Helmet>
 
       <div className="min-h-screen app-bg">
