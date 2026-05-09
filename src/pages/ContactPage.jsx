@@ -154,6 +154,10 @@ const ContactPage = () => {
           content="Contact Ozony Tech for small business IT support, network setup, business Wi-Fi, firewall setup, and managed IT services in NYC, New Jersey, and Connecticut."
         />
         <link rel="canonical" href="https://ozony.tech/contactpage" />
+        <meta
+          name="robots"
+          content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1"
+        />
 
         <meta property="og:title" content="Contact Ozony Tech | IT & Network Support" />
         <meta
@@ -162,6 +166,12 @@ const ContactPage = () => {
         />
         <meta property="og:url" content="https://ozony.tech/contactpage" />
         <meta property="og:type" content="website" />
+        <meta property="og:site_name" content="Ozony Tech" />
+        <meta property="og:image" content="https://ozony.tech/images/ozony-og-preview.png" />
+        <meta
+          property="og:image:alt"
+          content="Contact Ozony Tech for IT and network support"
+        />
 
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content="Contact Ozony Tech | IT & Network Support" />
@@ -169,7 +179,7 @@ const ContactPage = () => {
           name="twitter:description"
           content="Need help with business Wi-Fi, network setup, firewall configuration, or IT support? Contact Ozony Tech today."
         />
-        <meta name="twitter:image" content="https://ozony.tech/service_area_map.png" />
+        <meta name="twitter:image" content="https://ozony.tech/images/ozony-og-preview.png" />
 
         <script type="application/ld+json">
           {JSON.stringify({
@@ -178,6 +188,8 @@ const ContactPage = () => {
             name: 'Ozony Tech',
             url: 'https://ozony.tech',
             email: 'contact@ozony.tech',
+            telephone: '+1-347-653-7655',
+            image: 'https://ozony.tech/images/ozony-og-preview.png',
             areaServed: ['New York City', 'New Jersey', 'Connecticut'],
             serviceType: [
               'IT Support',

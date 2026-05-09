@@ -187,7 +187,7 @@ const Footer = () => {
                   </a>
 
                   <a
-                    href="tel:+13476547655"
+                    href="tel:+13476537655"
                     className="text-[15px] text-gray-400 transition-colors hover:text-white"
                   >
                     347 653 7655
@@ -195,7 +195,7 @@ const Footer = () => {
 
                   <button
                     type="button"
-                    onClick={() => navigate('/ContactPage')}
+                    onClick={() => navigate('/contactpage')}
                     className="inline-flex w-fit items-center rounded-full border border-slate-800 bg-slate-950/40 px-4 py-2 text-sm text-gray-400 transition-all hover:border-slate-700 hover:text-white"
                   >
                     Get a Quote
