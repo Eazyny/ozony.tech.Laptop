@@ -13,6 +13,7 @@ import Faq from '@/components/Faq';
 import Contact from '@/components/Contact';
 import Footer from '@/components/Footer';
 import ContactPage from '@/pages/ContactPage';
+import LaptopIntro from '@/components/LaptopIntro';
 
 const PackagesPage = lazy(() => import('@/components/PackagesPage'));
 const CertificationsPage = lazy(() => import('@/components/CertificationsPage'));
@@ -169,6 +170,16 @@ const HomePage = () => {
   );
 };
 
+const GatedHomePage = () => {
+  const [introComplete, setIntroComplete] = useState(false);
+
+  if (!introComplete) {
+    return <LaptopIntro onEnter={() => setIntroComplete(true)} />;
+  }
+
+  return <HomePage />;
+};
+
 const ScrollManager = () => {
   const location = useLocation();
 
@@ -226,7 +237,7 @@ function App() {
 
       <Suspense fallback={<RouteLoader />}>
         <Routes>
-          <Route path="/" element={<HomePage />} />
+          <Route path="/" element={<GatedHomePage />} />
           <Route path="/packages" element={<PackagesPage />} />
           <Route path="/certifications" element={<CertificationsPage />} />
           <Route path="/network-setup-nyc" element={<NetworkSetupNYC />} />
