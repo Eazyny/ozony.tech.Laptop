@@ -13,6 +13,34 @@ const BOOT_LINES = [
   'System ready.',
 ];
 
+function getLaptopMode() {
+  if (typeof window === 'undefined') return 'desktop';
+
+  const width = window.innerWidth;
+
+  if (width < 768) return 'mobile';
+  if (width < 1024) return 'tablet';
+
+  return 'desktop';
+}
+
+function useLaptopMode() {
+  const [mode, setMode] = useState(() => getLaptopMode());
+
+  useEffect(() => {
+    const handleResize = () => {
+      setMode(getLaptopMode());
+    };
+
+    window.addEventListener('resize', handleResize);
+    handleResize();
+
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
+  return mode;
+}
+
 function drawBootScreen(ctx, elapsed) {
   const width = ctx.canvas.width;
   const height = ctx.canvas.height;
@@ -120,7 +148,7 @@ function drawBootScreen(ctx, elapsed) {
   ctx.restore();
 }
 
-function CameraRig({ zoomToScreen }) {
+function CameraRig({ zoomToScreen, mode }) {
   const lookAtTarget = useRef(new THREE.Vector3(0, 0, 0));
 
   useFrame(({ camera, size }) => {
@@ -130,32 +158,47 @@ function CameraRig({ zoomToScreen }) {
     let zoomLookAt = new THREE.Vector3(0, 0.42, 0);
     let targetFov = 34;
 
-    // Narrower screens need the camera pulled back so the laptop screen
-    // does not get cut off.
-    if (aspect < 1.05) {
-      zoomPosition = new THREE.Vector3(0, 0.5, 4.55);
+    if (mode === 'tablet') {
+      zoomPosition = new THREE.Vector3(0, 0.55, 4.15);
       zoomLookAt = new THREE.Vector3(0, 0.48, 0);
-      targetFov = 38;
-    } else if (aspect < 1.3) {
-      zoomPosition = new THREE.Vector3(0, 0.48, 4.05);
-      zoomLookAt = new THREE.Vector3(0, 0.46, 0);
-      targetFov = 36;
-    } else if (aspect > 2.05) {
-      // Wider screens can come in slightly closer to reduce side gaps.
-      zoomPosition = new THREE.Vector3(0, 0.38, 3.05);
-      zoomLookAt = new THREE.Vector3(0, 0.4, 0);
-      targetFov = 33;
+      targetFov = 37;
+    }
+
+    if (mode === 'mobile') {
+      zoomPosition = new THREE.Vector3(0, 0.72, 5.25);
+      zoomLookAt = new THREE.Vector3(0, 0.45, 0);
+      targetFov = 42;
+    }
+
+    if (mode === 'desktop') {
+      if (aspect > 2.05) {
+        zoomPosition = new THREE.Vector3(0, 0.38, 3.1);
+        zoomLookAt = new THREE.Vector3(0, 0.4, 0);
+        targetFov = 33;
+      }
+
+      if (aspect < 1.3) {
+        zoomPosition = new THREE.Vector3(0, 0.48, 3.9);
+        zoomLookAt = new THREE.Vector3(0, 0.46, 0);
+        targetFov = 36;
+      }
     }
 
     const targetPosition = zoomToScreen
       ? zoomPosition
-      : new THREE.Vector3(0, 1.15, 8.2);
+      : mode === 'mobile'
+        ? new THREE.Vector3(0, 1.1, 9.2)
+        : new THREE.Vector3(0, 1.15, 8.2);
 
     const targetLookAt = zoomToScreen
       ? zoomLookAt
       : new THREE.Vector3(0, 0, 0);
 
-    const nextFov = zoomToScreen ? targetFov : 34;
+    const nextFov = zoomToScreen
+      ? targetFov
+      : mode === 'mobile'
+        ? 40
+        : 34;
 
     camera.position.lerp(targetPosition, 0.045);
     camera.fov = THREE.MathUtils.lerp(camera.fov, nextFov, 0.045);
@@ -266,17 +309,17 @@ function getProjectedScreenShape(screenMesh, camera, canvasRect) {
   };
 }
 
-function WebsiteOnProjectedScreen({ visible, zoomed, screenShape }) {
+function WebsiteOnProjectedScreen({ visible, zoomed, screenShape, mode }) {
   const iframeRef = useRef(null);
 
-  if (!screenShape?.rect) return null;
+  if (!screenShape?.rect || mode === 'mobile') return null;
 
-  const WEBSITE_WIDTH = 1600;
+  const WEBSITE_WIDTH = mode === 'tablet' ? 1440 : 1600;
   const WEBSITE_HEIGHT = 900;
 
-  const SCREEN_INSET_X = 8;
-  const SCREEN_INSET_TOP = 8;
-  const SCREEN_INSET_BOTTOM = 10;
+  const SCREEN_INSET_X = mode === 'tablet' ? 6 : 8;
+  const SCREEN_INSET_TOP = mode === 'tablet' ? 6 : 8;
+  const SCREEN_INSET_BOTTOM = mode === 'tablet' ? 8 : 10;
 
   const rect = screenShape.rect;
 
@@ -287,9 +330,6 @@ function WebsiteOnProjectedScreen({ visible, zoomed, screenShape }) {
     height: rect.height - SCREEN_INSET_TOP - SCREEN_INSET_BOTTOM,
   };
 
-  // Cover scale:
-  // - small viewport: fills the whole laptop screen without bottom cutoff
-  // - large viewport: fills the sides without gaps
   const scale = Math.max(
     fittedRect.width / WEBSITE_WIDTH,
     fittedRect.height / WEBSITE_HEIGHT
@@ -320,7 +360,12 @@ function WebsiteOnProjectedScreen({ visible, zoomed, screenShape }) {
 
       if (!doc) return;
 
+      const existingStyle = doc.getElementById('laptop-screen-iframe-styles');
+
+      if (existingStyle) return;
+
       const style = doc.createElement('style');
+      style.id = 'laptop-screen-iframe-styles';
 
       style.innerHTML = `
         html,
@@ -567,12 +612,15 @@ function LaptopModel({
   );
 }
 
-export default function LaptopIntro() {
+export default function LaptopIntro({ onEnter }) {
+  const mode = useLaptopMode();
+
   const [startOpen, setStartOpen] = useState(false);
   const [isEntering, setIsEntering] = useState(false);
   const [screenBoot, setScreenBoot] = useState(false);
   const [websiteVisible, setWebsiteVisible] = useState(false);
   const [zoomToScreen, setZoomToScreen] = useState(false);
+  const [fadeIntro, setFadeIntro] = useState(false);
   const [screenShape, setScreenShape] = useState(null);
 
   useEffect(() => {
@@ -594,17 +642,37 @@ export default function LaptopIntro() {
   const handleOpened = () => {
     setScreenBoot(true);
 
+    if (mode === 'mobile') {
+      setTimeout(() => {
+        setZoomToScreen(true);
+      }, 2600);
+
+      setTimeout(() => {
+        setFadeIntro(true);
+      }, 3600);
+
+      setTimeout(() => {
+        onEnter?.();
+      }, 4300);
+
+      return;
+    }
+
     setTimeout(() => {
       setWebsiteVisible(true);
     }, 3000);
 
     setTimeout(() => {
       setZoomToScreen(true);
-    }, 3900);
+    }, mode === 'tablet' ? 4300 : 3900);
   };
 
   return (
-    <section className="relative min-h-screen w-full overflow-hidden bg-[#020617] text-white">
+    <section
+      className={`relative min-h-screen w-full overflow-hidden bg-[#020617] text-white transition-opacity duration-700 ${
+        fadeIntro ? 'opacity-0' : 'opacity-100'
+      }`}
+    >
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(56,189,248,0.18),transparent_42%),radial-gradient(circle_at_top,rgba(37,99,235,0.18),transparent_38%)]" />
 
       <div className="absolute inset-0 opacity-30">
@@ -614,7 +682,7 @@ export default function LaptopIntro() {
       <div className="absolute inset-0 z-0">
         <Canvas camera={{ position: [0, 1.15, 8.2], fov: 34 }}>
           <Suspense fallback={null}>
-            <CameraRig zoomToScreen={zoomToScreen} />
+            <CameraRig zoomToScreen={zoomToScreen} mode={mode} />
 
             <ambientLight intensity={1.25} />
             <directionalLight position={[3, 5, 4]} intensity={2.2} />
@@ -636,6 +704,7 @@ export default function LaptopIntro() {
         visible={websiteVisible}
         zoomed={zoomToScreen}
         screenShape={screenShape}
+        mode={mode}
       />
 
       <div className="pointer-events-none relative z-10 flex min-h-screen flex-col items-center justify-between px-6 py-10 text-center">
@@ -680,7 +749,9 @@ export default function LaptopIntro() {
           </button>
 
           <p className="mt-5 text-xs uppercase tracking-[0.3em] text-slate-500">
-            Secure workspace ready
+            {mode === 'mobile'
+              ? 'Mobile workspace will open after boot'
+              : 'Secure workspace ready'}
           </p>
         </div>
       </div>

@@ -171,15 +171,17 @@ const HomePage = () => {
 };
 
 const GatedHomePage = () => {
+  const [introComplete, setIntroComplete] = useState(false);
+
   const isLaptopScreenMode =
     window.self !== window.top ||
     new URLSearchParams(window.location.search).get('screen') === '1';
 
-  if (isLaptopScreenMode) {
+  if (isLaptopScreenMode || introComplete) {
     return <HomePage />;
   }
 
-  return <LaptopIntro />;
+  return <LaptopIntro onEnter={() => setIntroComplete(true)} />;
 };
 
 const ScrollManager = () => {
