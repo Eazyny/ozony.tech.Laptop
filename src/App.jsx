@@ -171,7 +171,15 @@ const HomePage = () => {
 };
 
 const GatedHomePage = () => {
-  return <LaptopIntro screenContent={<HomePage />} />;
+  const isLaptopScreenMode =
+    window.self !== window.top ||
+    new URLSearchParams(window.location.search).get('screen') === '1';
+
+  if (isLaptopScreenMode) {
+    return <HomePage />;
+  }
+
+  return <LaptopIntro />;
 };
 
 const ScrollManager = () => {

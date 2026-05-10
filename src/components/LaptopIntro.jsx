@@ -61,7 +61,11 @@ function drawBootScreen(ctx, elapsed) {
     ctx.font = '18px monospace';
 
     ctx.fillStyle = isComplete ? '#7dd3fc' : '#e2e8f0';
-    ctx.fillText(isComplete ? '[OK]' : '[..]', left, linesTop + index * lineHeight);
+    ctx.fillText(
+      isComplete ? '[OK]' : '[..]',
+      left,
+      linesTop + index * lineHeight
+    );
 
     ctx.fillStyle = isComplete
       ? 'rgba(226, 232, 240, 0.9)'
@@ -121,11 +125,11 @@ function CameraRig({ zoomToScreen }) {
 
   useFrame(({ camera }) => {
     const targetPosition = zoomToScreen
-      ? new THREE.Vector3(0, 0.72, 3.05)
+      ? new THREE.Vector3(0, 0.42, 3.35)
       : new THREE.Vector3(0, 1.15, 8.2);
 
     const targetLookAt = zoomToScreen
-      ? new THREE.Vector3(0, 0.46, 0)
+      ? new THREE.Vector3(0, 0.42, 0)
       : new THREE.Vector3(0, 0, 0);
 
     camera.position.lerp(targetPosition, 0.045);
@@ -156,20 +160,30 @@ function getConvexHull(points) {
   });
 
   const lower = [];
+
   for (const point of sorted) {
-    while (lower.length >= 2 && cross(lower[lower.length - 2], lower[lower.length - 1], point) <= 0) {
+    while (
+      lower.length >= 2 &&
+      cross(lower[lower.length - 2], lower[lower.length - 1], point) <= 0
+    ) {
       lower.pop();
     }
+
     lower.push(point);
   }
 
   const upper = [];
+
   for (let i = sorted.length - 1; i >= 0; i -= 1) {
     const point = sorted[i];
 
-    while (upper.length >= 2 && cross(upper[upper.length - 2], upper[upper.length - 1], point) <= 0) {
+    while (
+      upper.length >= 2 &&
+      cross(upper[upper.length - 2], upper[upper.length - 1], point) <= 0
+    ) {
       upper.pop();
     }
+
     upper.push(point);
   }
 
@@ -224,7 +238,7 @@ function getProjectedScreenShape(screenMesh, camera, canvasRect) {
   };
 }
 
-function WebsiteOnProjectedScreen({ visible, zoomed, screenShape, children }) {
+function WebsiteOnProjectedScreen({ visible, zoomed, screenShape }) {
   if (!screenShape?.rect) return null;
 
   const WEBSITE_WIDTH = 1600;
@@ -243,8 +257,6 @@ function WebsiteOnProjectedScreen({ visible, zoomed, screenShape, children }) {
     height: rect.height - SCREEN_INSET_TOP - SCREEN_INSET_BOTTOM,
   };
 
-  const scale = fittedRect.width / WEBSITE_WIDTH;
-
   const clipPolygon = screenShape.polygon
     .map((point) => {
       const x = point.x - SCREEN_INSET_X;
@@ -258,19 +270,28 @@ function WebsiteOnProjectedScreen({ visible, zoomed, screenShape, children }) {
     <>
       <style>
         {`
-          .laptop-screen-webview {
+          .laptop-screen-browser {
             scrollbar-width: none;
             -ms-overflow-style: none;
           }
 
-          .laptop-screen-webview::-webkit-scrollbar {
+          .laptop-screen-browser::-webkit-scrollbar {
+            display: none;
+          }
+
+          .laptop-screen-browser iframe {
+            scrollbar-width: none;
+            -ms-overflow-style: none;
+          }
+
+          .laptop-screen-browser iframe::-webkit-scrollbar {
             display: none;
           }
         `}
       </style>
 
       <div
-        className={`laptop-screen-webview absolute z-20 bg-[#020617] transition-opacity duration-700 ${
+        className={`laptop-screen-browser absolute z-20 bg-[#020617] transition-opacity duration-700 ${
           visible ? 'opacity-100' : 'opacity-0'
         }`}
         style={{
@@ -279,8 +300,7 @@ function WebsiteOnProjectedScreen({ visible, zoomed, screenShape, children }) {
           width: `${fittedRect.width}px`,
           height: `${fittedRect.height}px`,
           pointerEvents: zoomed ? 'auto' : 'none',
-          overflowY: zoomed ? 'auto' : 'hidden',
-          overflowX: 'hidden',
+          overflow: 'hidden',
           borderRadius: zoomed ? '8px' : '3px',
           clipPath: `polygon(${clipPolygon})`,
           boxShadow: zoomed
@@ -288,16 +308,19 @@ function WebsiteOnProjectedScreen({ visible, zoomed, screenShape, children }) {
             : '0 0 20px rgba(56, 189, 248, 0.12)',
         }}
       >
-        <div
+        <iframe
+          title="Ozony Tech Laptop Screen"
+          src="/?screen=1"
           style={{
             width: `${WEBSITE_WIDTH}px`,
-            minHeight: `${WEBSITE_HEIGHT}px`,
-            transform: `scale(${scale})`,
+            height: `${WEBSITE_HEIGHT}px`,
+            border: 0,
+            display: 'block',
+            background: '#020617',
+            transform: `scale(${fittedRect.width / WEBSITE_WIDTH})`,
             transformOrigin: 'top left',
           }}
-        >
-          {children}
-        </div>
+        />
       </div>
     </>
   );
@@ -379,7 +402,9 @@ function LaptopModel({
   }, [screenBoot]);
 
   useEffect(() => {
-    if (!websiteVisible || !screenMesh.current || hasClearedScreen.current) return;
+    if (!websiteVisible || !screenMesh.current || hasClearedScreen.current) {
+      return;
+    }
 
     hasClearedScreen.current = true;
     bootTexture.current = null;
@@ -405,7 +430,11 @@ function LaptopModel({
     if (!screenMesh.current || !websiteVisible) return;
 
     const canvasRect = gl.domElement.getBoundingClientRect();
-    const nextShape = getProjectedScreenShape(screenMesh.current, camera, canvasRect);
+    const nextShape = getProjectedScreenShape(
+      screenMesh.current,
+      camera,
+      canvasRect
+    );
 
     const previous = lastShapeRef.current;
     const changed =
@@ -457,7 +486,7 @@ function LaptopModel({
   );
 }
 
-export default function LaptopIntro({ screenContent }) {
+export default function LaptopIntro() {
   const [startOpen, setStartOpen] = useState(false);
   const [isEntering, setIsEntering] = useState(false);
   const [screenBoot, setScreenBoot] = useState(false);
@@ -526,9 +555,7 @@ export default function LaptopIntro({ screenContent }) {
         visible={websiteVisible}
         zoomed={zoomToScreen}
         screenShape={screenShape}
-      >
-        {screenContent}
-      </WebsiteOnProjectedScreen>
+      />
 
       <div className="pointer-events-none relative z-10 flex min-h-screen flex-col items-center justify-between px-6 py-10 text-center">
         <div
