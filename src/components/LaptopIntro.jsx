@@ -123,16 +123,44 @@ function drawBootScreen(ctx, elapsed) {
 function CameraRig({ zoomToScreen }) {
   const lookAtTarget = useRef(new THREE.Vector3(0, 0, 0));
 
-  useFrame(({ camera }) => {
+  useFrame(({ camera, size }) => {
+    const aspect = size.width / Math.max(size.height, 1);
+
+    let zoomPosition = new THREE.Vector3(0, 0.42, 3.35);
+    let zoomLookAt = new THREE.Vector3(0, 0.42, 0);
+    let targetFov = 34;
+
+    // Narrower screens need the camera pulled back so the laptop screen
+    // does not get cut off.
+    if (aspect < 1.05) {
+      zoomPosition = new THREE.Vector3(0, 0.5, 4.55);
+      zoomLookAt = new THREE.Vector3(0, 0.48, 0);
+      targetFov = 38;
+    } else if (aspect < 1.3) {
+      zoomPosition = new THREE.Vector3(0, 0.48, 4.05);
+      zoomLookAt = new THREE.Vector3(0, 0.46, 0);
+      targetFov = 36;
+    } else if (aspect > 2.05) {
+      // Wider screens can come in slightly closer to reduce side gaps.
+      zoomPosition = new THREE.Vector3(0, 0.38, 3.05);
+      zoomLookAt = new THREE.Vector3(0, 0.4, 0);
+      targetFov = 33;
+    }
+
     const targetPosition = zoomToScreen
-      ? new THREE.Vector3(0, 0.42, 3.35)
+      ? zoomPosition
       : new THREE.Vector3(0, 1.15, 8.2);
 
     const targetLookAt = zoomToScreen
-      ? new THREE.Vector3(0, 0.42, 0)
+      ? zoomLookAt
       : new THREE.Vector3(0, 0, 0);
 
+    const nextFov = zoomToScreen ? targetFov : 34;
+
     camera.position.lerp(targetPosition, 0.045);
+    camera.fov = THREE.MathUtils.lerp(camera.fov, nextFov, 0.045);
+    camera.updateProjectionMatrix();
+
     lookAtTarget.current.lerp(targetLookAt, 0.055);
     camera.lookAt(lookAtTarget.current);
   });
@@ -239,6 +267,8 @@ function getProjectedScreenShape(screenMesh, camera, canvasRect) {
 }
 
 function WebsiteOnProjectedScreen({ visible, zoomed, screenShape }) {
+  const iframeRef = useRef(null);
+
   if (!screenShape?.rect) return null;
 
   const WEBSITE_WIDTH = 1600;
@@ -257,6 +287,20 @@ function WebsiteOnProjectedScreen({ visible, zoomed, screenShape }) {
     height: rect.height - SCREEN_INSET_TOP - SCREEN_INSET_BOTTOM,
   };
 
+  // Cover scale:
+  // - small viewport: fills the whole laptop screen without bottom cutoff
+  // - large viewport: fills the sides without gaps
+  const scale = Math.max(
+    fittedRect.width / WEBSITE_WIDTH,
+    fittedRect.height / WEBSITE_HEIGHT
+  );
+
+  const scaledWidth = WEBSITE_WIDTH * scale;
+  const scaledHeight = WEBSITE_HEIGHT * scale;
+
+  const offsetX = (fittedRect.width - scaledWidth) / 2;
+  const offsetY = (fittedRect.height - scaledHeight) / 2;
+
   const clipPolygon = screenShape.polygon
     .map((point) => {
       const x = point.x - SCREEN_INSET_X;
@@ -265,6 +309,41 @@ function WebsiteOnProjectedScreen({ visible, zoomed, screenShape }) {
       return `${x}px ${y}px`;
     })
     .join(', ');
+
+  const handleIframeLoad = () => {
+    const iframe = iframeRef.current;
+
+    if (!iframe) return;
+
+    try {
+      const doc = iframe.contentDocument;
+
+      if (!doc) return;
+
+      const style = doc.createElement('style');
+
+      style.innerHTML = `
+        html,
+        body {
+          scrollbar-width: none !important;
+          -ms-overflow-style: none !important;
+          background: #020617 !important;
+        }
+
+        html::-webkit-scrollbar,
+        body::-webkit-scrollbar,
+        *::-webkit-scrollbar {
+          width: 0 !important;
+          height: 0 !important;
+          display: none !important;
+        }
+      `;
+
+      doc.head.appendChild(style);
+    } catch (error) {
+      console.warn('Could not inject iframe scrollbar styles:', error);
+    }
+  };
 
   return (
     <>
@@ -276,15 +355,6 @@ function WebsiteOnProjectedScreen({ visible, zoomed, screenShape }) {
           }
 
           .laptop-screen-browser::-webkit-scrollbar {
-            display: none;
-          }
-
-          .laptop-screen-browser iframe {
-            scrollbar-width: none;
-            -ms-overflow-style: none;
-          }
-
-          .laptop-screen-browser iframe::-webkit-scrollbar {
             display: none;
           }
         `}
@@ -308,19 +378,30 @@ function WebsiteOnProjectedScreen({ visible, zoomed, screenShape }) {
             : '0 0 20px rgba(56, 189, 248, 0.12)',
         }}
       >
-        <iframe
-          title="Ozony Tech Laptop Screen"
-          src="/?screen=1"
+        <div
           style={{
-            width: `${WEBSITE_WIDTH}px`,
-            height: `${WEBSITE_HEIGHT}px`,
-            border: 0,
-            display: 'block',
-            background: '#020617',
-            transform: `scale(${fittedRect.width / WEBSITE_WIDTH})`,
+            width: `${scaledWidth}px`,
+            height: `${scaledHeight}px`,
+            transform: `translate(${offsetX}px, ${offsetY}px)`,
             transformOrigin: 'top left',
           }}
-        />
+        >
+          <iframe
+            ref={iframeRef}
+            title="Ozony Tech Laptop Screen"
+            src="/?screen=1"
+            onLoad={handleIframeLoad}
+            style={{
+              width: `${WEBSITE_WIDTH}px`,
+              height: `${WEBSITE_HEIGHT}px`,
+              border: 0,
+              display: 'block',
+              background: '#020617',
+              transform: `scale(${scale})`,
+              transformOrigin: 'top left',
+            }}
+          />
+        </div>
       </div>
     </>
   );
@@ -439,10 +520,10 @@ function LaptopModel({
     const previous = lastShapeRef.current;
     const changed =
       !previous ||
-      Math.abs(previous.rect.left - nextShape.rect.left) > 1 ||
-      Math.abs(previous.rect.top - nextShape.rect.top) > 1 ||
-      Math.abs(previous.rect.width - nextShape.rect.width) > 1 ||
-      Math.abs(previous.rect.height - nextShape.rect.height) > 1;
+      Math.abs(previous.rect.left - nextShape.rect.left) > 0.75 ||
+      Math.abs(previous.rect.top - nextShape.rect.top) > 0.75 ||
+      Math.abs(previous.rect.width - nextShape.rect.width) > 0.75 ||
+      Math.abs(previous.rect.height - nextShape.rect.height) > 0.75;
 
     if (changed) {
       lastShapeRef.current = nextShape;
