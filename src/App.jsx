@@ -172,15 +172,47 @@ const HomePage = () => {
 
 const GatedHomePage = () => {
   const [introComplete, setIntroComplete] = useState(false);
+  const [isMobileViewport, setIsMobileViewport] = useState(() => {
+    if (typeof window === 'undefined') return false;
+    return window.innerWidth < 768;
+  });
 
   const isLaptopScreenMode =
     window.self !== window.top ||
     new URLSearchParams(window.location.search).get('screen') === '1';
 
-  if (isLaptopScreenMode || introComplete) {
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobileViewport(window.innerWidth < 768);
+    };
+
+    handleResize();
+
+    window.addEventListener('resize', handleResize);
+
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
+  if (isLaptopScreenMode) {
     return <HomePage />;
   }
 
+  // Mobile: render the real site behind the intro so the reveal never flashes white.
+  if (isMobileViewport) {
+    return (
+      <div className="min-h-screen bg-[#020617]">
+        <HomePage />
+
+        {!introComplete && (
+          <div className="fixed inset-0 z-[9999] bg-[#020617]">
+            <LaptopIntro onEnter={() => setIntroComplete(true)} />
+          </div>
+        )}
+      </div>
+    );
+  }
+
+  // Desktop/tablet: keep the laptop screen as the final experience.
   return <LaptopIntro onEnter={() => setIntroComplete(true)} />;
 };
 

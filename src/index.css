@@ -15,6 +15,13 @@
     @apply border-border;
   }
 
+  html,
+  body,
+  #root {
+    min-height: 100%;
+    background: #020617;
+  }
+
   html {
     @apply font-sans;
     scroll-behavior: smooth;
@@ -25,6 +32,7 @@
     @apply text-white;
     min-height: 100%;
     margin: 0;
+    background: #020617;
 
     font-family: 'Oxanium', 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI',
       'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell',
