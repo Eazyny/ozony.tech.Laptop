@@ -171,13 +171,7 @@ const HomePage = () => {
 };
 
 const GatedHomePage = () => {
-  const [introComplete, setIntroComplete] = useState(false);
-
-  if (!introComplete) {
-    return <LaptopIntro onEnter={() => setIntroComplete(true)} />;
-  }
-
-  return <HomePage />;
+  return <LaptopIntro screenContent={<HomePage />} />;
 };
 
 const ScrollManager = () => {

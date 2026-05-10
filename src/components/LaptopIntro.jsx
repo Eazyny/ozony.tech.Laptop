@@ -24,7 +24,6 @@ function drawBootScreen(ctx, elapsed) {
 
   ctx.clearRect(0, 0, width, height);
 
-  // Pure clean black boot screen.
   ctx.fillStyle = '#020617';
   ctx.fillRect(0, 0, width, height);
 
@@ -35,7 +34,6 @@ function drawBootScreen(ctx, elapsed) {
   const top = height * 0.18;
   const lineHeight = 34;
 
-  // Header
   ctx.textAlign = 'left';
   ctx.fillStyle = '#f8fafc';
   ctx.font = '700 30px monospace';
@@ -45,11 +43,9 @@ function drawBootScreen(ctx, elapsed) {
   ctx.font = '16px monospace';
   ctx.fillText('Boot sequence initialized', left, top + 34);
 
-  // Separator
   ctx.fillStyle = 'rgba(148, 163, 184, 0.35)';
   ctx.fillRect(left, top + 58, width * 0.76, 1);
 
-  // Boot lines
   const linesTop = top + 102;
 
   BOOT_LINES.forEach((line, index) => {
@@ -74,7 +70,6 @@ function drawBootScreen(ctx, elapsed) {
     ctx.fillText(line, left + 70, linesTop + index * lineHeight);
   });
 
-  // Cursor
   const activeIndex = Math.min(
     BOOT_LINES.length,
     Math.floor(THREE.MathUtils.smoothstep(t, 0.14, 0.88) * BOOT_LINES.length)
@@ -87,7 +82,6 @@ function drawBootScreen(ctx, elapsed) {
     ctx.fillText('_', left, linesTop + (activeIndex + 1) * lineHeight);
   }
 
-  // Progress bar
   ctx.globalAlpha = fadeIn;
 
   const barWidth = width * 0.76;
@@ -122,13 +116,208 @@ function drawBootScreen(ctx, elapsed) {
   ctx.restore();
 }
 
-function LaptopModel({ startOpen, screenBoot, onOpened }) {
+function CameraRig({ zoomToScreen }) {
+  const lookAtTarget = useRef(new THREE.Vector3(0, 0, 0));
+
+  useFrame(({ camera }) => {
+    const targetPosition = zoomToScreen
+      ? new THREE.Vector3(0, 0.72, 3.05)
+      : new THREE.Vector3(0, 1.15, 8.2);
+
+    const targetLookAt = zoomToScreen
+      ? new THREE.Vector3(0, 0.46, 0)
+      : new THREE.Vector3(0, 0, 0);
+
+    camera.position.lerp(targetPosition, 0.045);
+    lookAtTarget.current.lerp(targetLookAt, 0.055);
+    camera.lookAt(lookAtTarget.current);
+  });
+
+  return null;
+}
+
+function projectToCanvas(point, camera, canvasRect) {
+  const projected = point.clone().project(camera);
+
+  return {
+    x: canvasRect.left + (projected.x * 0.5 + 0.5) * canvasRect.width,
+    y: canvasRect.top + (-projected.y * 0.5 + 0.5) * canvasRect.height,
+  };
+}
+
+function cross(o, a, b) {
+  return (a.x - o.x) * (b.y - o.y) - (a.y - o.y) * (b.x - o.x);
+}
+
+function getConvexHull(points) {
+  const sorted = [...points].sort((a, b) => {
+    if (a.x === b.x) return a.y - b.y;
+    return a.x - b.x;
+  });
+
+  const lower = [];
+  for (const point of sorted) {
+    while (lower.length >= 2 && cross(lower[lower.length - 2], lower[lower.length - 1], point) <= 0) {
+      lower.pop();
+    }
+    lower.push(point);
+  }
+
+  const upper = [];
+  for (let i = sorted.length - 1; i >= 0; i -= 1) {
+    const point = sorted[i];
+
+    while (upper.length >= 2 && cross(upper[upper.length - 2], upper[upper.length - 1], point) <= 0) {
+      upper.pop();
+    }
+    upper.push(point);
+  }
+
+  upper.pop();
+  lower.pop();
+
+  return lower.concat(upper);
+}
+
+function getProjectedScreenShape(screenMesh, camera, canvasRect) {
+  if (!screenMesh.geometry.boundingBox) {
+    screenMesh.geometry.computeBoundingBox();
+  }
+
+  const box = screenMesh.geometry.boundingBox;
+
+  const localPoints = [
+    new THREE.Vector3(box.min.x, box.min.y, box.min.z),
+    new THREE.Vector3(box.min.x, box.min.y, box.max.z),
+    new THREE.Vector3(box.min.x, box.max.y, box.min.z),
+    new THREE.Vector3(box.min.x, box.max.y, box.max.z),
+    new THREE.Vector3(box.max.x, box.min.y, box.min.z),
+    new THREE.Vector3(box.max.x, box.min.y, box.max.z),
+    new THREE.Vector3(box.max.x, box.max.y, box.min.z),
+    new THREE.Vector3(box.max.x, box.max.y, box.max.z),
+  ];
+
+  const projected = localPoints.map((point) =>
+    projectToCanvas(screenMesh.localToWorld(point.clone()), camera, canvasRect)
+  );
+
+  const hull = getConvexHull(projected);
+
+  const xs = hull.map((point) => point.x);
+  const ys = hull.map((point) => point.y);
+
+  const rect = {
+    left: Math.min(...xs),
+    top: Math.min(...ys),
+    width: Math.max(...xs) - Math.min(...xs),
+    height: Math.max(...ys) - Math.min(...ys),
+  };
+
+  const polygon = hull.map((point) => ({
+    x: point.x - rect.left,
+    y: point.y - rect.top,
+  }));
+
+  return {
+    rect,
+    polygon,
+  };
+}
+
+function WebsiteOnProjectedScreen({ visible, zoomed, screenShape, children }) {
+  if (!screenShape?.rect) return null;
+
+  const WEBSITE_WIDTH = 1600;
+  const WEBSITE_HEIGHT = 900;
+
+  const SCREEN_INSET_X = 8;
+  const SCREEN_INSET_TOP = 8;
+  const SCREEN_INSET_BOTTOM = 10;
+
+  const rect = screenShape.rect;
+
+  const fittedRect = {
+    left: rect.left + SCREEN_INSET_X,
+    top: rect.top + SCREEN_INSET_TOP,
+    width: rect.width - SCREEN_INSET_X * 2,
+    height: rect.height - SCREEN_INSET_TOP - SCREEN_INSET_BOTTOM,
+  };
+
+  const scale = fittedRect.width / WEBSITE_WIDTH;
+
+  const clipPolygon = screenShape.polygon
+    .map((point) => {
+      const x = point.x - SCREEN_INSET_X;
+      const y = point.y - SCREEN_INSET_TOP;
+
+      return `${x}px ${y}px`;
+    })
+    .join(', ');
+
+  return (
+    <>
+      <style>
+        {`
+          .laptop-screen-webview {
+            scrollbar-width: none;
+            -ms-overflow-style: none;
+          }
+
+          .laptop-screen-webview::-webkit-scrollbar {
+            display: none;
+          }
+        `}
+      </style>
+
+      <div
+        className={`laptop-screen-webview absolute z-20 bg-[#020617] transition-opacity duration-700 ${
+          visible ? 'opacity-100' : 'opacity-0'
+        }`}
+        style={{
+          left: `${fittedRect.left}px`,
+          top: `${fittedRect.top}px`,
+          width: `${fittedRect.width}px`,
+          height: `${fittedRect.height}px`,
+          pointerEvents: zoomed ? 'auto' : 'none',
+          overflowY: zoomed ? 'auto' : 'hidden',
+          overflowX: 'hidden',
+          borderRadius: zoomed ? '8px' : '3px',
+          clipPath: `polygon(${clipPolygon})`,
+          boxShadow: zoomed
+            ? '0 0 60px rgba(56, 189, 248, 0.18)'
+            : '0 0 20px rgba(56, 189, 248, 0.12)',
+        }}
+      >
+        <div
+          style={{
+            width: `${WEBSITE_WIDTH}px`,
+            minHeight: `${WEBSITE_HEIGHT}px`,
+            transform: `scale(${scale})`,
+            transformOrigin: 'top left',
+          }}
+        >
+          {children}
+        </div>
+      </div>
+    </>
+  );
+}
+
+function LaptopModel({
+  startOpen,
+  screenBoot,
+  websiteVisible,
+  onOpened,
+  onScreenShape,
+}) {
   const group = useRef();
   const screenMesh = useRef(null);
   const bootTexture = useRef(null);
   const bootStartedAt = useRef(null);
   const hasPlayedOpen = useRef(false);
   const hasStartedBoot = useRef(false);
+  const hasClearedScreen = useRef(false);
+  const lastShapeRef = useRef(null);
   const onOpenedRef = useRef(onOpened);
 
   const { scene, animations } = useGLTF('/models/ozony-laptop.glb');
@@ -152,8 +341,8 @@ function LaptopModel({ startOpen, screenBoot, onOpened }) {
         : child.material?.name?.toLowerCase() || '';
 
       if (
+        childName === 'laptop_screen' ||
         childName.includes('laptop_screen') ||
-        childName.includes('screen') ||
         materialName.includes('screen_mat_idle')
       ) {
         screenMesh.current = child;
@@ -177,8 +366,6 @@ function LaptopModel({ startOpen, screenBoot, onOpened }) {
     texture.magFilter = THREE.LinearFilter;
     texture.needsUpdate = true;
 
-    // Use a fresh clean material instead of cloning the Blender material.
-    // This prevents old maps/settings from creating weird shapes or panels.
     const material = new THREE.MeshBasicMaterial({
       map: texture,
       color: '#ffffff',
@@ -191,16 +378,47 @@ function LaptopModel({ startOpen, screenBoot, onOpened }) {
     bootStartedAt.current = performance.now() / 1000;
   }, [screenBoot]);
 
-  useFrame(() => {
-    if (!screenBoot || !bootTexture.current || !bootStartedAt.current) return;
+  useEffect(() => {
+    if (!websiteVisible || !screenMesh.current || hasClearedScreen.current) return;
 
-    const elapsed = performance.now() / 1000 - bootStartedAt.current;
-    const canvas = bootTexture.current.image;
-    const ctx = canvas.getContext('2d');
+    hasClearedScreen.current = true;
+    bootTexture.current = null;
+    bootStartedAt.current = null;
 
-    drawBootScreen(ctx, elapsed);
+    screenMesh.current.material = new THREE.MeshBasicMaterial({
+      color: '#020617',
+      toneMapped: false,
+    });
+  }, [websiteVisible]);
 
-    bootTexture.current.needsUpdate = true;
+  useFrame(({ camera, gl }) => {
+    if (screenBoot && bootTexture.current && bootStartedAt.current) {
+      const elapsed = performance.now() / 1000 - bootStartedAt.current;
+      const canvas = bootTexture.current.image;
+      const ctx = canvas.getContext('2d');
+
+      drawBootScreen(ctx, elapsed);
+
+      bootTexture.current.needsUpdate = true;
+    }
+
+    if (!screenMesh.current || !websiteVisible) return;
+
+    const canvasRect = gl.domElement.getBoundingClientRect();
+    const nextShape = getProjectedScreenShape(screenMesh.current, camera, canvasRect);
+
+    const previous = lastShapeRef.current;
+    const changed =
+      !previous ||
+      Math.abs(previous.rect.left - nextShape.rect.left) > 1 ||
+      Math.abs(previous.rect.top - nextShape.rect.top) > 1 ||
+      Math.abs(previous.rect.width - nextShape.rect.width) > 1 ||
+      Math.abs(previous.rect.height - nextShape.rect.height) > 1;
+
+    if (changed) {
+      lastShapeRef.current = nextShape;
+      onScreenShape(nextShape);
+    }
   });
 
   useEffect(() => {
@@ -239,10 +457,22 @@ function LaptopModel({ startOpen, screenBoot, onOpened }) {
   );
 }
 
-export default function LaptopIntro({ onEnter }) {
+export default function LaptopIntro({ screenContent }) {
   const [startOpen, setStartOpen] = useState(false);
   const [isEntering, setIsEntering] = useState(false);
   const [screenBoot, setScreenBoot] = useState(false);
+  const [websiteVisible, setWebsiteVisible] = useState(false);
+  const [zoomToScreen, setZoomToScreen] = useState(false);
+  const [screenShape, setScreenShape] = useState(null);
+
+  useEffect(() => {
+    const previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = 'hidden';
+
+    return () => {
+      document.body.style.overflow = previousOverflow;
+    };
+  }, []);
 
   const handleEnter = () => {
     if (isEntering) return;
@@ -255,24 +485,27 @@ export default function LaptopIntro({ onEnter }) {
     setScreenBoot(true);
 
     setTimeout(() => {
-      onEnter?.();
+      setWebsiteVisible(true);
     }, 3000);
+
+    setTimeout(() => {
+      setZoomToScreen(true);
+    }, 3900);
   };
 
   return (
     <section className="relative min-h-screen w-full overflow-hidden bg-[#020617] text-white">
-      {/* Background glow */}
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(56,189,248,0.18),transparent_42%),radial-gradient(circle_at_top,rgba(37,99,235,0.18),transparent_38%)]" />
 
-      {/* Grid */}
       <div className="absolute inset-0 opacity-30">
         <div className="h-full w-full bg-[linear-gradient(rgba(255,255,255,0.035)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.035)_1px,transparent_1px)] bg-[size:48px_48px]" />
       </div>
 
-      {/* Full-screen 3D canvas */}
       <div className="absolute inset-0 z-0">
         <Canvas camera={{ position: [0, 1.15, 8.2], fov: 34 }}>
           <Suspense fallback={null}>
+            <CameraRig zoomToScreen={zoomToScreen} />
+
             <ambientLight intensity={1.25} />
             <directionalLight position={[3, 5, 4]} intensity={2.2} />
             <directionalLight position={[-4, 2, -3]} intensity={0.9} />
@@ -281,13 +514,22 @@ export default function LaptopIntro({ onEnter }) {
             <LaptopModel
               startOpen={startOpen}
               screenBoot={screenBoot}
+              websiteVisible={websiteVisible}
               onOpened={handleOpened}
+              onScreenShape={setScreenShape}
             />
           </Suspense>
         </Canvas>
       </div>
 
-      {/* Top text overlay */}
+      <WebsiteOnProjectedScreen
+        visible={websiteVisible}
+        zoomed={zoomToScreen}
+        screenShape={screenShape}
+      >
+        {screenContent}
+      </WebsiteOnProjectedScreen>
+
       <div className="pointer-events-none relative z-10 flex min-h-screen flex-col items-center justify-between px-6 py-10 text-center">
         <div
           className={`pt-4 transition-all duration-500 md:pt-8 ${
@@ -310,7 +552,6 @@ export default function LaptopIntro({ onEnter }) {
           </p>
         </div>
 
-        {/* Bottom controls */}
         <div
           className={`pointer-events-auto pb-8 transition-all duration-500 ${
             isEntering
